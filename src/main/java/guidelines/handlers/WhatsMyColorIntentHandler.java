@@ -11,7 +11,7 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker.handlers;
+package main.java.guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -21,21 +21,30 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class HelpIntentHandler implements RequestHandler {
+public class WhatsMyColorIntentHandler implements RequestHandler {
+    public static final String COLOR_KEY = "COLOR";
+    public static final String COLOR_SLOT = "Color";
+
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.HelpIntent"));
+        return input.matches(intentName("WhatsMyColorIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Du kannst mir Deine Lieblingsfarbe sagen. Sage zum Beispiel, meine Lieblingsfarbe ist rot.";
-        String repromptText = "Bitte sage mir Deine Lieblingsfarbe.";
+        String speechText;
+        String favoriteColor = (String) input.getAttributesManager().getSessionAttributes().get(COLOR_KEY);
+
+        if (favoriteColor != null && !favoriteColor.isEmpty()) {
+            speechText = String.format("Deine Lieblingsfarbe ist %s. Auf Wiedersehen.", favoriteColor);
+        } else {
+            // Since the user's favorite color is not set render an error message.
+            speechText = "Ich weiss nicht welches Deine Lieblingsfarbe ist. Sag mir Deine Lieblingsfarbe. Sage zum Beispiel: ich mag rot.";
+        }
+
         return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
                 .withSpeech(speechText)
-                .withReprompt(repromptText)
-                .withShouldEndSession(false)
+                .withSimpleCard("ColorSession", speechText)
                 .build();
     }
 }
