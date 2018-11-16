@@ -11,20 +11,20 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker;
+package main.java.guidelines;
 
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
-import main.java.colorpicker.handlers.FallbackIntentHandler;
-import main.java.colorpicker.handlers.HelpIntentHandler;
-import main.java.colorpicker.handlers.LaunchRequestHandler;
-import main.java.colorpicker.handlers.SessionEndedRequestHandler;
-import main.java.colorpicker.handlers.WhatsMyColorIntentHandler;
-import main.java.colorpicker.handlers.CancelandStopIntentHandler;
-import main.java.colorpicker.handlers.MyColorIsIntentHandler;
+import main.java.guidelines.handlers.FallbackIntentHandler;
+import main.java.guidelines.handlers.HelpIntentHandler;
+import main.java.guidelines.handlers.LaunchRequestHandler;
+import main.java.guidelines.handlers.SessionEndedRequestHandler;
+import main.java.guidelines.handlers.WhatsMyColorIntentHandler;
+import main.java.guidelines.handlers.CancelandStopIntentHandler;
+import main.java.guidelines.handlers.MyColorIsIntentHandler;
 
-public class ColorPickerStreamHandler extends SkillStreamHandler {
+public class guidelinesStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
         return Skills.standard()
@@ -41,7 +41,7 @@ public class ColorPickerStreamHandler extends SkillStreamHandler {
                 .build();
     }
 
-    public ColorPickerStreamHandler() {
+    public guidelinesStreamHandler() {
         super(getSkill());
     }
 

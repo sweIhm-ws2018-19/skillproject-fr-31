@@ -11,40 +11,30 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker.handlers;
+package main.java.guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import main.java.guidelines.SpeechStrings;
 
 import java.util.Optional;
 
-import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.requestType;
 
-public class WhatsMyColorIntentHandler implements RequestHandler {
-    public static final String COLOR_KEY = "COLOR";
-    public static final String COLOR_SLOT = "Color";
-
+public class LaunchRequestHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("WhatsMyColorIntent"));
+        return input.matches(requestType(LaunchRequest.class));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText;
-        String favoriteColor = (String) input.getAttributesManager().getSessionAttributes().get(COLOR_KEY);
-
-        if (favoriteColor != null && !favoriteColor.isEmpty()) {
-            speechText = String.format("Deine Lieblingsfarbe ist %s. Auf Wiedersehen.", favoriteColor);
-        } else {
-            // Since the user's favorite color is not set render an error message.
-            speechText = "Ich weiss nicht welches Deine Lieblingsfarbe ist. Sag mir Deine Lieblingsfarbe. Sage zum Beispiel: ich mag rot.";
-        }
-
         return input.getResponseBuilder()
-                .withSpeech(speechText)
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("ColorSession", SpeechStrings.skillName) //Anzeige auf bildschirm
+                .withSpeech(SpeechStrings.welcome)
+                .withReprompt(SpeechStrings.reprompt)
                 .build();
     }
 }
