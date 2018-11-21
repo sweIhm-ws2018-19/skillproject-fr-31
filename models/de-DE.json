@@ -16,6 +16,20 @@
           "samples": []
         },
         {
+          "name": "MyNameIsIntent",
+          "slots": [
+            {
+              "name": "name",
+              "type": "AMAZON.DE_FIRST_NAME"
+            }
+          ],
+          "samples": [
+            "Meine name ist {name}",
+            "Ich heiße {name}",
+            "{name}"
+          ]
+        },
+        {
           "name": "MyColorIsIntent",
           "slots": [
             {

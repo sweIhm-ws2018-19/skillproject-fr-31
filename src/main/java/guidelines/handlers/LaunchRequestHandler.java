@@ -13,15 +13,19 @@
 
 package main.java.guidelines.handlers;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import com.amazon.ask.response.ResponseBuilder;
 import main.java.guidelines.SpeechStrings;
 
+import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.requestType;
+import static main.java.guidelines.handlers.MyNameIsIntentHandler.NAME_KEY;
 
 public class LaunchRequestHandler implements RequestHandler {
     @Override
@@ -31,10 +35,22 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", SpeechStrings.skillName) //Anzeige auf bildschirm
-                .withSpeech(SpeechStrings.welcome)
-                .withReprompt(SpeechStrings.reprompt)
-                .build();
+        AttributesManager attributesManager = input.getAttributesManager();
+        Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+        String name = (String) persistentAttributes.get(NAME_KEY);
+
+        ResponseBuilder builder = input.getResponseBuilder();
+        builder.withSimpleCard("Session", SpeechStrings.skillName);
+        if (name != null){
+             builder.withSpeech(SpeechStrings.welcomeUser + name)
+                     .withReprompt(SpeechStrings.reprompt);
+        }
+        else
+        {
+            builder.withSpeech(SpeechStrings.welcome)
+                    .withReprompt(SpeechStrings.reprompt);
+        }
+
+        return builder.build();
     }
 }

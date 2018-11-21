@@ -41,6 +41,8 @@ public class MyColorIsIntentHandler implements RequestHandler {
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
+
+
         Map<String, Slot> slots = intent.getSlots();
 
         // Get the color slot from the list of slots.
@@ -79,6 +81,7 @@ public class MyColorIsIntentHandler implements RequestHandler {
             responseBuilder.withShouldEndSession(false)
                     .withReprompt(repromptText);
         }
+
 
         return responseBuilder.build();
     }
