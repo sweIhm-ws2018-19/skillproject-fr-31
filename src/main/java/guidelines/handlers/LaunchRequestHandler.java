@@ -37,7 +37,7 @@ public class LaunchRequestHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput input) {
         AttributesManager attributesManager = input.getAttributesManager();
         Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-        String name = (String) persistentAttributes.get(NAME_KEY);
+        String name = (String)persistentAttributes.get(NAME_KEY);
 
         ResponseBuilder builder = input.getResponseBuilder();
         builder.withSimpleCard("Session", SpeechStrings.skillName);

@@ -16,13 +16,7 @@ package main.java.guidelines;
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
-import main.java.guidelines.handlers.FallbackIntentHandler;
-import main.java.guidelines.handlers.HelpIntentHandler;
-import main.java.guidelines.handlers.LaunchRequestHandler;
-import main.java.guidelines.handlers.SessionEndedRequestHandler;
-import main.java.guidelines.handlers.WhatsMyColorIntentHandler;
-import main.java.guidelines.handlers.CancelandStopIntentHandler;
-import main.java.guidelines.handlers.MyColorIsIntentHandler;
+import main.java.guidelines.handlers.*;
 
 public class guidelinesStreamHandler extends SkillStreamHandler {
 
@@ -35,7 +29,10 @@ public class guidelinesStreamHandler extends SkillStreamHandler {
                         new CancelandStopIntentHandler(),
                         new SessionEndedRequestHandler(),
                         new HelpIntentHandler(),
-                        new FallbackIntentHandler())
+                        new FallbackIntentHandler(),
+                        new MyNameIsIntentHandler())
+                .withTableName("configuration")
+                .withAutoCreateTable(true)
                 // Add your skill id below
                 //.withSkillId("")
                 .build();
