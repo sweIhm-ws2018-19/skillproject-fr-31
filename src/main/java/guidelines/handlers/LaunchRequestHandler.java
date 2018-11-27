@@ -40,15 +40,15 @@ public class LaunchRequestHandler implements RequestHandler {
         String name = (String)persistentAttributes.get(NAME_KEY);
 
         ResponseBuilder builder = input.getResponseBuilder();
-        builder.withSimpleCard("Session", SpeechStrings.skillName);
+        builder.withSimpleCard("Session", SpeechStrings.SKILL_NAME);
         if (name != null){
-             builder.withSpeech(SpeechStrings.welcomeUser + name)
-                     .withReprompt(SpeechStrings.reprompt);
+             builder.withSpeech(SpeechStrings.WELCOME_USER + name)
+                     .withReprompt(SpeechStrings.REPROMPT);
         }
         else
         {
-            builder.withSpeech(SpeechStrings.welcome)
-                    .withReprompt(SpeechStrings.reprompt);
+            builder.withSpeech(SpeechStrings.WELCOME)
+                    .withReprompt(SpeechStrings.REPROMPT);
         }
 
         return builder.build();

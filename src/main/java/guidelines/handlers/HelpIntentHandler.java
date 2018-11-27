@@ -15,7 +15,11 @@ package main.java.guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.Intent;
+import com.amazon.ask.model.IntentRequest;
+import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
+import main.java.guidelines.SpeechStrings;
 
 import java.util.Optional;
 
@@ -29,12 +33,11 @@ public class HelpIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Du kannst mir Deine Lieblingsfarbe sagen. Sage zum Beispiel, meine Lieblingsfarbe ist rot.";
-        String repromptText = "Bitte sage mir Deine Lieblingsfarbe.";
+
         return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
-                .withSpeech(speechText)
-                .withReprompt(repromptText)
+                .withSimpleCard("Guidelines", SpeechStrings.HELP)
+                .withSpeech(SpeechStrings.HELP)
+                .withReprompt(SpeechStrings.REPROMPT)
                 .withShouldEndSession(false)
                 .build();
     }

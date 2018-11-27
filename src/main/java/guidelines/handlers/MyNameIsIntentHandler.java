@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static main.java.guidelines.handlers.WhatsMyColorIntentHandler.COLOR_KEY;
-import static main.java.guidelines.handlers.WhatsMyColorIntentHandler.COLOR_SLOT;
 
 public class MyNameIsIntentHandler implements RequestHandler {
     public static final String NAME_KEY = "NAME";
