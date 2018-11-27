@@ -18,19 +18,19 @@ import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
 import main.java.guidelines.handlers.*;
 
-public class guidelinesStreamHandler extends SkillStreamHandler {
+public class GuidelinesStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
         return Skills.standard()
                 .addRequestHandlers(
-                        new WhatsMyColorIntentHandler(),
-                        new MyColorIsIntentHandler(),
                         new LaunchRequestHandler(),
                         new CancelandStopIntentHandler(),
                         new SessionEndedRequestHandler(),
                         new HelpIntentHandler(),
                         new FallbackIntentHandler(),
-                        new MyNameIsIntentHandler())
+                        new MyNameIsIntentHandler(),
+                        new HomeAddressHelpIntentHandler(),
+                        new DestinationAddressHelpIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
                 // Add your skill id below
@@ -38,7 +38,7 @@ public class guidelinesStreamHandler extends SkillStreamHandler {
                 .build();
     }
 
-    public guidelinesStreamHandler() {
+    public GuidelinesStreamHandler() {
         super(getSkill());
     }
 
