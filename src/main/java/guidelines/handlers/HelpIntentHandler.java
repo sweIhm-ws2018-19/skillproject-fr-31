@@ -33,7 +33,6 @@ public class HelpIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-
         return input.getResponseBuilder()
                 .withSimpleCard("Guidelines", SpeechStrings.HELP)
                 .withSpeech(SpeechStrings.HELP)
