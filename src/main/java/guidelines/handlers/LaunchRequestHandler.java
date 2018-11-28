@@ -35,8 +35,6 @@ public class LaunchRequestHandler implements RequestHandler {
         return input.matches(requestType(LaunchRequest.class));
     }
 
-    public static void main(String[] args) {
-    }
     @Override
     public Optional<Response> handle(HandlerInput input) {
         // Config Avail
@@ -50,12 +48,8 @@ public class LaunchRequestHandler implements RequestHandler {
         //   enter config state
 
 
-
-
-
         AttributesManager attributesManager = input.getAttributesManager();
         Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-
 
 
         String outputMessage = SpeechStrings.DEFAULT;
@@ -64,8 +58,7 @@ public class LaunchRequestHandler implements RequestHandler {
         if (persistentAttributes.get("NAME") == null) {
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
             outputMessage = SpeechStrings.WELCOME_NO_CONFIG;
-        }
-        else {
+        } else {
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
             outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
         }
@@ -75,8 +68,6 @@ public class LaunchRequestHandler implements RequestHandler {
         builder.withSimpleCard("Session", SpeechStrings.SKILL_NAME)
                 .withSpeech(outputMessage)
                 .withReprompt(outputMessage);
-
-
 
 
 //        ResponseBuilder builder = input.getResponseBuilder();

@@ -15,13 +15,12 @@ package main.java.guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
-import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
-import com.amazon.ask.model.Response;
+import com.amazon.ask.model.*;
+import com.amazon.ask.response.ResponseBuilder;
 import main.java.guidelines.SpeechStrings;
 import main.java.guidelines.stateMachine.GuideStates;
 
+import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -30,16 +29,22 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class HelpIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-
         return input.matches(intentName("AMAZON.HelpIntent").and(sessionAttribute("State", GuideStates.TRANSIT.toString())));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-
         // ToDo:
         //  willst du zu destinationhandler
         //  willst du zu homehandler
+        ResponseBuilder respBuilder = input.getResponseBuilder();
+
+        Request request = input.getRequestEnvelope().getRequest();
+        IntentRequest intentRequest = (IntentRequest) request;
+        Intent intent = intentRequest.getIntent();
+
+        Map<String, Slot> slots = intent.getSlots();
+
 
         return input.getResponseBuilder()
                 .withSimpleCard("Guidelines", SpeechStrings.HELP)
