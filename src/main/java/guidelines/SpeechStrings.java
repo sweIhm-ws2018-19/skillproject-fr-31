@@ -2,7 +2,8 @@ package main.java.guidelines;
 
 public class SpeechStrings {
     public static final String SKILL_NAME = "Guidelines";
-    public static final String WELCOME = "Herzlich willkommen bei guidelines, der Skill wird jetzt eingerichtet. Bitte sag mir deinen Namen";
+    public static final String WELCOME_NO_CONFIG = "Herzlich willkommen bei guidelines, der Skill wird jetzt eingerichtet. Bitte sag mir deinen Namen";
+    public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";
     public static final String REPROMPT = "Auf gehts!";
     public static final String WELCOME_USER = "Hallo ";
     public static final String HELP_NOT_IMPL = "Die Hilfefunktion wurde noch nicht implementiert";
@@ -19,4 +20,5 @@ public class SpeechStrings {
             "verwendete Ziele dar. Viele Leute haben hier Ziele wie ihren Arbeitsplatz, Universitaetscampus oder " +
             "ihre Schule hinterlegt. <break time=\"0.05s\" /> Auch hier brauche ich die Adresse, die Haltestelle und " +
             "einen Namen für dein Ziel. Ich kann dir noch weitere Informationen zur Anwendung geben, moechtest du das ?";
+    public static final String DEFAULT = "Ich weiß nicht was los ist?";
 }

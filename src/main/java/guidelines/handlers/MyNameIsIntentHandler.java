@@ -5,30 +5,38 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
+import main.java.guidelines.SpeechStrings;
+import main.java.guidelines.stateMachine.GuideStates;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class MyNameIsIntentHandler implements RequestHandler {
-    public static final String NAME_KEY = "NAME";
-    public static final String NAME_SLOT = "name";
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(intentName("MyNameIsIntent"));
+
+        // ka = (GuideStates)handlerInput.getAttributesManager().getSessionAttributes().get("State");
+        return handlerInput.matches(intentName("MyNameIsIntent").and(sessionAttribute("State", GuideStates.INSERT_NAME.toString())));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
+        // ToDo:
+        //   get name if okay
+        //   switch to heimat
+
+
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
 
         Map<String, Slot> slots = intent.getSlots();
-        Slot nameSlot = slots.get(NAME_SLOT);
+        Slot nameSlot = slots.get("name");
 
         String speechText;
         String repromptText;
@@ -38,14 +46,14 @@ public class MyNameIsIntentHandler implements RequestHandler {
             String name = nameSlot.getValue();
             AttributesManager attributesManager = input.getAttributesManager();
             // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap(NAME_KEY, name));
+            attributesManager.setSessionAttributes(Collections.singletonMap("NAME", name));
             // store in database
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-            persistentAttributes.put(NAME_KEY, name);
+            persistentAttributes.put("NAME", name);
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 
-            speechText = "Vielen dank <break time=\"1s\"/>"+name;
+            speechText = "Vielen dank "+name;
             repromptText = "Bitte jetzt deine Straße angeben";
         } else {
             speechText = "Leider habe ich das nicht verstanden. Versuche bitte erneut deinen Name zu sagen";
@@ -55,7 +63,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
         }
 
         ResponseBuilder respBuilder = input.getResponseBuilder();
-        respBuilder.withSimpleCard("Session", speechText)
+        respBuilder.withSimpleCard("Session", SpeechStrings.SKILL_NAME)
                 .withSpeech(speechText)
                 .withShouldEndSession(false);
 

@@ -20,19 +20,26 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import main.java.guidelines.SpeechStrings;
+import main.java.guidelines.stateMachine.GuideStates;
 
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class HelpIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.HelpIntent"));
+
+        return input.matches(intentName("AMAZON.HelpIntent").and(sessionAttribute("State", GuideStates.TRANSIT.toString())));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
+
+        // ToDo:
+        //  willst du zu destinationhandler
+        //  willst du zu homehandler
 
         return input.getResponseBuilder()
                 .withSimpleCard("Guidelines", SpeechStrings.HELP)

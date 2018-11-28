@@ -20,12 +20,14 @@ import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 import main.java.guidelines.SpeechStrings;
+import main.java.guidelines.stateMachine.GuideStates;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.requestType;
-import static main.java.guidelines.handlers.MyNameIsIntentHandler.NAME_KEY;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class LaunchRequestHandler implements RequestHandler {
     @Override
@@ -33,23 +35,61 @@ public class LaunchRequestHandler implements RequestHandler {
         return input.matches(requestType(LaunchRequest.class));
     }
 
+    public static void main(String[] args) {
+    }
     @Override
     public Optional<Response> handle(HandlerInput input) {
+        // Config Avail
+        // TODO: check all connfig
+        //  Name,
+        //  home address,
+        //  at least one dest address
+
+        // Config not Avail
+        // TODO:
+        //   enter config state
+
+
+
+
+
         AttributesManager attributesManager = input.getAttributesManager();
         Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-        String name = (String)persistentAttributes.get(NAME_KEY);
+
+
+
+        String outputMessage = SpeechStrings.DEFAULT;
+//        if( persistentAttributes.get("NAME") == null || persistentAttributes.get("HOMEADDRESS") == null
+//                || persistentAttributes.get("DESTADDRESS") == null) {
+        if (persistentAttributes.get("NAME") == null) {
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
+            outputMessage = SpeechStrings.WELCOME_NO_CONFIG;
+        }
+        else {
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+            outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
+        }
+
 
         ResponseBuilder builder = input.getResponseBuilder();
-        builder.withSimpleCard("Session", SpeechStrings.SKILL_NAME);
-        if (name != null){
-             builder.withSpeech(SpeechStrings.WELCOME_USER + name)
-                     .withReprompt(SpeechStrings.REPROMPT);
-        }
-        else
-        {
-            builder.withSpeech(SpeechStrings.WELCOME)
-                    .withReprompt(SpeechStrings.REPROMPT);
-        }
+        builder.withSimpleCard("Session", SpeechStrings.SKILL_NAME)
+                .withSpeech(outputMessage)
+                .withReprompt(outputMessage);
+
+
+
+
+//        ResponseBuilder builder = input.getResponseBuilder();
+//        builder.withSimpleCard("Session", SpeechStrings.SKILL_NAME);
+//        if (name != null){
+//             builder.withSpeech(SpeechStrings.WELCOME_USER + name)
+//                     .withReprompt(SpeechStrings.REPROMPT);
+//        }
+//        else
+//        {
+//            builder.withSpeech(SpeechStrings.WELCOME)
+//                    .withReprompt(SpeechStrings.REPROMPT);
+//        }
 
         return builder.build();
     }
