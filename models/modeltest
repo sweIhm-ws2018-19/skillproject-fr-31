@@ -1,0 +1,230 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "guidelines",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "help"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "stop"
+          ]
+        },
+        {
+          "name": "AMAZON.RepeatIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "Ja"
+          ]
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": [
+            "Nein",
+            "Nein danke"
+          ]
+        },
+        {
+          "name": "CatchAllIntent",
+          "slots": [],
+          "samples": [
+            "bekannt dadurch abend stehen",
+            "stelle sogenannten lediglich während beginn",
+            "genannt zeigte erneut alten Von",
+            "hatte gesagt keine entschieden Wie",
+            "dadurch abend",
+            "ebenfalls Lösung beiden neuer jungen",
+            "nichts Samstag gehören Blick jede",
+            "wenige noch sieht Grund Mal",
+            "Namen Auch sehen",
+            "einzige setzt Jetzt",
+            "nachdem wegen sowie ebenfalls dessen",
+            "internationalen meisten",
+            "recht gesehen weltweit Seite"
+          ]
+        },
+        {
+          "name": "InformationenIntent",
+          "slots": [],
+          "samples": [
+            "Informationen"
+          ]
+        },
+        {
+          "name": "NeueEinrichtungIntent",
+          "slots": [],
+          "samples": [
+            "neue Einrichtung"
+          ]
+        },
+        {
+          "name": "FirstnameIntent",
+          "slots": [],
+          "samples": [
+            "firstname"
+          ]
+        },
+        {
+          "name": "TransportationtypeIntent",
+          "slots": [],
+          "samples": [
+            "transportationtype"
+          ]
+        },
+        {
+          "name": "HomestationIntent",
+          "slots": [],
+          "samples": [
+            "homestation"
+          ]
+        },
+        {
+          "name": "DestinationadressoneIntent",
+          "slots": [],
+          "samples": [
+            "destinationadressone"
+          ]
+        },
+        {
+          "name": "AltdestinationoneIntent",
+          "slots": [],
+          "samples": [
+            "altdestinationone"
+          ]
+        },
+        {
+          "name": "AugustenstrasseZweiIntent",
+          "slots": [],
+          "samples": [
+            "Augustenstraße zwei"
+          ]
+        },
+        {
+          "name": "UniversitatIntent",
+          "slots": [],
+          "samples": [
+            "Universität"
+          ]
+        },
+        {
+          "name": "ArbeitIntent",
+          "slots": [],
+          "samples": [
+            "Arbeit"
+          ]
+        },
+        {
+          "name": "SchuleIntent",
+          "slots": [],
+          "samples": [
+            "Schule"
+          ]
+        },
+        {
+          "name": "ZielhaltestelleAltZweiIntent",
+          "slots": [],
+          "samples": [
+            "Zielhaltestelle alt zwei"
+          ]
+        },
+        {
+          "name": "UndefinedStationIntent",
+          "slots": [],
+          "samples": [
+            "undefined station"
+          ]
+        },
+        {
+          "name": "IsmaningerStrIntent",
+          "slots": [],
+          "samples": [
+            "Ismaninger Str"
+          ]
+        },
+        {
+          "name": "ZielhaltestelleAltDreiIntent",
+          "slots": [],
+          "samples": [
+            "Zielhaltestelle alt drei"
+          ]
+        },
+        {
+          "name": "HomeadressIntent",
+          "slots": [],
+          "samples": [
+            "homeadress"
+          ]
+        },
+        {
+          "name": "JaGerneIntent",
+          "slots": [],
+          "samples": [
+            "Ja gerne"
+          ]
+        },
+        {
+          "name": "ZieladresseIntent",
+          "slots": [],
+          "samples": [
+            "Zieladresse"
+          ]
+        },
+        {
+          "name": "HeimadresseIntent",
+          "slots": [],
+          "samples": [
+            "Heimadresse"
+          ]
+        },
+        {
+          "name": "NamehomeadressIntent",
+          "slots": [],
+          "samples": [
+            "namehomeadress"
+          ]
+        },
+        {
+          "name": "NamedestinationoneIntent",
+          "slots": [],
+          "samples": [
+            "namedestinationone"
+          ]
+        },
+        {
+          "name": "DestinationoneIntent",
+          "slots": [],
+          "samples": [
+            "destinationone"
+          ]
+        },
+        {
+          "name": "ZumEinrichtungsassistentenIntent",
+          "slots": [],
+          "samples": [
+            "zum Einrichtungsassistenten"
+          ]
+        },
+        {
+          "name": "ArrivaltimeIntent",
+          "slots": [],
+          "samples": [
+            "arrivaltime"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}
