@@ -22,7 +22,6 @@ import main.java.guidelines.SpeechStrings;
 import main.java.guidelines.stateMachine.GuideStates;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;

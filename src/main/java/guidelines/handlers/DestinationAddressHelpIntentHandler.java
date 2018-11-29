@@ -7,7 +7,6 @@ import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import main.java.guidelines.SpeechStrings;
 import main.java.guidelines.stateMachine.GuideStates;
-import org.w3c.dom.Attr;
 
 import java.util.Collections;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
         ResponseBuilder respBuilder = handlerInput.getResponseBuilder();
-        // TODO: Switch between DestHelpInfo and HomeHelpInfo and break
+
         Request request = handlerInput.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
@@ -40,7 +39,6 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
         boolean askResponse = false;
 
         if (exitOrHomeSlot != null) {
-            String choice = exitOrHomeSlot.getValue();
             AttributesManager attributesManager = handlerInput.getAttributesManager();
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP));
             speechText = SpeechStrings.HELP_DESTINATION_ADDRESS;

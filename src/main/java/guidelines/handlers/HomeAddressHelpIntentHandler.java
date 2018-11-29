@@ -26,7 +26,7 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
         ResponseBuilder respBuilder = handlerInput.getResponseBuilder();
-        // TODO: Switch between DestHelpInfo and HomeHelpInfo and break
+
         Request request = handlerInput.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
@@ -40,7 +40,6 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
         boolean askResponse = false;
 
         if (exitOrDestSlot != null) {
-            String choice = exitOrDestSlot.getValue();
             AttributesManager attributesManager = handlerInput.getAttributesManager();
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP));
             speechText = SpeechStrings.HELP_HOME_ADDRESS;

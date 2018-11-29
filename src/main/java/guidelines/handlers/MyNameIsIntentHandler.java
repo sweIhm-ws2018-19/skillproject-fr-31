@@ -19,18 +19,11 @@ public class MyNameIsIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-
-        // ka = (GuideStates)handlerInput.getAttributesManager().getSessionAttributes().get("State");
         return handlerInput.matches(intentName("MyNameIsIntent").and(sessionAttribute("State", GuideStates.INSERT_NAME.toString())));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        // ToDo:
-        //   get name if okay
-        //   switch to heimat
-
-
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
