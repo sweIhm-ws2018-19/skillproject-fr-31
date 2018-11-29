@@ -1,7 +1,7 @@
 package main.java.guidelines;
 
 public class SpeechStrings {
-
+    private SpeechStrings(){}
     // complete Strings
     public static final String WELCOME_NO_CONFIG = "Herzlich willkommen bei guidelines, der Skill wird jetzt eingerichtet. Bitte sag mir deinen Namen";
     public static final String REPROMPT = "Auf gehts!";
