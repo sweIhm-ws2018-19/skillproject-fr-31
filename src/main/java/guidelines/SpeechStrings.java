@@ -19,6 +19,6 @@ public class SpeechStrings {
     public static final String HELP_DESTINATION_ADDRESS = "Deine Zieladressen stellen haeufig von dir im Alltag " +
             "verwendete Ziele dar. Viele Leute haben hier Ziele wie ihren Arbeitsplatz, Universitaetscampus oder " +
             "ihre Schule hinterlegt. <break time=\"0.05s\" /> Auch hier brauche ich die Adresse, die Haltestelle und " +
-            "einen Namen für dein Ziel. Ich kann dir noch weitere Informationen zur Anwendung geben, moechtest du das ?";
+            "einen Namen für dein Ziel. Ich kann dir noch weitere Informationen zur Heimadresse geben. Sage einfach Heimadresse";
     public static final String DEFAULT = "Ich weiß nicht was los ist?";
 }

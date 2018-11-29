@@ -41,14 +41,8 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
 
         if (exitOrHomeSlot != null) {
             String choice = exitOrHomeSlot.getValue();
-            String stateToSet;
-            if(choice.equals("Heimadresse")){
-                stateToSet = GuideStates.HELP.toString();
-            }else{
-                stateToSet = GuideStates.LAUNCH_STATE.toString();
-            }
             AttributesManager attributesManager = handlerInput.getAttributesManager();
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", stateToSet));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP));
             speechText = SpeechStrings.HELP_DESTINATION_ADDRESS;
             repromptText = "ASHJFDASJHK";
         } else {
