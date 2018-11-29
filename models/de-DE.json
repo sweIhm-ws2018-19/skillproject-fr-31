@@ -16,6 +16,14 @@
           "samples": []
         },
         {
+          "name": "WhereIsTheLatestShitIntent",
+          "samples": [
+            "Wo ist der latest shit",
+            "latest shit"
+          ]
+        },
+
+        {
           "name": "MyNameIsIntent",
           "slots": [
             {
