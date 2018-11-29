@@ -14,7 +14,8 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class HomeAddressHelpIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(intentName("HomeAddressHelpIntent").and(sessionAttribute("State", GuideStates.HELP_HOME.toString())));
+        return handlerInput.matches(intentName("HomeAddressHelpIntent").and(sessionAttribute("State",
+                GuideStates.HELP.toString())));
     }
 
     @Override

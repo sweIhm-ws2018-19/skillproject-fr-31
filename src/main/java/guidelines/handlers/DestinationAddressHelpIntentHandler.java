@@ -41,10 +41,16 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
 
         if (exitOrHomeSlot != null) {
             String choice = exitOrHomeSlot.getValue();
+            String stateToSet;
+            if(choice.equals("Heimadresse")){
+                stateToSet = GuideStates.HELP.toString();
+            }else{
+                stateToSet = GuideStates.LAUNCH_STATE.toString();
+            }
             AttributesManager attributesManager = handlerInput.getAttributesManager();
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP_HOME));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", stateToSet));
             speechText = SpeechStrings.HELP_DESTINATION_ADDRESS;
-            repromptText = "was";
+            repromptText = "ASHJFDASJHK";
         } else {
             repromptText = "Bitte wiederhole nochmal was du gesagt hast? Möchtest du mit den Infos zur Heimadresse weiterfahren oder die Hilfefunktion beenden?";
             speechText = "Leider hat etwas nicht geklappt, bis sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
@@ -53,7 +59,7 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
 
         respBuilder.withSimpleCard("Hilfe Zieladresse", "Hilfe Zieladresse")
                 .withSpeech(SpeechStrings.HELP_DESTINATION_ADDRESS)
-                .withReprompt(SpeechStrings.REPROMPT)
+                .withReprompt(repromptText)
                 .withShouldEndSession(false)
                 .build();
 

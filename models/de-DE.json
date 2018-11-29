@@ -55,22 +55,6 @@
           "samples": [
             "Heimadresse"
           ]
-        },
-        {
-          "name": "HelpIntent",
-          "slots": [
-            {
-              "name": "homeordest",
-              "type": "HomeOrDestInfo"
-            }
-          ],
-          "samples": [
-            "Beginne Hilfefunktion",
-            "Starte Hilfefunktion",
-            "Starte Hilfe",
-            "Help",
-            "Hilfe"
-          ]
         }
       ],
       "types": [
@@ -80,16 +64,6 @@
             {
               "name": {
                 "value": "HomeInfo"
-              }
-            }
-          ]
-        },
-        {
-          "name": "HomeOrDestInfo",
-          "values": [
-            {
-              "name": {
-                "value": "ToBeDetermined"
               }
             }
           ]
