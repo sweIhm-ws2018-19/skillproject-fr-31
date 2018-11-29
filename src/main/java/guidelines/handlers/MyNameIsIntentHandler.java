@@ -53,12 +53,11 @@ public class MyNameIsIntentHandler implements RequestHandler {
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 
-            speechText = "Vielen dank "+name;
-            repromptText = "Bitte jetzt deine Straße angeben";
+            speechText = SpeechStrings.THANKS+name;
+            repromptText = name + SpeechStrings.PLS+SpeechStrings.STREET;
         } else {
-            speechText = "Leider habe ich das nicht verstanden. Versuche bitte erneut deinen Name zu sagen";
-            repromptText =
-                "Ich weiß deinen Namen noch nicht. Kannst du ihn mir veraten. Sage zum Beispiel: ich heiße Anita.";
+            speechText = SpeechStrings.INAUDIBLE +  " Versuche bitte erneut deinen Name zu sagen";
+            repromptText = SpeechStrings.NAMEUNKNOWN;
             askResponse = true;
         }
 
