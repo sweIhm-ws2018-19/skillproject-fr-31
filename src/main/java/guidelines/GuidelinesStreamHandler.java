@@ -16,7 +16,11 @@ package main.java.guidelines;
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
+import com.amazon.ask.attributes.AttributesManager;
 import main.java.guidelines.handlers.*;
+import main.java.guidelines.stateMachine.GuideStates;
+
+import java.util.Collections;
 
 public class GuidelinesStreamHandler extends SkillStreamHandler {
 

@@ -44,7 +44,7 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
             AttributesManager attributesManager = handlerInput.getAttributesManager();
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP));
             speechText = SpeechStrings.HELP_DESTINATION_ADDRESS;
-            repromptText = "ASHJFDASJHK";
+            repromptText = "Vielen dank";
         } else {
             repromptText = "Bitte wiederhole nochmal was du gesagt hast? Möchtest du mit den Infos zur Heimadresse weiterfahren oder die Hilfefunktion beenden?";
             speechText = "Leider hat etwas nicht geklappt, bis sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
@@ -52,7 +52,7 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
         }
 
         respBuilder.withSimpleCard("Hilfe Zieladresse", "Hilfe Zieladresse")
-                .withSpeech(SpeechStrings.HELP_DESTINATION_ADDRESS)
+                .withSpeech(speechText)
                 .withReprompt(repromptText)
                 .withShouldEndSession(false)
                 .build();
