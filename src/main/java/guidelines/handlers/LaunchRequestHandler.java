@@ -32,7 +32,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class LaunchRequestHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(requestType(LaunchRequest.class));
+        return input.matches(requestType(LaunchRequest.class).or(sessionAttribute("State", GuideStates.LAUNCH_STATE)));
     }
 
     @Override

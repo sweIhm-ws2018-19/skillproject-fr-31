@@ -42,7 +42,7 @@
           "slots": [
             {
               "name": "exitOrHome",
-              "type": "ExitOrHomeInfo"
+              "type": "AMAZON.SearchQuery"
             }
           ],
           "samples": [
@@ -54,36 +54,23 @@
           "slots": [
             {
               "name": "exitOrDest",
-              "type": "ExitOrDestInfo"
+              "type": "AMAZON.SearchQuery"
             }
           ],
           "samples": [
             "Heimadresse"
           ]
-        }
-      ],
-      "types": [
-        {
-          "name": "ExitOrHomeInfo",
-          "values": [
-            {
-              "name": {
-                "value": "HomeInfo"
-              }
-            }
-          ]
         },
         {
-          "name": "ExitOrDestInfo",
-          "values": [
-            {
-              "name": {
-                "value": "DestInfo"
-              }
-            }
+          "name": "BackToStartIntent",
+          "slots": [],
+          "samples": [
+            "Start",
+            "Zurück zum Start"
           ]
         }
-      ]
+      ],
+      "types": []
     }
   }
 }

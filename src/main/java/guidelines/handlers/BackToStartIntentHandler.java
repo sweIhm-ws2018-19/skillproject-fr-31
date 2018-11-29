@@ -1,0 +1,32 @@
+package main.java.guidelines.handlers;
+
+import com.amazon.ask.attributes.AttributesManager;
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.Response;
+import main.java.guidelines.SpeechStrings;
+import main.java.guidelines.stateMachine.GuideStates;
+
+import java.util.Collections;
+import java.util.Optional;
+
+import static com.amazon.ask.request.Predicates.intentName;
+
+public class BackToStartIntentHandler implements RequestHandler {
+    @Override
+    public boolean canHandle(HandlerInput handlerInput) {
+        return handlerInput.matches(intentName("BackToStartIntent"));
+    }
+
+    @Override
+    public Optional<Response> handle(HandlerInput handlerInput) {
+        AttributesManager attributesManager = handlerInput.getAttributesManager();
+        attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT.toString()));
+
+        return handlerInput.getResponseBuilder()
+                .withSimpleCard("Back to the beginning", "Back to the beginning")
+                .withSpeech("Du kannst nun wieder die Hilfefunktion aufrufen oder eine Route erfragen")
+                .withShouldEndSession(false)
+                .build();
+    }
+}
