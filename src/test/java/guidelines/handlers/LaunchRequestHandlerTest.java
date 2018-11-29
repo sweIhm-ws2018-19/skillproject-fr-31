@@ -1,4 +1,4 @@
 package test.java.guidelines.handlers;
 
-public class LaunchRequestHandler {
+public class LaunchRequestHandlerTest {
 }

@@ -11,7 +11,7 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
-public class WhereIsTheLatestShitIntent implements RequestHandler {
+public class WhereIsTheLatestShitIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
         return handlerInput.matches(intentName("WhereIsTheLatestShitIntent"));

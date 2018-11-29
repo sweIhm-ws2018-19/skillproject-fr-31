@@ -1,4 +1,4 @@
-package main.java.guidelines.handlers;
+package test.java.guidelines.handlers;
 
 public class CancelandStopIntentHandlerTest {
 }

@@ -36,7 +36,7 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new HomeAddressHelpIntentHandler(),
                         new DestinationAddressHelpIntentHandler(),
                         new BackToStartIntentHandler(),
-                        new WhereIsTheLatestShitIntent())
+                        new WhereIsTheLatestShitIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
                 // Add your skill id below
