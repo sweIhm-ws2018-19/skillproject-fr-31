@@ -42,7 +42,7 @@
           "slots": [
             {
               "name": "exitOrHome",
-              "type": ""
+              "type": "ExitOrHomeInfo"
             }
           ],
           "samples": [
@@ -55,9 +55,46 @@
           "samples": [
             "Heimadresse"
           ]
+        },
+        {
+          "name": "HelpIntent",
+          "slots": [
+            {
+              "name": "homeordest",
+              "type": "HomeOrDestInfo"
+            }
+          ],
+          "samples": [
+            "Beginne Hilfefunktion",
+            "Starte Hilfefunktion",
+            "Starte Hilfe",
+            "Help",
+            "Hilfe"
+          ]
         }
       ],
-      "types": []
+      "types": [
+        {
+          "name": "ExitOrHomeInfo",
+          "values": [
+            {
+              "name": {
+                "value": "HomeInfo"
+              }
+            }
+          ]
+        },
+        {
+          "name": "HomeOrDestInfo",
+          "values": [
+            {
+              "name": {
+                "value": "ToBeDetermined"
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }

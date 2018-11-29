@@ -13,6 +13,7 @@
 
 package main.java.guidelines.handlers;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
@@ -20,6 +21,7 @@ import com.amazon.ask.response.ResponseBuilder;
 import main.java.guidelines.SpeechStrings;
 import main.java.guidelines.stateMachine.GuideStates;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,7 +31,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class HelpIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.HelpIntent").and(sessionAttribute("State", GuideStates.TRANSIT.toString())));
+        return input.matches(intentName("HelpIntent").and(sessionAttribute("State", GuideStates.TRANSIT.toString())));
     }
 
     @Override
@@ -45,12 +47,37 @@ public class HelpIntentHandler implements RequestHandler {
 
         Map<String, Slot> slots = intent.getSlots();
 
+        Slot homeOrDestSlot = slots.get("homeordest");
 
-        return input.getResponseBuilder()
-                .withSimpleCard("Guidelines", SpeechStrings.HELP)
+        String speechText;
+        String repromptText;
+        boolean askResponse = false;
+
+        if (homeOrDestSlot != null) {
+            String choice = homeOrDestSlot.getValue();
+            AttributesManager attributesManager = input.getAttributesManager();
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP.toString()));
+            speechText = SpeechStrings.HELP;
+            repromptText = "Bitte funktioniere";
+        } else {
+            repromptText = "Bitte wiederhole nochmal was du gesagt hast? Möchtest du mit den Infos zur Heimadresse oder zur Zieladresse weiterfahren?";
+            speechText = "Leider hat etwas nicht geklappt, bis sage mir nochmal ob du Infos zur Heimadresse oder Zieladresse haben möchtest";
+            askResponse = true;
+        }
+
+        respBuilder.withSimpleCard("Hilfe Zieladresse", "Hilfe Zieladresse")
                 .withSpeech(SpeechStrings.HELP)
                 .withReprompt(SpeechStrings.REPROMPT)
                 .withShouldEndSession(false)
                 .build();
+
+        if (askResponse) {
+            respBuilder.withShouldEndSession(false)
+                    .withReprompt(repromptText)
+                    .withSpeech(speechText);
+        }
+
+
+        return respBuilder.build();
     }
 }
