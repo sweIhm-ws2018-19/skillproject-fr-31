@@ -1,4 +1,4 @@
-package guidelines;
+package main.java.guidelines;
 
 public class SpeechStrings {
     private SpeechStrings(){}
