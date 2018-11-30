@@ -1,17 +1,19 @@
-package java.guidelines.handlers;
+package guidelines.handlers;
 
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
 import com.amazon.ask.response.ResponseBuilder;
-import java.guidelines.SpeechStrings;
-import java.guidelines.stateMachine.GuideStates;
+
+import guidelines.SpeechStrings;
+import guidelines.stateMachine.GuideStates;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class DestinationAddressHelpIntentHandler implements RequestHandler {
     @Override

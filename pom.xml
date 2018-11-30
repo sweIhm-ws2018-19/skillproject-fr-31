@@ -47,8 +47,6 @@
     </dependency>
   </dependencies>
   <build>
-     <sourceDirectory>src/main</sourceDirectory>
-     <testSourceDirectory>src/test</testSourceDirectory>
     <pluginManagement>
       <plugins>
         <plugin>
