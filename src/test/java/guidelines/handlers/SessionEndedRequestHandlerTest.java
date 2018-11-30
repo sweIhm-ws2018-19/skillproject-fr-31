@@ -1,13 +1,11 @@
-package test.java.guidelines.handlers;
+package java.guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import main.java.guidelines.handlers.SessionEndedRequestHandler;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 
 public class SessionEndedRequestHandlerTest {

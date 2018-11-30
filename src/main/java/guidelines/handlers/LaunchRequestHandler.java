@@ -11,23 +11,21 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.guidelines.handlers;
+package java.guidelines.handlers;
 
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import static com.amazon.ask.request.Predicates.requestType;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 import com.amazon.ask.response.ResponseBuilder;
-import main.java.guidelines.SpeechStrings;
-import main.java.guidelines.stateMachine.GuideStates;
-
+import java.guidelines.SpeechStrings;
+import java.guidelines.stateMachine.GuideStates;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.requestType;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class LaunchRequestHandler implements RequestHandler {
     @Override

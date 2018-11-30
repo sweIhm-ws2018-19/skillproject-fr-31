@@ -1,8 +1,8 @@
-package main.java.guidelines.utilities;
+package java.guidelines.utilities;
 
 import java.util.Map;
 
-public class hereApi {
+public class HereApi {
     public static Map<String, Double> getCoordinates(String street, int number, String city, int zip){
 
         

@@ -10,17 +10,12 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for
      the specific language governing permissions and limitations under the License.
 */
-
-package main.java.guidelines;
+package java.guidelines;
 
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
-import com.amazon.ask.attributes.AttributesManager;
-import main.java.guidelines.handlers.*;
-import main.java.guidelines.stateMachine.GuideStates;
-
-import java.util.Collections;
+import java.guidelines.handlers.*;
 
 public class GuidelinesStreamHandler extends SkillStreamHandler {
 

@@ -1,19 +1,17 @@
-package main.java.guidelines.handlers;
+package java.guidelines.handlers;
 
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 import com.amazon.ask.response.ResponseBuilder;
-import main.java.guidelines.SpeechStrings;
-import main.java.guidelines.stateMachine.GuideStates;
-
+import java.guidelines.SpeechStrings;
+import java.guidelines.stateMachine.GuideStates;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class MyNameIsIntentHandler implements RequestHandler {
 
