@@ -1,7 +1,9 @@
 package main.java.guidelines;
 
 public class SpeechStrings {
-    private SpeechStrings(){}
+    private SpeechStrings() {
+    }
+
     // complete Strings
     public static final String WELCOME_NO_CONFIG = "Herzlich willkommen bei guidelines, der Skill wird jetzt eingerichtet. Bitte sag mir deinen Namen";
     public static final String REPROMPT = "Auf gehts!";
@@ -10,6 +12,8 @@ public class SpeechStrings {
             "diese benennen. GuideLines kann dir so schnell helfen, deine schnellste und puenktlichste Verbindung " +
             "zu finden. Wenn du mehr Informationen zur Einrichtung wissen moechtest, sage Zieladresse, Heimadresse oder " +
             "zurück zum Start";
+    public static final String USE_GPS_OR_NOT = " . Als naechstes brauche ich deine Heimatadresse. Waere es fuer dich"
+            + " in Ordnung deine aktuelle Position zu verwenden?";
 
     public static final String HELP_HOME_ADDRESS = "Deine Heimadresse benoetigt GuideLines, um einen Startpunkt im " +
             "System festzulegen. Neben deiner Adresse, deiner Haltestelle und einem bevorzugten Verkehrsmittel kannst " +
@@ -24,7 +28,7 @@ public class SpeechStrings {
     public static final String DEFAULT = "Ich weiß nicht was los ist?";
     public static final String NAMEUNKNOWN = "Ich weiß deinen Namen noch nicht. Kannst du ihn mir veraten. Sage zum Beispiel: ich heiße Anita.";
 
-    // formatt Strings
+    // format Strings
     public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";
 
     // Short answers to combine
@@ -34,6 +38,6 @@ public class SpeechStrings {
     public static final String STREET = "jetzt die Straße angeben.";
     public static final String INAUDIBLE = "Das habe ich nicht verstande.";
 
-    // Infos
+    // Info
     public static final String SKILL_NAME = "Guidelines";
 }

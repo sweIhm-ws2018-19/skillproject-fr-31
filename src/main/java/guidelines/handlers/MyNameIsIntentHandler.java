@@ -4,16 +4,14 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 import com.amazon.ask.response.ResponseBuilder;
-
-import main.java.guidelines.SpeechStrings;
-import main.java.guidelines.stateMachine.GuideStates;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
+import main.java.guidelines.SpeechStrings;
+import main.java.guidelines.stateMachine.GuideStates;
 
 public class MyNameIsIntentHandler implements RequestHandler {
 
@@ -35,21 +33,22 @@ public class MyNameIsIntentHandler implements RequestHandler {
         String repromptText;
         boolean askResponse = false;
 
-        if(nameSlot != null) {
+        if (nameSlot != null) {
             String name = nameSlot.getValue();
             AttributesManager attributesManager = input.getAttributesManager();
             // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap("NAME", name));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT.toString()));
             // store in database
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
             persistentAttributes.put("NAME", name);
+
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 
-            speechText = SpeechStrings.THANKS+name;
-            repromptText = name + SpeechStrings.PLS+SpeechStrings.STREET;
+            speechText = SpeechStrings.WELCOME_USER + name + SpeechStrings.USE_GPS_OR_NOT;
+            repromptText = name + SpeechStrings.PLS + SpeechStrings.STREET;
         } else {
-            speechText = SpeechStrings.INAUDIBLE +  " Versuche bitte erneut deinen Name zu sagen";
+            speechText = SpeechStrings.INAUDIBLE + " Versuche bitte erneut deinen Name zu sagen";
             repromptText = SpeechStrings.NAMEUNKNOWN;
             askResponse = true;
         }

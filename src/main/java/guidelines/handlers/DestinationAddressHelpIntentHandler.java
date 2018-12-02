@@ -51,7 +51,6 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
 
         respBuilder.withSimpleCard("Hilfe Zieladresse", "Hilfe Zieladresse")
                 .withSpeech(speechText)
-                .withReprompt(repromptText)
                 .withShouldEndSession(false)
                 .build();
 

@@ -17,12 +17,12 @@
         },
         {
           "name": "WhereIsTheLatestShitIntent",
+          "slots": [],
           "samples": [
             "Wo ist der latest shit",
             "latest shit"
           ]
         },
-
         {
           "name": "MyNameIsIntent",
           "slots": [
@@ -75,6 +75,18 @@
           "samples": [
             "Start",
             "Zurück zum Start"
+          ]
+        },
+        {
+          "name": "UseGpsIntent",
+          "slots": [
+            {
+              "name": "decision",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "{decision}"
           ]
         }
       ],
