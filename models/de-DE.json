@@ -78,15 +78,15 @@
           ]
         },
         {
-          "name": "UseGpsIntent",
+          "name": "NameHomeAddressIntent",
           "slots": [
             {
-              "name": "decision",
+              "name": "homeAddressName",
               "type": "AMAZON.SearchQuery"
             }
           ],
           "samples": [
-            "{decision}"
+            "Meine Heimadresse heißt {homeAddressName}"
           ]
         }
       ],

@@ -4,14 +4,16 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
 import com.amazon.ask.response.ResponseBuilder;
+import main.java.guidelines.SpeechStrings;
+import main.java.guidelines.stateMachine.GuideStates;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
-import main.java.guidelines.SpeechStrings;
-import main.java.guidelines.stateMachine.GuideStates;
+
+import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class MyNameIsIntentHandler implements RequestHandler {
 
@@ -37,7 +39,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
             String name = nameSlot.getValue();
             AttributesManager attributesManager = input.getAttributesManager();
             // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT.toString()));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT));
             // store in database
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
             persistentAttributes.put("NAME", name);
