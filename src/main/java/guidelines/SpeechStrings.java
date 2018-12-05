@@ -27,6 +27,10 @@ public class SpeechStrings {
             "Heimadresse oder zurück zum start";
     public static final String DEFAULT = "Ich weiß nicht was los ist?";
     public static final String NAMEUNKNOWN = "Ich weiß deinen Namen noch nicht. Kannst du ihn mir veraten. Sage zum Beispiel: ich heiße Anita.";
+    public static final String REPROMPT_DESTINATION_ADDRESS = "Bitte wiederhole nochmal was du gesagt hast? " +
+            "Möchtest du mit den Infos zur Heimadresse weiterfahren oder die Hilfefunktion beenden?";
+    public static final String SPEECH_ERROR_DESTINATION_ADDRESS = "Leider hat etwas nicht geklappt, " +
+            "bitte sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
 
     // format Strings
     public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";
@@ -37,6 +41,7 @@ public class SpeechStrings {
     public static final String PLS = "Bitte ";
     public static final String STREET = "jetzt die Straße angeben.";
     public static final String INAUDIBLE = "Das habe ich nicht verstande.";
+    public static final String STATE = "State";
 
     // Info
     public static final String SKILL_NAME = "Guidelines";

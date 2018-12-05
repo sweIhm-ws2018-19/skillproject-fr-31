@@ -34,8 +34,6 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new WhereIsTheLatestShitIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
-                // Add your skill id below
-                //.withSkillId("")
                 .build();
     }
 
