@@ -14,7 +14,7 @@ public class SpeechStrings {
     public static final String HELP_HOME_ADDRESS = "Deine Heimadresse benoetigt GuideLines, um einen Startpunkt im " +
             "System festzulegen. Neben deiner Adresse, deiner Haltestelle und einem bevorzugten Verkehrsmittel kannst " +
             "du deinen Startpunkt selbst benennen. Vorschlagen wuerde ich dir hier die Benennung Zuhause. " +
-            "Willst du weitere Infos zu den Zieladressen? Sage einfach Zieladresse oder zurück zum Start";
+            "Willst du weitere Infos zu den Zieladressen? Sage einfach Zieladresse oder zurueck zum Start";
 
     public static final String HELP_DESTINATION_ADDRESS = "Deine Zieladressen stellen haeufig von dir im Alltag " +
             "verwendete Ziele dar. Viele Leute haben hier Ziele wie ihren Arbeitsplatz, Universitaetscampus oder " +
