@@ -20,8 +20,8 @@ import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 
-import main.java.guidelines.SpeechStrings;
-import main.java.guidelines.stateMachine.GuideStates;
+import guidelines.SpeechStrings;
+import guidelines.stateMachine.GuideStates;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
