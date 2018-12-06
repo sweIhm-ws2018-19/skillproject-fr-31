@@ -1,4 +1,4 @@
-package main.java.guidelines.handlers;
+package guidelines.handlers;
 
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
