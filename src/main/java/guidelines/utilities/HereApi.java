@@ -1,4 +1,4 @@
-package guidelines.utilities;
+package main.java.guidelines.utilities;
 
 import java.util.Map;
 
