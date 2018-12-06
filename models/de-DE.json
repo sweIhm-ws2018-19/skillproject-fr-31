@@ -88,6 +88,13 @@
           "samples": [
             "Meine Heimadresse heißt {homeAddressName}"
           ]
+        },
+        {
+          "name": "GetAddressIntent",
+          "slots": [],
+          "samples": [
+            "Was ist meine Heimadresse"
+          ]
         }
       ],
       "types": []

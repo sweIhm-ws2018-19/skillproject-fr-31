@@ -31,6 +31,8 @@ public class SpeechStrings {
             "Möchtest du mit den Infos zur Heimadresse weiterfahren oder die Hilfefunktion beenden?";
     public static final String SPEECH_ERROR_DESTINATION_ADDRESS = "Leider hat etwas nicht geklappt, " +
             "bitte sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
+    public static final String NO_PERMISSION_DEVICE_ADDRESS = "Du hast dem Alexa Skill keine Berechtigung erteilt auf deine" +
+            " Adresse zuzugreifen. Bitte gebe dem Skill die notwendigen Berechtigungen";
 
     // format Strings
     public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";
