@@ -1,4 +1,4 @@
-package main.java.guidelines.handlers;
+package guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -8,10 +8,10 @@ import com.amazon.ask.model.Session;
 import com.amazon.ask.model.interfaces.system.SystemState;
 import com.amazon.ask.model.services.deviceAddress.Address;
 import com.amazon.ask.response.ResponseBuilder;
-import main.java.guidelines.SpeechStrings;
-import main.java.guidelines.exceptions.DeviceAddressClientException;
-import main.java.guidelines.exceptions.UnauthorizedException;
-import main.java.guidelines.utilities.AlexaDeviceAddressClient;
+import guidelines.SpeechStrings;
+import guidelines.exceptions.DeviceAddressClientException;
+import guidelines.exceptions.UnauthorizedException;
+import guidelines.utilities.AlexaDeviceAddressClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ public class GetAddressIntentHandler implements RequestHandler {
     }
 
     @Override
-    public Optional<Response> handle(HandlerInput input) {
+    public Optional<Response> handle(HandlerInput input){
         ResponseBuilder responseBuilder = input.getResponseBuilder();
         String permission = "read::alexa:device:all:address";
         List<String> permissionList = new ArrayList<>();

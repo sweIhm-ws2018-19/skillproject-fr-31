@@ -1,4 +1,4 @@
-package main.java.guidelines.exceptions;
+package guidelines.exceptions;
 
 public class UnauthorizedException extends DeviceAddressClientException {
 

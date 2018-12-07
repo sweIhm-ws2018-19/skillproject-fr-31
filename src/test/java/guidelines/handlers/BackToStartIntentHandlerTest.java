@@ -1,7 +1,6 @@
-package test.java.guidelines.handlers;
+package guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import main.java.guidelines.handlers.BackToStartIntentHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

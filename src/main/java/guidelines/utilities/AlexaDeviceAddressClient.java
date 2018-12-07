@@ -1,9 +1,9 @@
-package main.java.guidelines.utilities;
+package guidelines.utilities;
 
 import com.amazon.ask.model.services.deviceAddress.Address;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import main.java.guidelines.exceptions.DeviceAddressClientException;
-import main.java.guidelines.exceptions.UnauthorizedException;
+import guidelines.exceptions.DeviceAddressClientException;
+import guidelines.exceptions.UnauthorizedException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;

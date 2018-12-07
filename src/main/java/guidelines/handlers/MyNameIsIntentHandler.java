@@ -1,12 +1,12 @@
-package main.java.guidelines.handlers;
+package guidelines.handlers;
 
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
-import main.java.guidelines.SpeechStrings;
-import main.java.guidelines.stateMachine.GuideStates;
+import guidelines.SpeechStrings;
+import guidelines.stateMachine.GuideStates;
 
 import java.util.Collections;
 import java.util.Map;

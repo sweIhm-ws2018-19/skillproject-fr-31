@@ -1,4 +1,4 @@
-package main.java.guidelines.stateMachine;
+package guidelines.stateMachine;
 
 public enum GuideStates {
     CONFIG, CONFIG_AVAILABLE, INSERT_NAME, LAUNCH_STATE, HOME_ADDR, DEST_NAME, 
