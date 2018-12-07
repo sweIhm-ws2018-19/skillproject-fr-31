@@ -1,7 +1,5 @@
-package test.java.guidelines.utilities;
+package guidelines.utilities;
 
-import main.java.guidelines.utilities.Coordinates;
-import main.java.guidelines.utilities.HereApi;
 import org.junit.Assert;
 import org.junit.Test;
 
