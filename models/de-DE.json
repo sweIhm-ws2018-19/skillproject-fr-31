@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "guidelinestest",
+      "invocationName": "holzweg",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",

@@ -31,7 +31,7 @@ public class GetAddressIntentHandler implements RequestHandler {
     }
 
     @Override
-    public Optional<Response> handle(HandlerInput input){
+    public Optional<Response> handle(HandlerInput input) {
         ResponseBuilder responseBuilder = input.getResponseBuilder();
         String permission = "read::alexa:device:all:address";
         List<String> permissionList = new ArrayList<>();
