@@ -76,25 +76,6 @@
             "Start",
             "Zurück zum Start"
           ]
-        },
-        {
-          "name": "NameHomeAddressIntent",
-          "slots": [
-            {
-              "name": "homeAddressName",
-              "type": "AMAZON.SearchQuery"
-            }
-          ],
-          "samples": [
-            "Meine Heimadresse heißt {homeAddressName}"
-          ]
-        },
-        {
-          "name": "GetAddressIntent",
-          "slots": [],
-          "samples": [
-            "Was ist meine Heimadresse"
-          ]
         }
       ],
       "types": []

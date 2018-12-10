@@ -87,8 +87,8 @@ public class LaunchRequestHandler implements RequestHandler {
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT));
             // store in database
             persistentAttributes.put("Street", deviceAddress.getAddressLine1());
-            persistentAttributes.put("PostalCode", deviceAddress.getCity());
-            persistentAttributes.put("City", deviceAddress.getPostalCode());
+            persistentAttributes.put("PostalCode", deviceAddress.getPostalCode());
+            persistentAttributes.put("City", deviceAddress.getCity());
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
             attributesManager.setPersistentAttributes(persistentAttributes);

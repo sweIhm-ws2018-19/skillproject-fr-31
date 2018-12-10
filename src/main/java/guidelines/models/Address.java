@@ -2,6 +2,8 @@ package guidelines.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Objects;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Address {
@@ -79,5 +81,25 @@ public class Address {
 
     public void setDistrictOrCounty(String districtOrCounty) {
         this.districtOrCounty = districtOrCounty;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(getStateOrRegion(), address.getStateOrRegion()) &&
+                Objects.equals(getCity(), address.getCity()) &&
+                Objects.equals(getCountryCode(), address.getCountryCode()) &&
+                Objects.equals(getPostalCode(), address.getPostalCode()) &&
+                Objects.equals(getAddressLine1(), address.getAddressLine1()) &&
+                Objects.equals(getAddressLine2(), address.getAddressLine2()) &&
+                Objects.equals(getAddressLine3(), address.getAddressLine3()) &&
+                Objects.equals(getDistrictOrCounty(), address.getDistrictOrCounty());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStateOrRegion(), getCity(), getCountryCode(), getPostalCode(), getAddressLine1(), getAddressLine2(), getAddressLine3(), getDistrictOrCounty());
     }
 }
