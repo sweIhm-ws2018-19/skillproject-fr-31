@@ -39,7 +39,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
             String name = nameSlot.getValue();
             AttributesManager attributesManager = input.getAttributesManager();
             // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
             // store in database
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
             persistentAttributes.put("NAME", name);
@@ -47,7 +47,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 
-            speechText = SpeechStrings.WELCOME_USER + name + SpeechStrings.USE_GPS_OR_NOT;
+            speechText = SpeechStrings.WELCOME_USER + name + SpeechStrings.START_CONFIG_DEST_ADDRESS;
             repromptText = name + SpeechStrings.PLS + SpeechStrings.STREET;
         } else {
             speechText = SpeechStrings.INAUDIBLE + " Versuche bitte erneut deinen Name zu sagen";

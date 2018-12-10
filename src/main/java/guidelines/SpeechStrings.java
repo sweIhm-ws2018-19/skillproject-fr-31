@@ -33,6 +33,8 @@ public class SpeechStrings {
             "bitte sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
     public static final String NO_PERMISSION_DEVICE_ADDRESS = "Du hast dem Alexa Skill keine Berechtigung erteilt auf deine" +
             " Adresse zuzugreifen. Bitte gebe dem Skill die notwendigen Berechtigungen";
+    public static final String START_CONFIG_DEST_ADDRESS = "Nun beginnen wir mit der Einrichtung der Zieladressen. " +
+            "Wie viele Zieladresse möchtest du einrichten?";
 
     // format Strings
     public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";
