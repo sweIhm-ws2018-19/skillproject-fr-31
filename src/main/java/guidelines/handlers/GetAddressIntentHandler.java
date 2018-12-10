@@ -1,23 +1,23 @@
 package guidelines.handlers;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Permissions;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Session;
 import com.amazon.ask.model.interfaces.system.SystemState;
-import com.amazon.ask.model.services.deviceAddress.Address;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.SpeechStrings;
-import guidelines.exceptions.DeviceAddressClientException;
-import guidelines.exceptions.UnauthorizedException;
-import guidelines.utilities.AlexaDeviceAddressClient;
+import guidelines.models.Address;
+import guidelines.stateMachine.GuideStates;
+import guidelines.utilities.HereApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
@@ -45,35 +45,32 @@ public class GetAddressIntentHandler implements RequestHandler {
                     .build();
         }
 
-        try {
-            SystemState systemState = input.getRequestEnvelope().getContext().getSystem();
-            String apiAccessToken = systemState.getApiAccessToken();
-            String deviceId = systemState.getDevice().getDeviceId();
-            String apiEndpoint = systemState.getApiEndpoint();
+        SystemState systemState = input.getRequestEnvelope().getContext().getSystem();
+        String apiAccessToken = systemState.getApiAccessToken();
+        String deviceId = systemState.getDevice().getDeviceId();
+        String apiEndpoint = systemState.getApiEndpoint();
 
-            AlexaDeviceAddressClient alexaDeviceAddressClient = new AlexaDeviceAddressClient(deviceId, apiAccessToken, apiEndpoint);
-            Address addressObject = alexaDeviceAddressClient.getFullAddress();
+        RestTemplate restTemplate = new RestTemplate();
+        String requestUrl = apiEndpoint + "/v1/devices/" + deviceId + "/settings/address";
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        httpHeaders.add("Authorization", "Bearer " + apiAccessToken);
+        HttpEntity<String> request = new HttpEntity<>(httpHeaders);
+        ResponseEntity<Address> response = restTemplate.exchange(requestUrl, HttpMethod.GET, request, Address.class);
+        Address deviceAddress = response.getBody();
 
-            if (addressObject == null) {
-                return responseBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Es gab einen Fehler mit dem Skill.")
-                        .withSpeech("Es gab einen Fehler mit dem Skill.")
-                        .withReprompt("Versuche es noch einmal")
-                        .build();
-            }
+        AttributesManager attributesManager = input.getAttributesManager();
+        // store in session
+        attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT));
+        // store in database
+        Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+        persistentAttributes.put("Street", deviceAddress.getAddressLine1());
+        persistentAttributes.put("PostalCode", deviceAddress.getCity());
+        persistentAttributes.put("City", deviceAddress.getPostalCode());
 
-            return responseBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, addressObject.getAddressLine1())
-                    .withSpeech(addressObject.getAddressLine1())
-                    .build();
-        }catch (UnauthorizedException error){
-            return responseBuilder.withAskForPermissionsConsentCard(permissionList)
-                    .withSpeech(SpeechStrings.NO_PERMISSION_DEVICE_ADDRESS)
-                    .build();
-        } catch (DeviceAddressClientException error){
-            log.error("Der Geräte-Client hat es nicht geschafft die Adresse zurückzugeben");
-            return responseBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Es gab einen Fehler mit dem Skill.")
-                    .withSpeech("Es gab einen Fehler mit dem Skill.")
-                    .withReprompt("Versuche es noch einmal")
-                    .build();
-        }
+        attributesManager.setPersistentAttributes(persistentAttributes);
+        attributesManager.savePersistentAttributes();
+
+        return responseBuilder.withSpeech(deviceAddress.getAddressLine1() + " " + deviceAddress.getPostalCode() + " " +deviceAddress.getCity()).build();
     }
 }
