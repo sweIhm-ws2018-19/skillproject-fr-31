@@ -56,7 +56,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
         }
 
         ResponseBuilder respBuilder = input.getResponseBuilder();
-        respBuilder.withSimpleCard("Session", SpeechStrings.SKILL_NAME)
+        respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Namenseingabe")
                 .withSpeech(speechText)
                 .withShouldEndSession(false);
 

@@ -16,6 +16,7 @@ package guidelines.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
+import guidelines.SpeechStrings;
 
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class CancelandStopIntentHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput input) {
         return input.getResponseBuilder()
                 .withSpeech("Auf Wiedersehen")
-                .withSimpleCard("ColorSession", "Auf Wiedersehen")
+                .withSimpleCard(SpeechStrings.SKILL_NAME, "Auf Wiedersehen")
                 .build();
     }
 }

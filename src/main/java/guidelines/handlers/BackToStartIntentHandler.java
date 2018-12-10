@@ -4,6 +4,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
+import guidelines.SpeechStrings;
 import guidelines.stateMachine.GuideStates;
 
 import java.util.Collections;
@@ -23,7 +24,7 @@ public class BackToStartIntentHandler implements RequestHandler {
         attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT.toString()));
 
         return handlerInput.getResponseBuilder()
-                .withSimpleCard("Back to the beginning", "Back to the beginning")
+                .withSimpleCard(SpeechStrings.SKILL_NAME, "Back to the beginning")
                 .withSpeech("Du kannst nun wieder die Hilfefunktion aufrufen oder eine Route erfragen")
                 .withShouldEndSession(false)
                 .build();

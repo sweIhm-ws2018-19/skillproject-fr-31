@@ -11,20 +11,20 @@ public class SpeechStrings {
             "Du startest mit der Einrichtung deiner Heimadresse. Anschliessend kannst du bis zu 3 Ziele definieren und " +
             "diese benennen. GuideLines kann dir so schnell helfen, deine schnellste und puenktlichste Verbindung " +
             "zu finden. Wenn du mehr Informationen zur Einrichtung wissen moechtest, sage Zieladresse, Heimadresse oder " +
-            "zurück zum Start";
+            "zurueck zum Start";
     public static final String USE_GPS_OR_NOT = " . Als naechstes brauche ich deine Heimatadresse. Waere es fuer dich"
             + " in Ordnung deine aktuelle Position zu verwenden?";
 
     public static final String HELP_HOME_ADDRESS = "Deine Heimadresse benoetigt GuideLines, um einen Startpunkt im " +
             "System festzulegen. Neben deiner Adresse, deiner Haltestelle und einem bevorzugten Verkehrsmittel kannst " +
             "du deinen Startpunkt selbst benennen. Vorschlagen wuerde ich dir hier die Benennung Zuhause. " +
-            "Willst du weitere Infos zu den Zieladressen? Sage einfach Zieladresse oder zurück zum Start";
+            "Willst du weitere Infos zu den Zieladressen? Sage einfach Zieladresse oder zurueck zum Start";
 
     public static final String HELP_DESTINATION_ADDRESS = "Deine Zieladressen stellen haeufig von dir im Alltag " +
             "verwendete Ziele dar. Viele Leute haben hier Ziele wie ihren Arbeitsplatz, Universitaetscampus oder " +
             "ihre Schule hinterlegt. <break time=\"0.05s\" /> Auch hier brauche ich die Adresse, die Haltestelle und " +
             "einen Namen für dein Ziel. Ich kann dir noch weitere Informationen zur Heimadresse geben. Sage einfach " +
-            "Heimadresse oder zurück zum start";
+            "Heimadresse oder zurueck zum start";
     public static final String DEFAULT = "Ich weiß nicht was los ist?";
     public static final String NAMEUNKNOWN = "Ich weiß deinen Namen noch nicht. Kannst du ihn mir veraten. Sage zum Beispiel: ich heiße Anita.";
     public static final String REPROMPT_DESTINATION_ADDRESS = "Bitte wiederhole nochmal was du gesagt hast? " +

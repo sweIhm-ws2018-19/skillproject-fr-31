@@ -49,7 +49,7 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
             askResponse = true;
         }
 
-        respBuilder.withSimpleCard("Hilfe Zieladresse", "Hilfe Zieladresse")
+        respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Hilfe Zieladresse")
                 .withSpeech(speechText)
                 .withShouldEndSession(false)
                 .build();

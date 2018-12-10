@@ -49,7 +49,7 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
             askResponse = true;
         }
 
-        respBuilder.withSimpleCard("Hilfe Heimadresse", "Hilfe Heimadresse")
+        respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Hilfe Heimadresse")
                 .withSpeech(speechText)
                 .withShouldEndSession(false)
                 .build();

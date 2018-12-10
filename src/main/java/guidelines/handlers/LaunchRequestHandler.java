@@ -100,7 +100,7 @@ public class LaunchRequestHandler implements RequestHandler {
             outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
         }
 
-        return responseBuilder.withSimpleCard("Session", SpeechStrings.SKILL_NAME)
+        return responseBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Start")
                 .withSpeech(outputMessage)
                 .withReprompt(outputMessage)
                 .build();

@@ -1,0 +1,12 @@
+- Erst Zieladresse erfragen oder Namen der Zieladresse?
+- Wie gebe ich mehrere Zieladresse ein bzw. wie bekomme ich den DialogFlow dazu hin?
+- Setzten wir nun vorraus, dass der Nutzer eine GeräteAdresse eingegeben hat?
+- Wie speichere ich Daten in mehrere Tabellen?
+
+TODO:
+- Einrichtung Zieladressen (bis zu 3)
+-- Dialogflow modellieren/implementieren
+--- Erst Namen eingeben
+--- Zieladressen angeben und validieren
+--- Zieladresse in seperate Tabelle (nicht in configuration) speichern
+-- In der Datenbank in einer seperaten Tabelle speichern
