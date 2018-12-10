@@ -16,9 +16,6 @@ public class Address {
     private String addressLine3;
     private String districtOrCounty;
 
-    public Address() {
-    }
-
     public String getStateOrRegion() {
         return stateOrRegion;
     }
