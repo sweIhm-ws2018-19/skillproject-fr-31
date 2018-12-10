@@ -24,7 +24,7 @@ import com.amazon.ask.model.interfaces.system.SystemState;
 import com.amazon.ask.response.ResponseBuilder;
 
 import guidelines.SpeechStrings;
-import guidelines.models.Address;
+import guidelines.models.DeviceAddress;
 import guidelines.stateMachine.GuideStates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,15 +80,13 @@ public class LaunchRequestHandler implements RequestHandler {
             httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
             httpHeaders.add("Authorization", "Bearer " + apiAccessToken);
             HttpEntity<String> request = new HttpEntity<>(httpHeaders);
-            ResponseEntity<Address> response = restTemplate.exchange(requestUrl, HttpMethod.GET, request, Address.class);
-            Address deviceAddress = response.getBody();
+            ResponseEntity<DeviceAddress> response = restTemplate.exchange(requestUrl, HttpMethod.GET, request, DeviceAddress.class);
+            DeviceAddress deviceAddress = response.getBody();
 
             // store in session
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT));
             // store in database
-            persistentAttributes.put("Street", deviceAddress.getAddressLine1());
-            persistentAttributes.put("PostalCode", deviceAddress.getPostalCode());
-            persistentAttributes.put("City", deviceAddress.getCity());
+            persistentAttributes.put("DeviceAddress", deviceAddress);
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
             attributesManager.setPersistentAttributes(persistentAttributes);

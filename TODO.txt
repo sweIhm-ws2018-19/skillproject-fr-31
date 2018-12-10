@@ -10,3 +10,5 @@ TODO:
 --- Zieladressen angeben und validieren
 --- Zieladresse in seperate Tabelle (nicht in configuration) speichern
 -- In der Datenbank in einer seperaten Tabelle speichern
+- J-Unit Tests schreiben!!!
+- Github Wiki für Abgabe fertigstellen
