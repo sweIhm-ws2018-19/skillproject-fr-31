@@ -39,7 +39,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
             String name = nameSlot.getValue();
             AttributesManager attributesManager = input.getAttributesManager();
             // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_NAME));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
             // store in database
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
             persistentAttributes.put("NAME", name);
