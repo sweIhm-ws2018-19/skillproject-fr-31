@@ -5,9 +5,9 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
-
 import guidelines.SpeechStrings;
 import guidelines.stateMachine.GuideStates;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -42,16 +42,15 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
             AttributesManager attributesManager = handlerInput.getAttributesManager();
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP));
             speechText = SpeechStrings.HELP_DESTINATION_ADDRESS;
-            repromptText = "Vielen dank";
+            repromptText = SpeechStrings.THANKS;
         } else {
-            repromptText = "Bitte wiederhole nochmal was du gesagt hast? Möchtest du mit den Infos zur Heimadresse weiterfahren oder die Hilfefunktion beenden?";
-            speechText = "Leider hat etwas nicht geklappt, bis sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
+            repromptText = SpeechStrings.REPROMPT_DESTINATION_ADDRESS;
+            speechText = SpeechStrings.SPEECH_ERROR_DESTINATION_ADDRESS;
             askResponse = true;
         }
 
-        respBuilder.withSimpleCard("Hilfe Zieladresse", "Hilfe Zieladresse")
+        respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Hilfe Zieladresse")
                 .withSpeech(speechText)
-                .withReprompt(repromptText)
                 .withShouldEndSession(false)
                 .build();
 

@@ -1,5 +1,6 @@
 package guidelines.utilities;
 
+import guidelines.models.Coordinates;
 import org.junit.Assert;
 import org.junit.Test;
 

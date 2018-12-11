@@ -5,9 +5,9 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
-
 import guidelines.SpeechStrings;
 import guidelines.stateMachine.GuideStates;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -35,27 +35,28 @@ public class MyNameIsIntentHandler implements RequestHandler {
         String repromptText;
         boolean askResponse = false;
 
-        if(nameSlot != null) {
+        if (nameSlot != null) {
             String name = nameSlot.getValue();
             AttributesManager attributesManager = input.getAttributesManager();
             // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap("NAME", name));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
             // store in database
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
             persistentAttributes.put("NAME", name);
+
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 
-            speechText = SpeechStrings.THANKS+name;
-            repromptText = name + SpeechStrings.PLS+SpeechStrings.STREET;
+            speechText = SpeechStrings.WELCOME_USER + name + SpeechStrings.START_CONFIG_DEST_ADDRESS;
+            repromptText = name + SpeechStrings.PLS + SpeechStrings.STREET;
         } else {
-            speechText = SpeechStrings.INAUDIBLE +  " Versuche bitte erneut deinen Name zu sagen";
+            speechText = SpeechStrings.INAUDIBLE + " Versuche bitte erneut deinen Name zu sagen";
             repromptText = SpeechStrings.NAMEUNKNOWN;
             askResponse = true;
         }
 
         ResponseBuilder respBuilder = input.getResponseBuilder();
-        respBuilder.withSimpleCard("Session", SpeechStrings.SKILL_NAME)
+        respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Namenseingabe")
                 .withSpeech(speechText)
                 .withShouldEndSession(false);
 

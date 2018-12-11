@@ -3,6 +3,7 @@ package guidelines.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
+import guidelines.SpeechStrings;
 
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class FallbackIntentHandler implements RequestHandler {
         String speechText = "Tut mir leid, das weiss ich nicht. Sage einfach Hilfe.";
         return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard(SpeechStrings.SKILL_NAME, speechText)
                 .withReprompt(speechText)
                 .build();
     }

@@ -3,6 +3,7 @@ package guidelines.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guidelines.models.Coordinates;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;

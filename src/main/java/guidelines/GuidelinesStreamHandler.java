@@ -31,11 +31,10 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new HomeAddressHelpIntentHandler(),
                         new DestinationAddressHelpIntentHandler(),
                         new BackToStartIntentHandler(),
-                        new WhereIsTheLatestShitIntentHandler())
+                        new WhereIsTheLatestShitIntentHandler(),
+                        new DestAddressIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
-                // Add your skill id below
-                //.withSkillId("")
                 .build();
     }
 
