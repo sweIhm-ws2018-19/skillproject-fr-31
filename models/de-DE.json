@@ -100,10 +100,18 @@
             {
               "name": "city",
               "type": "AMAZON.DE_CITY"
+            },
+            {
+              "name": "streetNumber",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "postalCode",
+              "type": "AMAZON.NUMBER"
             }
           ],
           "samples": [
-            "Ich wohne in {city} {street}"
+            "Ich wohne in {street} {streetNumber} {postalCode} {city} "
           ]
         }
       ],

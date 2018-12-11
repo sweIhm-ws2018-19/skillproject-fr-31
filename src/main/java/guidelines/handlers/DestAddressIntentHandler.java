@@ -14,7 +14,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class DestAddressIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("DestAddressIntent").and(sessionAttribute("State", GuideStates.DEST_ADDR)));
+        return input.matches(intentName("DestAddressIntent").and(sessionAttribute("State", GuideStates.DEST_ADDR.toString())));
     }
 
     @Override
@@ -25,10 +25,16 @@ public class DestAddressIntentHandler implements RequestHandler {
 
         Map<String, Slot> slots = intent.getSlots();
         Slot citySlot = slots.get("city");
+        Slot streetSlot = slots.get("street");
+        Slot streetNumberSlot = slots.get("streetNumber");
+        Slot postalCodeSlot = slots.get("postalCode");
 
-        if(citySlot != null){
+        if(citySlot != null && streetSlot != null && streetNumberSlot != null && postalCodeSlot != null){
             String cityValue = citySlot.getValue();
-            return input.getResponseBuilder().withSpeech(cityValue).build();
+            String streetValue = streetSlot.getValue();
+            String streetNumberValue = streetNumberSlot.getValue();
+            String postalCode = postalCodeSlot.getValue();
+            return input.getResponseBuilder().withSpeech(cityValue + " - " +streetValue + " - " + streetNumberValue + " - " + postalCode).build();
         }else{
             return input.getResponseBuilder().withSpeech("DU VOLLIDIOT DU AHST EINEN FEHLER GEMACHT").withReprompt("SPACKEN").build();
         }

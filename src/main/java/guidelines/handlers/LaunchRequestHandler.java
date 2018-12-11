@@ -82,9 +82,6 @@ public class LaunchRequestHandler implements RequestHandler {
             httpHeaders.add("Authorization", "Bearer " + apiAccessToken);
             HttpEntity<String> request = new HttpEntity<>(httpHeaders);
             ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, request, String.class);
-
-            // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.USE_GPS_OR_NOT));
             // store in database
             persistentAttributes.put("Heimadresse", response.getBody());
 
