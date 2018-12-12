@@ -4,7 +4,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import guidelines.models.Coordinates;
+import guidelines.models.Coordinate;
 import guidelines.stateMachine.GuideStates;
 import guidelines.utilities.HereApi;
 
@@ -39,7 +39,7 @@ public class DestAddressIntentHandler implements RequestHandler {
 
             AttributesManager attributesManager = input.getAttributesManager();
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
-            final Coordinates coordinates = HereApi.getCoordinates(streetValue, Integer.valueOf(streetNumberValue),
+            final Coordinate coordinates = HereApi.getCoordinate(streetValue, Integer.valueOf(streetNumberValue),
                     cityValue, Integer.valueOf(postalCode));
             List<String> stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
 
