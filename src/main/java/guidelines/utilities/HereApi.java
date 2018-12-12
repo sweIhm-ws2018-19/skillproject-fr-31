@@ -26,10 +26,14 @@ public class HereApi {
     public static Coordinate getCoordinate(String street, int number, String city){
         String requestUrl = GEOCODEBASE +"&searchtext="+ street + "&city=" + city + "&housenumber=" + number;
         JsonNode jsNode = sendRequest(requestUrl);
-        jsNode = jsNode.findPath("DisplayPosition");
-        if(jsNode.asText().equals("missing node"))
+        try{
+            jsNode = jsNode.findPath("DisplayPosition");
+            if(jsNode.asText().equals("missing node"))
+                return null;
+            return new Coordinate(jsNode.findValue("Latitude").asDouble(),jsNode.findValue("Longitude").asDouble());
+        }catch(NullPointerException ex){
             return null;
-        return new Coordinate(jsNode.findValue("Latitude").asDouble(),jsNode.findValue("Longitude").asDouble());
+        }
     }
 
     public static Coordinate getRoute(Coordinate home, Coordinate dest){
