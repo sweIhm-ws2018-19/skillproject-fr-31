@@ -12,7 +12,7 @@ public class HereApiTest {
     @Test
     public void getCoordinatesTest(){
         final Coordinate want = new Coordinate(48.47452, 11.93002);
-        final Coordinate have = HereApi.getCoordinates("In der Feldkirchner Au", 20, "Moosburg", 85368);
+        final Coordinate have = HereApi.getCoordinate("In der Feldkirchner Au", 20, "Moosburg", 85368);
         Assert.assertEquals(want, have);
     }
 
