@@ -98,7 +98,7 @@
             }
           ],
           "samples": [
-            "Mein erstes Ziel ist {street} {streetNumber} {postalCode} {city} "
+            "Mein erstes Ziel ist {street} {streetNumber} {city} {postalCode}  "
           ]
         },
         {
@@ -116,6 +116,18 @@
           "samples": [
             "Bitte nenne mein Ziel {streetCustomName}",
             "Mein erstes Ziel heißt {streetCustomName}"
+          ]
+        },
+        {
+          "name": "ChoiceIntent",
+          "slots": [
+            {
+              "name": "choice",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "Ich wähle die {choice}"
           ]
         }
       ],

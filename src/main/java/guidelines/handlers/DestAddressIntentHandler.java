@@ -14,6 +14,10 @@ import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class DestAddressIntentHandler implements RequestHandler {
+
+    public static List<String> stationNames;
+    public static Map<String, Coordinates> nearbyStations;
+
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("DestAddressIntent").and(sessionAttribute("State", GuideStates.DEST_ADDR.toString())));
@@ -41,15 +45,16 @@ public class DestAddressIntentHandler implements RequestHandler {
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
             final Coordinates coordinates = HereApi.getCoordinates(streetValue, Integer.valueOf(streetNumberValue),
                     cityValue, Integer.valueOf(postalCode));
-            List<String> stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
-
+            nearbyStations = HereApi.getNearbyStations(coordinates);
+            stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
 
 
             return input.getResponseBuilder()
                     .withSpeech("Du hast uns folgende Adresse genannt: " + streetValue + " "
                             + streetNumberValue + " " + postalCode + " " + cityValue + ". Als naechstes waehlen wir " +
                             "eine Zielstation aus. Moechtest du " + stationNames.get(0) + ", " + stationNames.get(1) +
-                            " oder " + stationNames.get(2) + " als Zielstation einrichten?")
+                            " oder " + stationNames.get(2) + " als Zielstation einrichten? Zur Auswahl sage. Ich waehle die eins, zwei" +
+                            " oder drei.")
                     .withReprompt("Bitte gebe die Adresse an deines erstes Ziels")
                     .withShouldEndSession(false)
                     .build();
