@@ -18,11 +18,12 @@ public class HereApi {
     private static final String routeBase = "https://transit.api.here.com/v3/route.json?app_id="+appId+"&app_code="+appCode;
     private static final String stationsBase = "https://transit.api.here.com/v3/stations/by_geocoord.json?app_id="+appId+"&app_code="+appCode;
 
-    public static Coordinate getCoordinate(String street, int number, String city, int zip){
-        String requestUrl = geocodeBase +"&searchtext="+ street + "&city=" + city + "&housenumber=" + number + "&postalcode=" + zip;
+    public static Coordinate getCoordinate(String street, int number, String city){
+        String requestUrl = geocodeBase +"&searchtext="+ street + "&city=" + city + "&housenumber=" + number;
         JsonNode jsNode = sendRequest(requestUrl);
         jsNode = jsNode.findPath("DisplayPosition");
-
+        if(jsNode.asText().equals("missing node"))
+            return null;
         return new Coordinate(jsNode.findValue("Latitude").asDouble(),jsNode.findValue("Longitude").asDouble());
     }
 
