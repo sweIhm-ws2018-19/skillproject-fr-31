@@ -49,20 +49,6 @@ public class HereApi {
         return stations;
     }
 
-    public static Map<String, Coordinates> getNearbyStations(Coordinates co){
-        String stationReq = stationsBase + "&center=" + co.getLatitude() + "," + co.getLongitude();
-        JsonNode jsNode = sendRequest(stationReq);
-        jsNode = jsNode.findPath("Stn");
-
-        Map<String,Coordinates> stations = new HashMap<>();
-        if (jsNode.isArray()) {
-            for (final JsonNode objNode : jsNode) {
-                stations.put(objNode.get("name").asText(), new Coordinates(objNode.get("y").asDouble(), objNode.get("x").asDouble()));
-            }
-        }
-        return stations;
-    }
-
     private static JsonNode sendRequest(String url){
         RestTemplate rs = new RestTemplate();
         String result = "";
