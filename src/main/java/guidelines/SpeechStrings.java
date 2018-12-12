@@ -35,7 +35,7 @@ public class SpeechStrings {
             " Adresse zuzugreifen. Bitte gebe dem Skill die notwendigen Berechtigungen";
     public static final String START_CONFIG_DEST_ADDRESS = ". Nun beginnen wir mit der Einrichtung der Zieladressen. " +
             "Du hast nun die Moeglichkeit bis zu drei Zieladressen einzurichten. " +
-            "Wie moechtest du deine erste Adresse benennen? Bitte sage hier: \"Mein Ziel heisst\" plus den Namen";
+            "Bitte nenne uns deine erste Zieladresse.";
 
     // format Strings
     public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";

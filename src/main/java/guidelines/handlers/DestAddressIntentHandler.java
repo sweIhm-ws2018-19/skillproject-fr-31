@@ -1,12 +1,14 @@
 package guidelines.handlers;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import guidelines.models.Coordinates;
 import guidelines.stateMachine.GuideStates;
+import guidelines.utilities.HereApi;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
@@ -29,14 +31,32 @@ public class DestAddressIntentHandler implements RequestHandler {
         Slot streetNumberSlot = slots.get("streetNumber");
         Slot postalCodeSlot = slots.get("postalCode");
 
-        if(citySlot != null && streetSlot != null && streetNumberSlot != null && postalCodeSlot != null){
+        if (citySlot != null && streetSlot != null && streetNumberSlot != null && postalCodeSlot != null) {
             String cityValue = citySlot.getValue();
             String streetValue = streetSlot.getValue();
             String streetNumberValue = streetNumberSlot.getValue();
             String postalCode = postalCodeSlot.getValue();
-            return input.getResponseBuilder().withSpeech(cityValue + " - " +streetValue + " - " + streetNumberValue + " - " + postalCode).build();
-        }else{
-            return input.getResponseBuilder().withSpeech("DU VOLLIDIOT DU AHST EINEN FEHLER GEMACHT").withReprompt("SPACKEN").build();
+
+            AttributesManager attributesManager = input.getAttributesManager();
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
+            final Coordinates coordinates = HereApi.getCoordinates(streetValue, Integer.valueOf(streetNumberValue),
+                    cityValue, Integer.valueOf(postalCode));
+            List<String> stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
+
+
+
+            return input.getResponseBuilder()
+                    .withSpeech("Du hast uns folgende Adresse genannt: " + streetValue + " "
+                            + streetNumberValue + " " + postalCode + " " + cityValue + ". Als naechstes waehlen wir " +
+                            "eine Zielstation aus. Moechtest du " + stationNames.get(0) + ", " + stationNames.get(1) +
+                            " oder " + stationNames.get(2) + " als Zielstation einrichten?")
+                    .withReprompt("Bitte gebe die Adresse an deines erstes Ziels")
+                    .withShouldEndSession(false)
+                    .build();
+        } else {
+            return input.getResponseBuilder()
+                    .withSpeech("Leider hat das Befüllen der Slots nicht richtig funktioniert")
+                    .withReprompt("Bitte mache die Eingabe der Slots erneut").build();
         }
     }
 }

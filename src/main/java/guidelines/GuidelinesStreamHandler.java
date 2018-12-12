@@ -32,7 +32,8 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new DestinationAddressHelpIntentHandler(),
                         new BackToStartIntentHandler(),
                         new WhereIsTheLatestShitIntentHandler(),
-                        new DestAddressIntentHandler())
+                        new DestAddressIntentHandler(),
+                        new DestNameIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
                 .build();
