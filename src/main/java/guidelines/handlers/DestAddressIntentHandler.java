@@ -39,8 +39,7 @@ public class DestAddressIntentHandler implements RequestHandler {
 
             AttributesManager attributesManager = input.getAttributesManager();
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
-            final Coordinate coordinates = HereApi.getCoordinate(streetValue, Integer.valueOf(streetNumberValue),
-                    cityValue, Integer.valueOf(postalCode));
+            final Coordinate coordinates = HereApi.getCoordinate(streetValue, Integer.valueOf(streetNumberValue), cityValue);
             List<String> stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
 
 
