@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class BackToStartIntentHandler implements RequestHandler {
     @Override

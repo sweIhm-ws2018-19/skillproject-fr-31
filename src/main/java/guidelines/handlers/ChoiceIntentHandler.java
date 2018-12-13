@@ -1,5 +1,6 @@
 package guidelines.handlers;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
@@ -29,8 +30,10 @@ public class ChoiceIntentHandler implements RequestHandler {
 
         if (choiceSlot != null) {
             String choiceValue = choiceSlot.getValue();
-
+            AttributesManager attributesManager = input.getAttributesManager();
+            Map<String, Object> sessionAttr = attributesManager.getSessionAttributes();
             int choice = Integer.valueOf(choiceValue);
+
 
             return input.getResponseBuilder()
                     .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.stationNames.get(choice - 1))

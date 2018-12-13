@@ -16,14 +16,6 @@
           "samples": []
         },
         {
-          "name": "WhereIsTheLatestShitIntent",
-          "slots": [],
-          "samples": [
-            "Wo ist der latest shit",
-            "latest shit"
-          ]
-        },
-        {
           "name": "MyNameIsIntent",
           "slots": [
             {
@@ -123,7 +115,7 @@
             }
           ],
           "samples": [
-            "Ich wähle die {choice}"
+            "{choice}"
           ]
         },
         {
@@ -131,11 +123,11 @@
           "slots": [
             {
               "name": "decision",
-              "type": "AMAZON.SearchQuery"
+              "type": "YesOrNo"
             }
           ],
           "samples": [
-            "Bitte {decision}"
+            "{decision}"
           ]
         }
       ],
@@ -143,6 +135,11 @@
         {
           "name": "Street",
           "values": [
+            {
+              "name": {
+                "value": "In der Feldkirchner Au"
+              }
+            },
             {
               "name": {
                 "value": "Aachener straße"
@@ -38611,6 +38608,21 @@
             {
               "name": {
                 "value": "2000"
+              }
+            }
+          ]
+        },
+        {
+          "name": "YesOrNo",
+          "values": [
+            {
+              "name": {
+                "value": "ja"
+              }
+            },
+            {
+              "name": {
+                "value": "nein"
               }
             }
           ]

@@ -43,21 +43,24 @@ public class DestAddressIntentHandler implements RequestHandler {
 
             final Coordinate coordinates = HereApi.getCoordinate(streetValue, Integer.valueOf(streetNumberValue),
                     cityValue);
-            if (Objects.isNull(coordinates)) {
+            if (coordinates == null) {
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
                 return input.getResponseBuilder()
                         .withSpeech("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
                         .withReprompt("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
+                        .withShouldEndSession(false)
                         .build();
             }
             nearbyStations = HereApi.getNearbyStations(coordinates);
+            int amountOfStationsNearby = nearbyStations.size();
+            attributesManager.setSessionAttributes(Collections.singletonMap("StationCount", amountOfStationsNearby));
             stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
 
             return input.getResponseBuilder()
                     .withSpeech("Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
-                            cityValue + ". Moechtest du deine Eingabe wiederholen? Sage hierzu: Bitte ja oder Bitte nein")
+                            cityValue + ". Moechtest du deine Eingabe wiederholen?")
                     .withReprompt("Moechtest du deine Eingabe wiederholen?")
                     .withShouldEndSession(false)
                     .build();

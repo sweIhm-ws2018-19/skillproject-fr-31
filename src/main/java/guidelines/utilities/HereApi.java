@@ -27,7 +27,7 @@ public class HereApi {
         String requestUrl = GEOCODEBASE +"&searchtext="+ street + "&city=" + city + "&housenumber=" + number;
         JsonNode jsNode = sendRequest(requestUrl);
         jsNode = jsNode.findPath("DisplayPosition");
-        if(jsNode.asText().equals("missing node"))
+        if(jsNode.isMissingNode())
             return null;
         return new Coordinate(jsNode.findValue("Latitude").asDouble(),jsNode.findValue("Longitude").asDouble());
     }
