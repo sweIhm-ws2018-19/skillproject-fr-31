@@ -5,13 +5,12 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import guidelines.SpeechStrings;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 
 import java.util.Collections;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class BackToStartIntentHandler implements RequestHandler {
     @Override

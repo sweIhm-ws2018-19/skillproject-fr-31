@@ -4,7 +4,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 
 import java.util.Collections;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class ChoiceIntentHandler implements RequestHandler {
 
         if (choiceSlot != null) {
             String choiceValue = choiceSlot.getValue();
-            int choice = Integer.valueOf(choiceValue);
+            int choice = Integer.parseInt(choiceValue);
             destChoice = choice;
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_NAME));
 

@@ -20,7 +20,7 @@ import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 
 import guidelines.SpeechStrings;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 import java.util.Collections;
 import java.util.Optional;
 

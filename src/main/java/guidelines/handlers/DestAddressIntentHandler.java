@@ -5,7 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import guidelines.models.Coordinate;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 import guidelines.utilities.HereApi;
 
 import java.util.*;

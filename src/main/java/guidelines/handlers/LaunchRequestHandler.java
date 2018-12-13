@@ -23,7 +23,7 @@ import com.amazon.ask.model.Session;
 import com.amazon.ask.model.interfaces.system.SystemState;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.SpeechStrings;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
