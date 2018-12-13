@@ -86,25 +86,12 @@
             }
           ],
           "samples": [
-            "Mein erstes Ziel ist {street} {streetNumber} {city}  "
+            "{street} {streetNumber} {city}  "
           ]
         },
         {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
-        },
-        {
-          "name": "DestNameIntent",
-          "slots": [
-            {
-              "name": "streetCustomName",
-              "type": "AMAZON.SearchQuery"
-            }
-          ],
-          "samples": [
-            "Bitte nenne mein Ziel {streetCustomName}",
-            "Mein erstes Ziel heißt {streetCustomName}"
-          ]
         },
         {
           "name": "ChoiceIntent",
@@ -128,6 +115,18 @@
           ],
           "samples": [
             "{decision}"
+          ]
+        },
+        {
+          "name": "DestNameIntent",
+          "slots": [
+            {
+              "name": "destCustomName",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Mein Ziel heißt {destCustomName}"
           ]
         }
       ],

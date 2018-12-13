@@ -6,6 +6,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import guidelines.stateMachine.GuideStates;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class ChoiceIntentHandler implements RequestHandler {
+
+    static int destChoice;
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -28,15 +31,18 @@ public class ChoiceIntentHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
         Slot choiceSlot = slots.get("choice");
 
+        AttributesManager attributesManager = input.getAttributesManager();
+
         if (choiceSlot != null) {
             String choiceValue = choiceSlot.getValue();
-            AttributesManager attributesManager = input.getAttributesManager();
-            Map<String, Object> sessionAttr = attributesManager.getSessionAttributes();
             int choice = Integer.valueOf(choiceValue);
-
+            destChoice = choice;
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_NAME));
 
             return input.getResponseBuilder()
-                    .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.stationNames.get(choice - 1))
+                    .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.stationNames.get(choice - 1) +
+                            ". Welchen benutzerdefinierten Namen moechtest du der Station geben?")
+                    .withShouldEndSession(false)
                     .build();
         } else {
             return input.getResponseBuilder()

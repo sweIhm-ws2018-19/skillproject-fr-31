@@ -47,7 +47,7 @@ public class SayDestAddressAgainIntentHandler implements RequestHandler {
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
                 return responseBuilder
                         .withSpeech("Alles klar. Moechtest du " + DestAddressIntentHandler.stationNames.get(0) + ", " + DestAddressIntentHandler.stationNames.get(1) +
-                                " oder " + DestAddressIntentHandler.stationNames.get(2) + " als Zielstation einrichten? Zur Auswahl sage. Ich waehle die eins, zwei" +
+                                " oder " + DestAddressIntentHandler.stationNames.get(2) + " als Zielstation einrichten? Zur Auswahl sage: eins, zwei" +
                                 " oder drei.")
                         .withReprompt("Waehle die eins, zwei oder drei")
                         .withShouldEndSession(false)

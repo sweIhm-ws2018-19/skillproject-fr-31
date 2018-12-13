@@ -15,8 +15,8 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class DestAddressIntentHandler implements RequestHandler {
 
-    public static List<String> stationNames;
-    public static Map<String, Coordinate> nearbyStations;
+    static List<String> stationNames;
+    static Map<String, Coordinate> nearbyStations;
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -52,8 +52,6 @@ public class DestAddressIntentHandler implements RequestHandler {
                         .build();
             }
             nearbyStations = HereApi.getNearbyStations(coordinates);
-            int amountOfStationsNearby = nearbyStations.size();
-            attributesManager.setSessionAttributes(Collections.singletonMap("StationCount", amountOfStationsNearby));
             stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
