@@ -91,14 +91,10 @@
             {
               "name": "streetNumber",
               "type": "AMAZON.NUMBER"
-            },
-            {
-              "name": "postalCode",
-              "type": "AMAZON.NUMBER"
             }
           ],
           "samples": [
-            "Mein erstes Ziel ist {street} {streetNumber} {city} {postalCode}  "
+            "Mein erstes Ziel ist {street} {streetNumber} {city}  "
           ]
         },
         {
@@ -128,6 +124,18 @@
           ],
           "samples": [
             "Ich wähle die {choice}"
+          ]
+        },
+        {
+          "name": "SayDestAddressAgain",
+          "slots": [
+            {
+              "name": "decision",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Bitte {decision}"
           ]
         }
       ],

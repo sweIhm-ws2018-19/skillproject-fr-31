@@ -1,12 +1,12 @@
-package guidelines.utilities;
+package guidelines.models;
 
 import java.util.Objects;
 
-public class Coordinates {
+public class Coordinate {
     private double latitude;
     private double longitude;
 
-    public Coordinates(double latitude, double longitude) {
+    public Coordinate(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -31,7 +31,7 @@ public class Coordinates {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Coordinates that = (Coordinates) o;
+        Coordinate that = (Coordinate) o;
         return Double.compare(that.latitude, latitude) == 0 &&
                 Double.compare(that.longitude, longitude) == 0;
     }

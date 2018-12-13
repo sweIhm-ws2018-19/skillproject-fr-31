@@ -34,7 +34,8 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new WhereIsTheLatestShitIntentHandler(),
                         new DestAddressIntentHandler(),
                         new DestNameIntentHandler(),
-                        new ChoiceIntentHandler())
+                        new ChoiceIntentHandler(),
+                        new SayDestAddressAgainIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
                 .build();

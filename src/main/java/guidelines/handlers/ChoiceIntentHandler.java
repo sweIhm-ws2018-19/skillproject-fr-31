@@ -33,8 +33,7 @@ public class ChoiceIntentHandler implements RequestHandler {
             int choice = Integer.valueOf(choiceValue);
 
             return input.getResponseBuilder()
-                    .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.stationNames.get(choice - 1) + ". " +
-                            "Damit waere die Einrichtung vorerst abgeschlossen")
+                    .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.stationNames.get(choice - 1))
                     .build();
         } else {
             return input.getResponseBuilder()
