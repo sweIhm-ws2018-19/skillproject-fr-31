@@ -41,7 +41,8 @@ public class ChoiceIntentHandler implements RequestHandler {
 
             return input.getResponseBuilder()
                     .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.stationNames.get(choice - 1) +
-                            ". Welchen benutzerdefinierten Namen moechtest du der Station geben?")
+                            ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
+                            "heisst: plus den Namen")
                     .withShouldEndSession(false)
                     .build();
         } else {

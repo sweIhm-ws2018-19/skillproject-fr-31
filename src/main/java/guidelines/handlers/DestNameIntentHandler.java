@@ -45,8 +45,8 @@ public class DestNameIntentHandler implements RequestHandler {
 
             return input.getResponseBuilder()
                     .withSpeech("Deine gewuenschte Zielstation ist nun unter den Namen: " + destName + " gespeichert." +
-                            " Die Einrichtung deiner Zielstation waere hiermit abgeschlossen. " +
-                            "Moechtest du eine weitere Zielstation einrichten?")
+                            " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
+                            "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen")
                     .withReprompt("Bitte sage uns nochmal den Namen des Ziels")
                     .build();
         }
