@@ -2,6 +2,7 @@ package guidelines.utilities;
 
 import guidelines.models.Coordinate;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class HereApiTest {
         Assert.assertEquals(true,true);
     }
 
+    @Ignore
     @Test
     public void getNearbyStationsTest(){
         final Map<String, Coordinate> want = new HashMap<>();
