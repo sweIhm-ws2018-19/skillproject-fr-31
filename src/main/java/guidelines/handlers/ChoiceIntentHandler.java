@@ -44,6 +44,8 @@ public class ChoiceIntentHandler implements RequestHandler {
                             ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
                             "heisst: plus den Namen")
                     .withShouldEndSession(false)
+                    .withReprompt("Bitte sage mir den Namen fuer deine gewuenschte Zielstation. Sage hierzu: Mein Ziel heisst: " +
+                            "plus den Namen")
                     .build();
         } else {
             return input.getResponseBuilder()

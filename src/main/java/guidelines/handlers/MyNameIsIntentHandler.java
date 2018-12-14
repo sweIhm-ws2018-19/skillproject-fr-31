@@ -58,6 +58,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
         ResponseBuilder respBuilder = input.getResponseBuilder();
         respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Namenseingabe")
                 .withSpeech(speechText)
+                .withReprompt("Bitte sage mir nochmal die Straße, Hausnummer und Stadt")
                 .withShouldEndSession(false);
 
         if (askResponse) {

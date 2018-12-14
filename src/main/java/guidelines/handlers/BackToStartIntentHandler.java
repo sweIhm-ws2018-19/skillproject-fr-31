@@ -26,6 +26,7 @@ public class BackToStartIntentHandler implements RequestHandler {
         return handlerInput.getResponseBuilder()
                 .withSimpleCard(SpeechStrings.SKILL_NAME, "Back to the beginning")
                 .withSpeech("Du kannst nun wieder die Hilfefunktion aufrufen oder eine Route erfragen")
+                .withReprompt("Moechtest du die Hilfefunktion aufrufen oder eine Route erfragen?")
                 .withShouldEndSession(false)
                 .build();
     }

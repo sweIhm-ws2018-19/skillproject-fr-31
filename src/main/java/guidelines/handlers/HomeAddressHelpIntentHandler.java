@@ -51,6 +51,7 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
 
         respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Hilfe Heimadresse")
                 .withSpeech(speechText)
+                .withReprompt("Moechtest du Infos zur Zieladresse oder zurueck zum Start?")
                 .withShouldEndSession(false)
                 .build();
 
