@@ -11,21 +11,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-public class MyNameIsIntentHandlerTest {
-    private MyNameIsIntentHandler handler;
+public class DestAddressIntentHandlerTest {
+    private DestAddressIntentHandler handler;
 
     @Before
-    public void setup(){
-        handler = new MyNameIsIntentHandler();
+    public void setup() {
+        handler = new DestAddressIntentHandler();
     }
 
     @Test
     public void test_Ctor() {
-        assertEquals(handler.getClass(), MyNameIsIntentHandler.class);
+        assertEquals(handler.getClass(), DestAddressIntentHandler.class);
     }
 
+
     @Test
-    public void canHandleTest(){
+    public void canHandleTest() {
         final HandlerInput inputMock = Mockito.mock(HandlerInput.class);
         when(inputMock.matches(any())).thenReturn(true);
         assertTrue(handler.canHandle(inputMock));

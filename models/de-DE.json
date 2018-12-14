@@ -16,14 +16,6 @@
           "samples": []
         },
         {
-          "name": "WhereIsTheLatestShitIntent",
-          "slots": [],
-          "samples": [
-            "Wo ist der latest shit",
-            "latest shit"
-          ]
-        },
-        {
           "name": "MyNameIsIntent",
           "slots": [
             {
@@ -91,14 +83,10 @@
             {
               "name": "streetNumber",
               "type": "AMAZON.NUMBER"
-            },
-            {
-              "name": "postalCode",
-              "type": "AMAZON.NUMBER"
             }
           ],
           "samples": [
-            "Mein erstes Ziel ist {street} {streetNumber} {postalCode} {city} "
+            "{street} {streetNumber} {city}  "
           ]
         },
         {
@@ -106,16 +94,39 @@
           "samples": []
         },
         {
+          "name": "ChoiceIntent",
+          "slots": [
+            {
+              "name": "choice",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "{choice}"
+          ]
+        },
+        {
+          "name": "SayDestAddressAgain",
+          "slots": [
+            {
+              "name": "decision",
+              "type": "YesOrNo"
+            }
+          ],
+          "samples": [
+            "{decision}"
+          ]
+        },
+        {
           "name": "DestNameIntent",
           "slots": [
             {
-              "name": "streetCustomName",
+              "name": "destCustomName",
               "type": "AMAZON.SearchQuery"
             }
           ],
           "samples": [
-            "Bitte nenne mein Ziel {streetCustomName}",
-            "Mein erstes Ziel heißt {streetCustomName}"
+            "Mein Ziel heißt {destCustomName}"
           ]
         }
       ],
@@ -123,6 +134,11 @@
         {
           "name": "Street",
           "values": [
+            {
+              "name": {
+                "value": "In der Feldkirchner Au"
+              }
+            },
             {
               "name": {
                 "value": "Aachener straße"
@@ -38591,6 +38607,21 @@
             {
               "name": {
                 "value": "2000"
+              }
+            }
+          ]
+        },
+        {
+          "name": "YesOrNo",
+          "values": [
+            {
+              "name": {
+                "value": "ja"
+              }
+            },
+            {
+              "name": {
+                "value": "nein"
               }
             }
           ]

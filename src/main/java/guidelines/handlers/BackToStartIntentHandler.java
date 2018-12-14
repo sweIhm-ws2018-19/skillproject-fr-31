@@ -5,7 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import guidelines.SpeechStrings;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 
 import java.util.Collections;
 import java.util.Optional;

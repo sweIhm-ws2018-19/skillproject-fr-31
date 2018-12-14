@@ -23,7 +23,7 @@ import com.amazon.ask.model.Session;
 import com.amazon.ask.model.interfaces.system.SystemState;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.SpeechStrings;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -80,7 +80,7 @@ public class LaunchRequestHandler implements RequestHandler {
             HttpEntity<String> request = new HttpEntity<>(httpHeaders);
             ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, request, String.class);
             // store in database
-            persistentAttributes.put("Heimadresse", response.getBody());
+            persistentAttributes.put("Zuhause", response.getBody());
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
 

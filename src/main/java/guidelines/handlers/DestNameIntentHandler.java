@@ -4,7 +4,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import guidelines.stateMachine.GuideStates;
+import guidelines.statemachine.GuideStates;
 
 import java.util.Collections;
 import java.util.Map;
@@ -26,16 +26,27 @@ public class DestNameIntentHandler implements RequestHandler {
         Intent intent = intentRequest.getIntent();
 
         Map<String, Slot> slots = intent.getSlots();
-        Slot destNameSlot = slots.get("streetCustomName");
+        Slot destNameSlot = slots.get("destCustomName");
 
         if (destNameSlot != null) {
             String destName = destNameSlot.getValue();
 
             AttributesManager attributesManager = input.getAttributesManager();
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+            Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+
+            double latitude = DestAddressIntentHandler.nearbyStations.get(DestAddressIntentHandler.stationNames.get(ChoiceIntentHandler.destChoice)).getLatitude();
+            double longitude = DestAddressIntentHandler.nearbyStations.get(DestAddressIntentHandler.stationNames.get(ChoiceIntentHandler.destChoice)).getLongitude();
+
+            persistentAttributes.put(destName + "x", latitude);
+            persistentAttributes.put(destName + "y", longitude);
+            attributesManager.setPersistentAttributes(persistentAttributes);
+            attributesManager.savePersistentAttributes();
 
             return input.getResponseBuilder()
-                    .withSpeech(destName)
+                    .withSpeech("Deine gewuenschte Zielstation ist nun unter den Namen: " + destName + " gespeichert." +
+                            " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
+                            "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen")
                     .withReprompt("Bitte sage uns nochmal den Namen des Ziels")
                     .build();
         }
