@@ -17,6 +17,13 @@ public class HereApiTest {
     }
 
     @Test
+    public void getCoordinatesTestWithWrongAddr(){
+        final Coordinate want = null;
+        final Coordinate have = HereApi.getCoordinate("Lothstraße", 64, "Moosburg");
+        Assert.assertEquals(want, have);
+    }
+
+    @Test
     public void getRouteTest(){
         Assert.assertEquals(true,true);
     }
