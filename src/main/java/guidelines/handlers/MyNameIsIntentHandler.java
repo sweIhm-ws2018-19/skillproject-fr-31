@@ -17,6 +17,8 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class MyNameIsIntentHandler implements RequestHandler {
 
+    private static String name;
+
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
         return handlerInput.matches(intentName("MyNameIsIntent").and(sessionAttribute("State", GuideStates.INSERT_NAME.toString())));
@@ -36,19 +38,13 @@ public class MyNameIsIntentHandler implements RequestHandler {
         boolean askResponse = false;
 
         if (nameSlot != null) {
-            String name = nameSlot.getValue();
+            setName(nameSlot.getValue());
             AttributesManager attributesManager = input.getAttributesManager();
             // store in session
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
-            // store in database
-            Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-            persistentAttributes.put("NAME", name);
 
-            attributesManager.setPersistentAttributes(persistentAttributes);
-            attributesManager.savePersistentAttributes();
-
-            speechText = SpeechStrings.WELCOME_USER + name + SpeechStrings.START_CONFIG_DEST_ADDRESS;
-            repromptText = name + SpeechStrings.PLS + SpeechStrings.STREET;
+            speechText = SpeechStrings.WELCOME_USER + getName() + SpeechStrings.START_CONFIG_DEST_ADDRESS;
+            repromptText = getName() + SpeechStrings.PLS + SpeechStrings.STREET;
         } else {
             speechText = SpeechStrings.INAUDIBLE + " Versuche bitte erneut deinen Name zu sagen";
             repromptText = SpeechStrings.NAMEUNKNOWN;
@@ -67,5 +63,13 @@ public class MyNameIsIntentHandler implements RequestHandler {
         }
 
         return respBuilder.build();
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    private void setName(String name) {
+        MyNameIsIntentHandler.name = name;
     }
 }

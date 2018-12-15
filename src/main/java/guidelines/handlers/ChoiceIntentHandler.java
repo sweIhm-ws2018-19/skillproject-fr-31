@@ -15,7 +15,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class ChoiceIntentHandler implements RequestHandler {
 
-    static int destChoice;
+    private static int destChoice;
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -40,7 +40,7 @@ public class ChoiceIntentHandler implements RequestHandler {
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_NAME));
 
             return input.getResponseBuilder()
-                    .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.stationNames.get(choice - 1) +
+                    .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.getStationNames().get(choice - 1) +
                             ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
                             "heisst: plus den Namen")
                     .withShouldEndSession(false)
@@ -54,5 +54,9 @@ public class ChoiceIntentHandler implements RequestHandler {
         }
 
 
+    }
+
+    public static int getDestChoice() {
+        return destChoice;
     }
 }

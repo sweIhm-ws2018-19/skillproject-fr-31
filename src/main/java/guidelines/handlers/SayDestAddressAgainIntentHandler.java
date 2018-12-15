@@ -11,7 +11,6 @@ import guidelines.utilities.StringUtils;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
@@ -46,7 +45,8 @@ public class SayDestAddressAgainIntentHandler implements RequestHandler {
                         .build();
 
             } else {
-                String stationsToSelect = StringUtils.prepStringForChoiceIntent(DestAddressIntentHandler.stationNames);
+                String stationsToSelect = StringUtils.prepStringForChoiceIntent(DestAddressIntentHandler.getStationNames());
+                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
                 return responseBuilder
                         .withSpeech("Alles klar. Moechtest du " + stationsToSelect + " als Zielstation einrichten? Zur Auswahl sage: eins, zwei" +
                                 " oder drei.")

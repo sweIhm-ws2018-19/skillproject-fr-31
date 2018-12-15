@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
+import static guidelines.handlers.LaunchRequestHandler.getDeviceAddressJson;
 
 public class DestNameIntentHandler implements RequestHandler {
     @Override
@@ -35,9 +36,17 @@ public class DestNameIntentHandler implements RequestHandler {
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
 
-            double latitude = DestAddressIntentHandler.nearbyStations.get(DestAddressIntentHandler.stationNames.get(ChoiceIntentHandler.destChoice)).getLatitude();
-            double longitude = DestAddressIntentHandler.nearbyStations.get(DestAddressIntentHandler.stationNames.get(ChoiceIntentHandler.destChoice)).getLongitude();
+            double latitude = DestAddressIntentHandler
+                    .getNearbyStations()
+                    .get(DestAddressIntentHandler.getStationNames().get(ChoiceIntentHandler.getDestChoice() - 1))
+                    .getLatitude();
+            double longitude = DestAddressIntentHandler
+                    .getNearbyStations()
+                    .get(DestAddressIntentHandler.getStationNames().get(ChoiceIntentHandler.getDestChoice()  - 1))
+                    .getLongitude();
 
+            persistentAttributes.put("Zuhause", getDeviceAddressJson());
+            persistentAttributes.put("NAME", MyNameIsIntentHandler.getName());
             persistentAttributes.put(destName + "x", latitude);
             persistentAttributes.put(destName + "y", longitude);
             attributesManager.setPersistentAttributes(persistentAttributes);

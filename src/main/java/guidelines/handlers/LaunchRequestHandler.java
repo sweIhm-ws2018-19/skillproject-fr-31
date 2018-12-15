@@ -33,11 +33,13 @@ import java.util.*;
 
 import static com.amazon.ask.request.Predicates.requestType;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
+import static guidelines.utilities.DeviceAddressClient.getDeviceAddress;
 
 public class LaunchRequestHandler implements RequestHandler {
 
 
     private static final Logger log = LoggerFactory.getLogger(LaunchRequestHandler.class);
+    private static String deviceAddressJson;
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -72,20 +74,10 @@ public class LaunchRequestHandler implements RequestHandler {
 
         String outputMessage;
         if (persistentAttributes.get("NAME") == null) {
-            RestTemplate restTemplate = new RestTemplate();
-            String requestUrl = apiEndpoint + "/v1/devices/" + deviceId + "/settings/address";
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-            httpHeaders.add("Authorization", "Bearer " + apiAccessToken);
-            HttpEntity<String> request = new HttpEntity<>(httpHeaders);
-            ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, request, String.class);
             // store in database
-            persistentAttributes.put("Zuhause", response.getBody());
+            deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
-
-            attributesManager.setPersistentAttributes(persistentAttributes);
-            attributesManager.savePersistentAttributes();
 
             outputMessage = SpeechStrings.WELCOME_NO_CONFIG;
         } else {
@@ -97,5 +89,9 @@ public class LaunchRequestHandler implements RequestHandler {
                 .withSpeech(outputMessage)
                 .withReprompt(outputMessage)
                 .build();
+    }
+
+    public static String getDeviceAddressJson() {
+        return deviceAddressJson;
     }
 }

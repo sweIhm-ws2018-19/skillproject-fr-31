@@ -15,8 +15,8 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class DestAddressIntentHandler implements RequestHandler {
 
-    static List<String> stationNames;
-    static Map<String, Coordinate> nearbyStations;
+    private static List<String> stationNames;
+    private static Map<String, Coordinate> nearbyStations;
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -67,5 +67,13 @@ public class DestAddressIntentHandler implements RequestHandler {
                     .withSpeech("Leider hat das Befüllen der Slots nicht richtig funktioniert")
                     .withReprompt("Bitte mache die Eingabe der Slots erneut").build();
         }
+    }
+
+    static List<String> getStationNames() {
+        return stationNames;
+    }
+
+    static Map<String, Coordinate> getNearbyStations() {
+        return nearbyStations;
     }
 }
