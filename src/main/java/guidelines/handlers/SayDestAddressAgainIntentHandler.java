@@ -6,10 +6,12 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.StringUtils;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
@@ -44,10 +46,9 @@ public class SayDestAddressAgainIntentHandler implements RequestHandler {
                         .build();
 
             } else {
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
+                String stationsToSelect = StringUtils.prepStringForChoiceIntent(DestAddressIntentHandler.stationNames);
                 return responseBuilder
-                        .withSpeech("Alles klar. Moechtest du " + DestAddressIntentHandler.stationNames.get(0) + ", " + DestAddressIntentHandler.stationNames.get(1) +
-                                " oder " + DestAddressIntentHandler.stationNames.get(2) + " als Zielstation einrichten? Zur Auswahl sage: eins, zwei" +
+                        .withSpeech("Alles klar. Moechtest du " + stationsToSelect + " als Zielstation einrichten? Zur Auswahl sage: eins, zwei" +
                                 " oder drei.")
                         .withReprompt("Waehle die eins, zwei oder drei")
                         .withShouldEndSession(false)
