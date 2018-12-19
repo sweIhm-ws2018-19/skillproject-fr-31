@@ -37,11 +37,6 @@ public class LaunchRequestHandler implements RequestHandler {
 
 
     private static final Logger log = LoggerFactory.getLogger(LaunchRequestHandler.class);
-    private static String deviceAddressJson;
-
-    public static String getDeviceAddressJson() {
-        return deviceAddressJson;
-    }
 
     @Override
     public boolean canHandle(HandlerInput input) {

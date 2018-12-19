@@ -4,6 +4,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import guidelines.models.Coordinate;
 import guidelines.statemachine.GuideStates;
 
 import java.util.Collections;
@@ -12,7 +13,6 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
-import static guidelines.handlers.LaunchRequestHandler.getDeviceAddressJson;
 
 public class DestNameIntentHandler implements RequestHandler {
     @Override
@@ -47,10 +47,8 @@ public class DestNameIntentHandler implements RequestHandler {
                     .get(AddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice()  - 1))
                     .getLongitude();
 
-            persistentAttributes.put("Zuhause", getDeviceAddressJson());
-            persistentAttributes.put("NAME", MyNameIsIntentHandler.getName());
-            persistentAttributes.put(destName + "x", latitude);
-            persistentAttributes.put(destName + "y", longitude);
+
+            persistentAttributes.put("DEST1", new Coordinate(latitude,longitude).toJsonString(destName));
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 

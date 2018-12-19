@@ -42,6 +42,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
             AttributesManager attributesManager = input.getAttributesManager();
 
             attributesManager.getPersistentAttributes().put("NAME", nameSlot);
+            attributesManager.savePersistentAttributes();
             return Setup.SetupState(input);
 
 //            speechText = SpeechStrings.WELCOME_USER + getName() + SpeechStrings.START_CONFIG_DEST_ADDRESS;

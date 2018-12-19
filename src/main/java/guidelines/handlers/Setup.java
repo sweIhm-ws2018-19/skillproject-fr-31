@@ -51,6 +51,7 @@ public class Setup {
                     // Todo: save as valid json coordinates;
                     String deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
                     persistentAttributes.put("HOME", deviceAddressJson);
+                    attributesManager.savePersistentAttributes();
                 }
 
             }

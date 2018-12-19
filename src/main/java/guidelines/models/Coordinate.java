@@ -41,7 +41,7 @@ public class Coordinate {
         return Objects.hash(latitude, longitude);
     }
 
-    public String toJsonString(){
-        return String.format("{\n\t\"lat\": %1,\n\t\"long\":%2\n}", latitude,longitude);
+    public String toJsonString(String name){
+        return String.format("{\n\t\"NAME\":%1,\n\t\"lat\": %2,\n\t\"long\":%3\n}", name,latitude,longitude);
     }
 }
