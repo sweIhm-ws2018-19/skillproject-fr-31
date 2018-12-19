@@ -36,21 +36,20 @@ public class SayDestAddressAgainIntentHandler implements RequestHandler {
 
         if (yesOrNoSlot != null) {
             String yesOrNo = yesOrNoSlot.getValue();
-            if (yesOrNo.equals("ja")) {
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
-                return responseBuilder
-                        .withSpeech("Alles klar. Bitte sag mir nochmal die Strasse, Hausnummer und Stadt")
-                        .withReprompt("Bitte sag mir nochmal die Strasse, Hausnummer und Stadt")
-                        .withShouldEndSession(false)
-                        .build();
-
-            } else {
+            if (yesOrNo.equals("nein")) {
                 String stationsToSelect = StringUtils.prepStringForChoiceIntent(DestAddressIntentHandler.getStationNames());
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
                 return responseBuilder
                         .withSpeech("Alles klar. Moechtest du " + stationsToSelect + " als Zielstation einrichten? Zur Auswahl sage: eins, zwei" +
                                 " oder drei.")
                         .withReprompt("Waehle die eins, zwei oder drei")
+                        .withShouldEndSession(false)
+                        .build();
+            } else {
+                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
+                return responseBuilder
+                        .withSpeech("Alles klar. Bitte sag mir nochmal die Strasse, Hausnummer und Stadt")
+                        .withReprompt("Bitte sag mir nochmal die Strasse, Hausnummer und Stadt")
                         .withShouldEndSession(false)
                         .build();
             }

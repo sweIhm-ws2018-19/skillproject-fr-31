@@ -38,11 +38,11 @@ public class DestNameIntentHandler implements RequestHandler {
 
             double latitude = DestAddressIntentHandler
                     .getNearbyStations()
-                    .get(DestAddressIntentHandler.getStationNames().get(ChoiceIntentHandler.getDestChoice() - 1))
+                    .get(DestAddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice() - 1))
                     .getLatitude();
             double longitude = DestAddressIntentHandler
                     .getNearbyStations()
-                    .get(DestAddressIntentHandler.getStationNames().get(ChoiceIntentHandler.getDestChoice()  - 1))
+                    .get(DestAddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice()  - 1))
                     .getLongitude();
 
             persistentAttributes.put("Zuhause", getDeviceAddressJson());
