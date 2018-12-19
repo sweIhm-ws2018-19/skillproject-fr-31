@@ -40,8 +40,11 @@ public class HelpIntentHandler implements RequestHandler {
         AttributesManager attributesManager = input.getAttributesManager();
         attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP.toString()));
 
+        String speechText = SpeechStrings.HELP;
+        FallbackIntentHandler.setFallbackMessage(speechText);
+
         respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Hilfe")
-                .withSpeech(SpeechStrings.HELP)
+                .withSpeech(speechText)
                 .withReprompt(SpeechStrings.REPROMPT)
                 .withShouldEndSession(false)
                 .build();

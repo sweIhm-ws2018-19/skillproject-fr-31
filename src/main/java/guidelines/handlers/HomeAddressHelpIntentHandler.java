@@ -49,6 +49,8 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
             askResponse = true;
         }
 
+
+        FallbackIntentHandler.setFallbackMessage(speechText);
         respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Hilfe Heimadresse")
                 .withSpeech(speechText)
                 .withReprompt("Moechtest du Infos zur Zieladresse oder zurueck zum Start?")

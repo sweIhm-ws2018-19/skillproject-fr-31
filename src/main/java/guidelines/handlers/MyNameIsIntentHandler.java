@@ -51,6 +51,8 @@ public class MyNameIsIntentHandler implements RequestHandler {
             askResponse = true;
         }
 
+
+        FallbackIntentHandler.setFallbackMessage(speechText);
         ResponseBuilder respBuilder = input.getResponseBuilder();
         respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Namenseingabe")
                 .withSpeech(speechText)

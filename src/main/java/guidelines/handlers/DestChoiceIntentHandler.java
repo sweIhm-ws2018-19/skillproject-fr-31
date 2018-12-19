@@ -33,21 +33,28 @@ public class DestChoiceIntentHandler implements RequestHandler {
 
         AttributesManager attributesManager = input.getAttributesManager();
 
+        String speechText;
+
         if (choiceSlot != null) {
             String choiceValue = choiceSlot.getValue();
             int choice = Integer.parseInt(choiceValue);
             destChoice = choice;
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_NAME));
 
+            speechText = "Deine Wahl faellt auf " + DestAddressIntentHandler.getStationNames().get(choice - 1) +
+                    ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
+                    "heisst: plus den Namen";
+            FallbackIntentHandler.setFallbackMessage(speechText);
+
             return input.getResponseBuilder()
-                    .withSpeech("Deine Wahl faellt auf " + DestAddressIntentHandler.getStationNames().get(choice - 1) +
-                            ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
-                            "heisst: plus den Namen")
+                    .withSpeech(speechText)
                     .withShouldEndSession(false)
                     .withReprompt("Bitte sage mir den Namen fuer deine gewuenschte Zielstation. Sage hierzu: Mein Ziel heisst: " +
                             "plus den Namen")
                     .build();
         } else {
+            speechText = "Leider hat das Befüllen der Slots nicht richtig funktioniert";
+            FallbackIntentHandler.setFallbackMessage(speechText);
             return input.getResponseBuilder()
                     .withSpeech("Leider hat das Befüllen der Slots nicht richtig funktioniert")
                     .withReprompt("Bitte mache die Eingabe der Slots erneut").build();

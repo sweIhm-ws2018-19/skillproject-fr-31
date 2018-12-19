@@ -29,6 +29,8 @@ public class DestNameIntentHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
         Slot destNameSlot = slots.get("destCustomName");
 
+        String speechText;
+
         if (destNameSlot != null) {
             String destName = destNameSlot.getValue();
 
@@ -52,13 +54,18 @@ public class DestNameIntentHandler implements RequestHandler {
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 
+            speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName + " gespeichert." +
+                    " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
+                    "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen";
+            FallbackIntentHandler.setFallbackMessage(speechText);
+
             return input.getResponseBuilder()
-                    .withSpeech("Deine gewuenschte Zielstation ist nun unter den Namen: " + destName + " gespeichert." +
-                            " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
-                            "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen")
+                    .withSpeech(speechText)
                     .withReprompt("Bitte sage uns nochmal den Namen des Ziels")
                     .build();
         }
+        speechText = "Leider hat das Befüllen der Slots nicht richtig funktioniert";
+        FallbackIntentHandler.setFallbackMessage(speechText);
 
         return input.getResponseBuilder()
                 .withSpeech("Leider hat das Befüllen der Slots nicht richtig funktioniert")

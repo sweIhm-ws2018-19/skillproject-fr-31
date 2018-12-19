@@ -34,6 +34,8 @@ public class DestAddressIntentHandler implements RequestHandler {
         Slot streetSlot = slots.get("street");
         Slot streetNumberSlot = slots.get("streetNumber");
 
+        String speechText;
+
         if (citySlot != null && streetSlot != null && streetNumberSlot != null) {
             String cityValue = citySlot.getValue();
             String streetValue = streetSlot.getValue();
@@ -55,16 +57,20 @@ public class DestAddressIntentHandler implements RequestHandler {
             stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
+            speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
+                    cityValue + ". Moechtest du deine Eingabe wiederholen?";
+            FallbackIntentHandler.setFallbackMessage(speechText);
 
             return input.getResponseBuilder()
-                    .withSpeech("Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
-                            cityValue + ". Moechtest du deine Eingabe wiederholen?")
+                    .withSpeech(speechText)
                     .withReprompt("Moechtest du deine Eingabe wiederholen?")
                     .withShouldEndSession(false)
                     .build();
         } else {
+            speechText = "Leider hat das Befüllen der Slots nicht richtig funktioniert";
+            FallbackIntentHandler.setFallbackMessage(speechText);
             return input.getResponseBuilder()
-                    .withSpeech("Leider hat das Befüllen der Slots nicht richtig funktioniert")
+                    .withSpeech(speechText)
                     .withReprompt("Bitte mache die Eingabe der Slots erneut").build();
         }
     }

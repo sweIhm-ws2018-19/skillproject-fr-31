@@ -26,7 +26,6 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new CancelandStopIntentHandler(),
                         new SessionEndedRequestHandler(),
                         new HelpIntentHandler(),
-                        new FallbackIntentHandler(),
                         new MyNameIsIntentHandler(),
                         new HomeAddressHelpIntentHandler(),
                         new DestinationAddressHelpIntentHandler(),
@@ -34,7 +33,8 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new DestAddressIntentHandler(),
                         new DestNameIntentHandler(),
                         new DestChoiceIntentHandler(),
-                        new SayDestAddressAgainIntentHandler())
+                        new SayDestAddressAgainIntentHandler(),
+                        new FallbackIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
                 .build();
