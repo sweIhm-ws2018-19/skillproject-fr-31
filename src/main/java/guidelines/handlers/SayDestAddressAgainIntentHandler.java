@@ -40,8 +40,10 @@ public class SayDestAddressAgainIntentHandler implements RequestHandler {
             if (yesOrNo.equals("nein")) {
                 String stationsToSelect = StringUtils.prepStringForChoiceIntent(AddressIntentHandler.getStationNames());
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
-                speechText = "Alles klar. Moechtest du " + stationsToSelect + " als Zielstation einrichten? Zur Auswahl sage: eins, zwei" +
-                        " oder drei.";
+                speechText = "Alles klar. Ich sage dir jetzt die Stationen die du zur Auswahl hast. Merke dir" +
+                        " bitte die zugehörige Nummer der Station die du benutzen möchtest. " +
+                        "Station: " + stationsToSelect + " als Zielstation einrichten? " +
+                        "Zur Auswahl sage jetzt bitte deine Nummer.";
                 FallbackIntentHandler.setFallbackMessage(speechText);
                 return responseBuilder
                         .withSpeech(speechText)
