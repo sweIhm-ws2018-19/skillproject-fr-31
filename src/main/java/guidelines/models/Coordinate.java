@@ -1,5 +1,6 @@
 package guidelines.models;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class Coordinate {
@@ -42,6 +43,6 @@ public class Coordinate {
     }
 
     public String toJsonString(String name){
-        return String.format("{\n\t\"NAME\":%1,\n\t\"lat\": %2,\n\t\"long\":%3\n}", name,latitude,longitude);
+        return String.format(Locale.ROOT,"{\n\t\"NAME\":%s,\n\t\"lat\":%f,\n\t\"long\":%f\n}", name,latitude,longitude);
     }
 }

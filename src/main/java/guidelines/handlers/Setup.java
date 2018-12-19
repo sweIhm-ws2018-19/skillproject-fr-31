@@ -57,7 +57,7 @@ public class Setup {
             }
 
             if (persistentAttributes.get("DEST1") == null) {
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_NAME));
+                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_ADDR));
                 return putTogether("Ziel Adresse", SpeechStrings.START_CONFIG_DEST_ADDRESS).build();
             }
 

@@ -32,7 +32,7 @@ public class AddressIntentHandler implements RequestHandler {
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
         AttributesManager attributesManager = input.getAttributesManager();
-        GuideStates currentState = GuideStates.valueOf(attributesManager.getRequestAttributes().get("State").toString());
+        GuideStates currentState = GuideStates.valueOf(input.getAttributesManager().getSessionAttributes().get("State").toString());
 
         Map<String, Slot> slots = intent.getSlots();
         Slot citySlot = slots.get("city");
@@ -61,7 +61,7 @@ public class AddressIntentHandler implements RequestHandler {
             }
 
             if(currentState == GuideStates.GET_HOME_ADDR){
-                attributesManager.getPersistentAttributes().put("HOME", coordinates.toJsonString());
+                attributesManager.getPersistentAttributes().put("HOME", coordinates.toJsonString("HOME"));
                 return Setup.SetupState(input);
             }
             //if(currentState == GuideStates.GET_DEST_ADDR) maybe?

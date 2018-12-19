@@ -41,7 +41,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
             setName(nameSlot.getValue());
             AttributesManager attributesManager = input.getAttributesManager();
 
-            attributesManager.getPersistentAttributes().put("NAME", nameSlot);
+            attributesManager.getPersistentAttributes().put("NAME", nameSlot.getValue());
             attributesManager.savePersistentAttributes();
             return Setup.SetupState(input);
 
