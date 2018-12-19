@@ -50,8 +50,13 @@ public class Setup {
                 } else {
                     // Todo: save as valid json coordinates;
                     String deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
-                    persistentAttributes.put("HOME", deviceAddressJson);
-                    attributesManager.savePersistentAttributes();
+                    if(deviceAddressJson != null && !deviceAddressJson.isEmpty()){
+                        persistentAttributes.put("HOME", deviceAddressJson);
+                        attributesManager.savePersistentAttributes();
+                    }else{
+                        attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_HOME_ADDR));
+                        return putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
+                    }
                 }
 
             }
