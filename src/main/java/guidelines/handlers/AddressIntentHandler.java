@@ -6,6 +6,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import guidelines.models.Coordinate;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.BasicUtils;
 import guidelines.utilities.HereApi;
 
 import java.util.*;
@@ -29,12 +30,10 @@ public class AddressIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         Request request = input.getRequestEnvelope().getRequest();
-        IntentRequest intentRequest = (IntentRequest) request;
-        Intent intent = intentRequest.getIntent();
         AttributesManager attributesManager = input.getAttributesManager();
         GuideStates currentState = GuideStates.valueOf(input.getAttributesManager().getSessionAttributes().get("State").toString());
 
-        Map<String, Slot> slots = intent.getSlots();
+        Map<String, Slot> slots = BasicUtils.getSlots(input);
         Slot citySlot = slots.get("city");
         Slot streetSlot = slots.get("street");
         Slot streetNumberSlot = slots.get("streetNumber");
@@ -91,7 +90,7 @@ public class AddressIntentHandler implements RequestHandler {
         }
     }
 
-    static List<String> getStationNames() {
+    public static List<String> getStationNames() {
         return stationNames;
     }
 

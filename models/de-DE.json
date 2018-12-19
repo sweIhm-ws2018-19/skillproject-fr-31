@@ -109,7 +109,7 @@
           ]
         },
         {
-          "name": "SayDestAddressAgain",
+          "name": "ConfirmationIntent",
           "slots": [
             {
               "name": "decision",
