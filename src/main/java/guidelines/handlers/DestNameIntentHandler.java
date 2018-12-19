@@ -48,7 +48,21 @@ public class DestNameIntentHandler implements RequestHandler {
                     .getLongitude();
 
 
-            persistentAttributes.put("DEST1", new Coordinate(latitude,longitude).toJsonString(destName));
+            if(persistentAttributes.get("DEST1") == null){
+                persistentAttributes.put("DEST1", new Coordinate(latitude,longitude).toJsonString(destName));
+            }
+            else if(persistentAttributes.get("DEST2") == null){
+                persistentAttributes.put("DEST2", new Coordinate(latitude,longitude).toJsonString(destName));
+            }
+            else if(persistentAttributes.get("DEST3") == null){
+                persistentAttributes.put("DEST3", new Coordinate(latitude,longitude).toJsonString(destName));
+            }
+            else {
+                // Todo: all dest Addresses are set.
+                //      - Oeveride?
+                //      - Error?
+                //      - Do nothing?
+            }
             attributesManager.setPersistentAttributes(persistentAttributes);
             attributesManager.savePersistentAttributes();
 

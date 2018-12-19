@@ -69,7 +69,7 @@ public class AddressIntentHandler implements RequestHandler {
             else
             {
                 nearbyStations = HereApi.getNearbyStations(coordinates);
-                stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
+                stationNames = new ArrayList<>(nearbyStations.keySet());
 
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
                 speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +

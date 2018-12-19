@@ -48,9 +48,9 @@ public class Setup {
                     attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_HOME_ADDR));
                     return putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
                 } else {
-                    // Todo: save as valid json coordinates;
                     String deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
                     if(deviceAddressJson != null && !deviceAddressJson.isEmpty()){
+                        // Todo: get geocoordinates and save them and not this shit!!!!!!!!!!
                         persistentAttributes.put("HOME", deviceAddressJson);
                         attributesManager.savePersistentAttributes();
                     }else{
