@@ -1,6 +1,7 @@
 package guidelines.utilities;
 
 import guidelines.models.Coordinate;
+import guidelines.models.Route;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,7 +26,8 @@ public class HereApiTest {
 
     @Test
     public void getRouteTest(){
-        Assert.assertEquals(true,true);
+        final Route have = HereApi.getRoute(new Coordinate(48.474536,11.9278286), new Coordinate(48.1549484,11.5537992),"2018-12-19T20:00:29.099426+01:00");
+        Assert.assertTrue(have.getMinutesLeft() >= 0);
     }
 
     @Test

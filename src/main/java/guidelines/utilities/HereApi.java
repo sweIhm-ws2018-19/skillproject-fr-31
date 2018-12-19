@@ -4,11 +4,13 @@ package guidelines.utilities;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guidelines.models.Coordinate;
+import guidelines.models.Route;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,13 +34,15 @@ public class HereApi {
         return new Coordinate(jsNode.findValue("Latitude").asDouble(),jsNode.findValue("Longitude").asDouble());
     }
 
-    public static Coordinate getRoute(Coordinate home, Coordinate dest){
-        JsonNode timeReq = sendRequest("http://worldtimeapi.org/api/timezone/Europe/Berlin");
-        final String time = timeReq.findValue("datetime").asText();
+    public static Route getRoute(Coordinate home, Coordinate dest, String time){
+        long currentTime = System.currentTimeMillis() + 60*60;
         String requestUrl = ROUTEBASE + "&routing=all&dep=" + home.getLatitude() + "," + home.getLongitude() + "&arr=" + dest.getLatitude() + "," + dest.getLongitude() +
-                "&time=" + time + "&routingMode=realtime";
+                "&time=" + time + "&routingMode=realtime&arrival=1&walk=2000,200";
         JsonNode jsNode = sendRequest(requestUrl);
-        return new Coordinate(1.0,1.0);
+        String depTimeSt = jsNode.findPath("Connection").get(0).findValue("Dep").findValue("time").asText();
+        long depTime = Instant.parse( depTimeSt + ".000Z" ).toEpochMilli() - 60 * 60 * 1000;
+        int minutesLeft =(int)(depTime - currentTime) /1000 /60;
+        return new Route(minutesLeft, 0);
     }
 
     public static Map<String, Coordinate> getNearbyStations(Coordinate co){
@@ -59,7 +63,6 @@ public class HereApi {
         RestTemplate rs = new RestTemplate();
         String result = "";
         result = rs.getForObject(url, String.class);
-
         ObjectMapper jsonMapper = new ObjectMapper();
         JsonNode jsNode = null;
         try {
