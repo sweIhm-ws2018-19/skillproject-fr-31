@@ -38,7 +38,7 @@ public class SayDestAddressAgainIntentHandler implements RequestHandler {
         if (yesOrNoSlot != null) {
             String yesOrNo = yesOrNoSlot.getValue();
             if (yesOrNo.equals("nein")) {
-                String stationsToSelect = StringUtils.prepStringForChoiceIntent(DestAddressIntentHandler.getStationNames());
+                String stationsToSelect = StringUtils.prepStringForChoiceIntent(AddressIntentHandler.getStationNames());
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
                 speechText = "Alles klar. Moechtest du " + stationsToSelect + " als Zielstation einrichten? Zur Auswahl sage: eins, zwei" +
                         " oder drei.";
@@ -49,7 +49,7 @@ public class SayDestAddressAgainIntentHandler implements RequestHandler {
                         .withShouldEndSession(false)
                         .build();
             } else {
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
+                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_ADDR));
                 speechText = "Alles klar. Bitte sag mir nochmal die Strasse, Hausnummer und Stadt";
                 FallbackIntentHandler.setFallbackMessage(speechText);
                 return responseBuilder

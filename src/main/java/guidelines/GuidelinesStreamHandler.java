@@ -30,7 +30,7 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new HomeAddressHelpIntentHandler(),
                         new DestinationAddressHelpIntentHandler(),
                         new BackToStartIntentHandler(),
-                        new DestAddressIntentHandler(),
+                        new AddressIntentHandler(),
                         new DestNameIntentHandler(),
                         new DestChoiceIntentHandler(),
                         new SayDestAddressAgainIntentHandler(),

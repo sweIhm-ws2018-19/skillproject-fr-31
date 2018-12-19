@@ -13,14 +13,17 @@ import java.util.*;
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
-public class DestAddressIntentHandler implements RequestHandler {
+public class AddressIntentHandler implements RequestHandler {
 
     private static List<String> stationNames;
     private static Map<String, Coordinate> nearbyStations;
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("DestAddressIntent").and(sessionAttribute("State", GuideStates.DEST_ADDR.toString())));
+        return input.matches(intentName("AddressIntent")
+                .and(sessionAttribute("State", GuideStates.GET_DEST_ADDR.toString())
+                        .or(sessionAttribute("State", GuideStates.GET_HOME_ADDR.toString()))
+                ));
     }
 
     @Override
@@ -28,6 +31,8 @@ public class DestAddressIntentHandler implements RequestHandler {
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
+        AttributesManager attributesManager = input.getAttributesManager();
+        GuideStates currentState = GuideStates.valueOf(attributesManager.getRequestAttributes().get("State").toString());
 
         Map<String, Slot> slots = intent.getSlots();
         Slot citySlot = slots.get("city");
@@ -36,30 +41,40 @@ public class DestAddressIntentHandler implements RequestHandler {
 
         String speechText;
 
+
         if (citySlot != null && streetSlot != null && streetNumberSlot != null) {
             String cityValue = citySlot.getValue();
             String streetValue = streetSlot.getValue();
             String streetNumberValue = streetNumberSlot.getValue();
 
-            AttributesManager attributesManager = input.getAttributesManager();
+
 
             final Coordinate coordinates = HereApi.getCoordinate(streetValue, Integer.valueOf(streetNumberValue),
                     cityValue);
             if (coordinates == null) {
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
+                attributesManager.setSessionAttributes(Collections.singletonMap("State", currentState));
                 return input.getResponseBuilder()
                         .withSpeech("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
                         .withReprompt("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
                         .withShouldEndSession(false)
                         .build();
             }
-            nearbyStations = HereApi.getNearbyStations(coordinates);
-            stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
 
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
-            speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
-                    cityValue + ". Moechtest du deine Eingabe wiederholen?";
-            FallbackIntentHandler.setFallbackMessage(speechText);
+            if(currentState == GuideStates.GET_HOME_ADDR){
+                attributesManager.getPersistentAttributes().put("HOME", coordinates.toJsonString());
+                return Setup.SetupState(input);
+            }
+            //if(currentState == GuideStates.GET_DEST_ADDR) maybe?
+            else
+            {
+                nearbyStations = HereApi.getNearbyStations(coordinates);
+                stationNames = new ArrayList<>(HereApi.getNearbyStations(coordinates).keySet());
+
+                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
+                speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
+                        cityValue + ". Moechtest du deine Eingabe wiederholen?";
+                FallbackIntentHandler.setFallbackMessage(speechText);
+            }
 
             return input.getResponseBuilder()
                     .withSpeech(speechText)

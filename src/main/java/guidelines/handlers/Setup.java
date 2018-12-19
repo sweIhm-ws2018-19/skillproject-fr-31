@@ -1,0 +1,77 @@
+package guidelines.handlers;
+
+import com.amazon.ask.attributes.AttributesManager;
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import com.amazon.ask.model.Permissions;
+import com.amazon.ask.model.Response;
+import com.amazon.ask.model.Session;
+import com.amazon.ask.model.interfaces.system.SystemState;
+import com.amazon.ask.response.ResponseBuilder;
+import guidelines.SpeechStrings;
+import guidelines.statemachine.GuideStates;
+
+import java.util.*;
+
+import static guidelines.utilities.DeviceAddressClient.getDeviceAddress;
+
+public class Setup {
+    private Setup(){};
+
+    public static Optional<Response> SetupState(HandlerInput input) {
+
+        // Attribute Manger for Database info
+        AttributesManager attributesManager = input.getAttributesManager();
+        Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+        // If no Name ask Name
+        if (persistentAttributes.get("NAME") == null) {
+            // store in database
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
+
+            return putTogether("Namen", SpeechStrings.WELCOME_NO_CONFIG).build();
+        } else {
+            // if home adress is available
+            if (persistentAttributes.get("HOME") == null) {
+                // needed for address permision
+                String permission = "read::alexa:device:all:address";
+                List<String> permissionList = new ArrayList<>();
+                permissionList.add(permission);
+
+                Session session = input.getRequestEnvelope().getSession();
+                Permissions permissions = session.getUser().getPermissions();
+
+                SystemState systemState = input.getRequestEnvelope().getContext().getSystem();
+                String apiAccessToken = systemState.getApiAccessToken();
+                String deviceId = systemState.getDevice().getDeviceId();
+                String apiEndpoint = systemState.getApiEndpoint();
+                if (permissions == null) {
+                    // Return that we want to get the homeAdress
+                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_HOME_ADDR));
+                    return putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
+                } else {
+                    // Todo: save as valid json coordinates;
+                    String deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
+                    persistentAttributes.put("HOME", deviceAddressJson);
+                }
+
+            }
+
+            if (persistentAttributes.get("DEST1") == null) {
+                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_NAME));
+                return putTogether("Ziel Adresse", SpeechStrings.START_CONFIG_DEST_ADDRESS).build();
+            }
+
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+            String outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
+            return putTogether("Route", outputMessage).build();
+
+
+        }
+
+    }
+
+    private static ResponseBuilder putTogether(String title, String text){
+        return new ResponseBuilder().withSimpleCard(title,text)
+                .withSpeech(text)
+                .withReprompt(text);
+    }
+}

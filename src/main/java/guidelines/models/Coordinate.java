@@ -40,4 +40,8 @@ public class Coordinate {
     public int hashCode() {
         return Objects.hash(latitude, longitude);
     }
+
+    public String toJsonString(){
+        return String.format("{\n\t\"lat\": %1,\n\t\"long\":%2\n}", latitude,longitude);
+    }
 }

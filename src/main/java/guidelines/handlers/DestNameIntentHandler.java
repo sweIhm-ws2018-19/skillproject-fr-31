@@ -17,7 +17,7 @@ import static guidelines.handlers.LaunchRequestHandler.getDeviceAddressJson;
 public class DestNameIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("DestNameIntent").and(sessionAttribute("State", GuideStates.DEST_NAME.toString())));
+        return input.matches(intentName("DestNameIntent").and(sessionAttribute("State", GuideStates.GET_DEST_NAME.toString())));
     }
 
     @Override
@@ -38,13 +38,13 @@ public class DestNameIntentHandler implements RequestHandler {
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
 
-            double latitude = DestAddressIntentHandler
+            double latitude = AddressIntentHandler
                     .getNearbyStations()
-                    .get(DestAddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice() - 1))
+                    .get(AddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice() - 1))
                     .getLatitude();
-            double longitude = DestAddressIntentHandler
+            double longitude = AddressIntentHandler
                     .getNearbyStations()
-                    .get(DestAddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice()  - 1))
+                    .get(AddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice()  - 1))
                     .getLongitude();
 
             persistentAttributes.put("Zuhause", getDeviceAddressJson());

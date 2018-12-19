@@ -39,9 +39,9 @@ public class DestChoiceIntentHandler implements RequestHandler {
             String choiceValue = choiceSlot.getValue();
             int choice = Integer.parseInt(choiceValue);
             destChoice = choice;
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_NAME));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_NAME));
 
-            speechText = "Deine Wahl faellt auf " + DestAddressIntentHandler.getStationNames().get(choice - 1) +
+            speechText = "Deine Wahl faellt auf " + AddressIntentHandler.getStationNames().get(choice - 1) +
                     ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
                     "heisst: plus den Namen";
             FallbackIntentHandler.setFallbackMessage(speechText);

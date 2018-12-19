@@ -40,11 +40,12 @@ public class MyNameIsIntentHandler implements RequestHandler {
         if (nameSlot != null) {
             setName(nameSlot.getValue());
             AttributesManager attributesManager = input.getAttributesManager();
-            // store in session
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.DEST_ADDR));
 
-            speechText = SpeechStrings.WELCOME_USER + getName() + SpeechStrings.START_CONFIG_DEST_ADDRESS;
-            repromptText = getName() + SpeechStrings.PLS + SpeechStrings.STREET;
+            attributesManager.getPersistentAttributes().put("NAME", nameSlot);
+            return Setup.SetupState(input);
+
+//            speechText = SpeechStrings.WELCOME_USER + getName() + SpeechStrings.START_CONFIG_DEST_ADDRESS;
+//            repromptText = getName() + SpeechStrings.PLS + SpeechStrings.STREET;
         } else {
             speechText = SpeechStrings.INAUDIBLE + " Versuche bitte erneut deinen Name zu sagen";
             repromptText = SpeechStrings.NAMEUNKNOWN;
