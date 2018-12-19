@@ -10,11 +10,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StringUtilsTest {
+public class StringUtilsTest {
     @Test
     public void createFromatedString(){
         List<String> list = new ArrayList<>(Arrays.asList("Berbling", "Muenchen", "Bad Aibling", "Rosenheim"));
-        String want = "1. Berbling 2. Muenchen 3. Bad Aibling 4. Rosenheim";
+        String want = "1. Berbling, 2. Muenchen, 3. Bad Aibling oder 4. Rosenheim";
         Assert.assertEquals(want, StringUtils.prepStringForChoiceIntent(list));
     }
 }

@@ -6,7 +6,10 @@ public class StringUtils {
     public static String prepStringForChoiceIntent(List<String> stations){
         int lastIndex = stations.size() - 1;
         int count =1;
-        String result = String.join((count++)+".", String.join(", ", stations.subList(0, lastIndex)), stations.get(lastIndex));
+        for (int i = 0; i < stations.size(); i++) {
+            stations.set(i,(i+1)+". "+stations.get(i));
+        }
+        String result = String.join(" oder ", String.join(", ", stations.subList(0, lastIndex)), stations.get(lastIndex));
         if(stations.size() == 1){
             return stations.get(0);
         }
