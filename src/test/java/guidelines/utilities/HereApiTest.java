@@ -1,10 +1,14 @@
 package guidelines.utilities;
 
 import guidelines.models.Coordinate;
+import guidelines.models.Route;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +30,12 @@ public class HereApiTest {
 
     @Test
     public void getRouteTest(){
-        Assert.assertEquals(true,true);
+        final Instant oneHourAgo = Instant.ofEpochMilli(System.currentTimeMillis());
+        OffsetDateTime time = oneHourAgo.plusSeconds(2*60*60).atOffset(ZoneOffset.ofHours(1));
+
+        final Route have = HereApi.getRoute(new Coordinate(48.474536,11.9278286),
+                new Coordinate(48.1549484,11.5537992),time.toString());
+        Assert.assertTrue(have.getMinutesLeft() >= 0);
     }
 
     @Ignore
