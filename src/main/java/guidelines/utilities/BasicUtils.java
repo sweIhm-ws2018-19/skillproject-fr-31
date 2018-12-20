@@ -19,4 +19,9 @@ public final class BasicUtils {
         Map<String, Slot> slots = intent.getSlots();
         return slots;
     }
+    public  static ResponseBuilder putTogether(String title, String text){
+        return new ResponseBuilder().withSimpleCard(title,text)
+                .withSpeech(text)
+                .withReprompt(text);
+    }
 }

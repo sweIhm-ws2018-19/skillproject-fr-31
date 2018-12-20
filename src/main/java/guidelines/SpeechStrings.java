@@ -31,13 +31,17 @@ public class SpeechStrings {
             "Möchtest du mit den Infos zur Heimadresse weiterfahren oder die Hilfefunktion beenden?";
     public static final String SPEECH_ERROR_DESTINATION_ADDRESS = "Leider hat etwas nicht geklappt, " +
             "bitte sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
+
     public static final String NO_PERMISSION_DEVICE_ADDRESS = "Du hast dem Alexa Skill keine Berechtigung erteilt auf deine" +
             " Adresse zuzugreifen. Bitte gebe dem Skill die notwendigen Berechtigungen";
 
-    public static final String GET_HOME_ADDRESS = "Bitte sage uns die Strasse, Hausnummer und die Stadt\"";
+    public static final String SAY_ADDRESS = "Bitte sage uns die Strasse, Hausnummer und die Stadt\"";
 
-    public static final String NO_PERMISSION_DEVICE_GET_HOME = "Du hast dem Alexa Skill keine Berechtigung erteilt auf deine\" +\n" +
-            "            \" Adresse zuzugreifen. "+GET_HOME_ADDRESS;
+    public static final String FOLLOWING_ADDRESSES = "Okay du kannst jetzt die nächste Adresse einrichten.";
+
+    public static final String NO_PERMISSION_DEVICE_GET_HOME = "Du hast dem Alexa Skill keine Berechtigung erteilt auf deine" +
+            "            Adresse zuzugreifen. "+ SAY_ADDRESS;
+
     public static final String START_CONFIG_DEST_ADDRESS = "Nun beginnen wir mit der Einrichtung der Zieladressen. " +
             "Du hast nun die Moeglichkeit bis zu drei Zieladressen einzurichten. " +
             "Bitte nenne uns deine erste Zieladresse. Sage uns die Strasse, Hausnummer und die Stadt";

@@ -7,16 +7,14 @@ import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
-import guidelines.utilities.StringUtils;
 
 import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class ConfirmationHandler implements RequestHandler {
 
-    ArrayList<GuideStates> confirmationStates=new ArrayList<>(Arrays.asList(GuideStates.SAY_DEST_ADDR_AGAIN,GuideStates.NEXT_ADDR));
+    ArrayList<GuideStates> confirmationStates=new ArrayList<>(Arrays.asList(GuideStates.SAY_DEST_ADDR_AGAIN,GuideStates.Q_NEXT_ADDR));
     private boolean inConfirmationStates(HandlerInput input){
         return confirmationStates.contains(
                 GuideStates.valueOf(input.getAttributesManager().getSessionAttributes().get("State").toString()));
@@ -43,7 +41,7 @@ public class ConfirmationHandler implements RequestHandler {
             String yesOrNo = yesOrNoSlot.getValue();
             GuideStates currentState = GuideStates.valueOf(attributesManager.getSessionAttributes().get("State").toString());
             if (yesOrNo.equals("nein")) {
-                return GuideStates.decisionBuilder(currentState,true,attributesManager);
+                return GuideStates.decisionBuilder(currentState,false,attributesManager);
             } else {
                 return GuideStates.decisionBuilder(currentState,true,attributesManager);
             }

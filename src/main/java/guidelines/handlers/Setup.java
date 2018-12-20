@@ -9,6 +9,7 @@ import com.amazon.ask.model.interfaces.system.SystemState;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.BasicUtils;
 
 import java.util.*;
 
@@ -27,7 +28,7 @@ public class Setup {
             // store in database
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
 
-            return putTogether("Namen", SpeechStrings.WELCOME_NO_CONFIG).build();
+            return BasicUtils.putTogether("Namen", SpeechStrings.WELCOME_NO_CONFIG).build();
         } else {
             // if home adress is available
             if (persistentAttributes.get("HOME") == null) {
@@ -46,7 +47,7 @@ public class Setup {
                 if (permissions == null) {
                     // Return that we want to get the homeAdress
                     attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_HOME_ADDR));
-                    return putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
+                    return BasicUtils.putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
                 } else {
                     String deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
                     if(deviceAddressJson != null && !deviceAddressJson.isEmpty()){
@@ -55,7 +56,7 @@ public class Setup {
                         attributesManager.savePersistentAttributes();
                     }else{
                         attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_HOME_ADDR));
-                        return putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
+                        return BasicUtils.putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
                     }
                 }
 
@@ -63,21 +64,17 @@ public class Setup {
 
             if (persistentAttributes.get("DEST1") == null) {
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_ADDR));
-                return putTogether("Ziel Adresse", SpeechStrings.START_CONFIG_DEST_ADDRESS).build();
+                return BasicUtils.putTogether("Ziel Adresse", SpeechStrings.START_CONFIG_DEST_ADDRESS).build();
             }
 
             attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
             String outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
-            return putTogether("Route", outputMessage).build();
+            return BasicUtils.putTogether("Route", outputMessage).build();
 
 
         }
 
     }
 
-    private static ResponseBuilder putTogether(String title, String text){
-        return new ResponseBuilder().withSimpleCard(title,text)
-                .withSpeech(text)
-                .withReprompt(text);
-    }
+
 }

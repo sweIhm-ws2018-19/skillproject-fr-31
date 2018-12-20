@@ -43,6 +43,12 @@ public class Coordinate {
     }
 
     public String toJsonString(String name){
-        return String.format(Locale.ROOT,"{\n\t\"NAME\":%s,\n\t\"lat\":%f,\n\t\"long\":%f\n}", name,latitude,longitude);
+        try{
+            String x = String.format(Locale.ROOT,"{\n\t\"NAME\":%s,\n\t\"lat\":%f,\n\t\"long\":%f\n}", name,latitude,longitude);
+            return x;
+        }
+        catch (Exception e){
+            return e.getMessage();
+        }
     }
 }

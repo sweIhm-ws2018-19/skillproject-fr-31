@@ -30,58 +30,79 @@ public class DestNameIntentHandler implements RequestHandler {
         Slot destNameSlot = slots.get("destCustomName");
 
         String speechText;
+        String repromt = "Bitte sage uns nochmal den Namen des Ziels";
 
+        AttributesManager attributesManager = input.getAttributesManager();
         if (destNameSlot != null) {
+
             String destName = destNameSlot.getValue();
 
-            AttributesManager attributesManager = input.getAttributesManager();
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
-            Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+            if(destName != null){
+                Coordinate coordinate;
 
-            double latitude = AddressIntentHandler
-                    .getNearbyStations()
-                    .get(AddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice() - 1))
-                    .getLatitude();
-            double longitude = AddressIntentHandler
-                    .getNearbyStations()
-                    .get(AddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice()  - 1))
-                    .getLongitude();
+                try{
+                    coordinate = AddressIntentHandler.getNearbyStations()
+                            .get(AddressIntentHandler.getStationNames().get(DestChoiceIntentHandler.getDestChoice()-1));
+                }catch (Exception e){
+                    coordinate = new Coordinate( 5.5555, 6.66666);
+                }
+                
+                if(attributesManager.getPersistentAttributes().get("DEST1") == null){
+                    String x = coordinate.toJsonString(destName);
+                    if(x == null){
+                        x = "shit";
+                    }
+                    try{
+                        attributesManager.getPersistentAttributes().put("DEST1", x);
+                        speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName
+                                + " gespeichert. Noch eine Adresse eingeben?";
+                    }
+                    catch (Exception e){
+                        speechText = "asdf";
+                    }
+                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.Q_NEXT_ADDR));
+                }
+                else if(attributesManager.getPersistentAttributes().get("DEST2") == null){
+                    attributesManager.getPersistentAttributes().put("DEST2", "asdf2");
+                    speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName
+                            + " gespeichert. Noch eine Adresse eingeben?";
+                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.Q_NEXT_ADDR));
+                }
+                else if(attributesManager.getPersistentAttributes().get("DEST3") == null){
+                    attributesManager.getPersistentAttributes().put("DEST3", "asdf3");
+                    speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName + " gespeichert." +
+                            " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
+                            "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen";
+                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+                }
+                else {
+                    speechText = "Error";
+                    // Todo: all dest Addresses are set.
+                    //      - Oeveride?
+                    //      - Error?
+                    //      - Do nothing?
+                }
 
+                attributesManager.savePersistentAttributes();
 
-            if(persistentAttributes.get("DEST1") == null){
-                persistentAttributes.put("DEST1", new Coordinate(latitude,longitude).toJsonString(destName));
             }
-            else if(persistentAttributes.get("DEST2") == null){
-                persistentAttributes.put("DEST2", new Coordinate(latitude,longitude).toJsonString(destName));
+            else{
+                speechText = "Leider hab ich den Namen nicht verstanden";
+                repromt = "Bitte sag den Namen erneut";
+                FallbackIntentHandler.setFallbackMessage(speechText);
             }
-            else if(persistentAttributes.get("DEST3") == null){
-                persistentAttributes.put("DEST3", new Coordinate(latitude,longitude).toJsonString(destName));
-            }
-            else {
-                // Todo: all dest Addresses are set.
-                //      - Oeveride?
-                //      - Error?
-                //      - Do nothing?
-            }
-            attributesManager.setPersistentAttributes(persistentAttributes);
-            attributesManager.savePersistentAttributes();
 
-            speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName + " gespeichert." +
-                    " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
-                    "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen";
             FallbackIntentHandler.setFallbackMessage(speechText);
-
-            return input.getResponseBuilder()
-                    .withSpeech(speechText)
-                    .withReprompt("Bitte sage uns nochmal den Namen des Ziels")
-                    .build();
         }
-        speechText = "Leider hat das Befüllen der Slots nicht richtig funktioniert";
-        FallbackIntentHandler.setFallbackMessage(speechText);
+        else{
+            speechText = "Leider hab ich den Namen nicht verstanden";
+            repromt = "Bitte sag den Namen erneut";
+            FallbackIntentHandler.setFallbackMessage(speechText);
+        }
 
         return input.getResponseBuilder()
-                .withSpeech("Leider hat das Befüllen der Slots nicht richtig funktioniert")
-                .withReprompt("Bitte mache die Eingabe der Slots erneut")
+                .withSpeech(speechText)
+                .withReprompt(repromt)
                 .build();
     }
 }
