@@ -48,7 +48,7 @@ public class AddressIntentHandler implements RequestHandler {
             final Coordinate coordinates = HereApi.getCoordinate(streetValue, Integer.valueOf(streetNumberValue),
                     cityValue);
             if (coordinates == null) {
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", currentState));
+                BasicUtils.setSessionAttributes(attributesManager,"State", currentState);
                 return input.getResponseBuilder()
                         .withSpeech("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
                         .withReprompt("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
@@ -57,18 +57,17 @@ public class AddressIntentHandler implements RequestHandler {
             }
 
             if(currentState == GuideStates.GET_HOME_ADDR){
-                attributesManager.getPersistentAttributes().put("HOME", coordinates.toJsonString("HOME"));
-                attributesManager.savePersistentAttributes();
+                BasicUtils.setPersistentAttributes(attributesManager,"HOME", coordinates.toJsonString("HOME"));
                 return Setup.SetupState(input);
             }
             //if(currentState == GuideStates.GET_DEST_ADDR) maybe?
             else
             {
                 Map<String, Coordinate> nearbyStations = HereApi.getNearbyStations(coordinates);
-                attributesManager.setSessionAttributes(Collections.singletonMap("Stations", nearbyStations));
+                BasicUtils.setSessionAttributes(attributesManager,"Stations", nearbyStations);
 
 
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
+                BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.SAY_DEST_ADDR_AGAIN);
                 speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
                         cityValue + ". Moechtest du deine Eingabe wiederholen?";
                 FallbackIntentHandler.setFallbackMessage(speechText);

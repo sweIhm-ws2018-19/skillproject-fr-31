@@ -6,6 +6,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import guidelines.models.Coordinate;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.BasicUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,29 +43,33 @@ public class DestNameIntentHandler implements RequestHandler {
 
                 Map<String, Coordinate> stations = (Map<String, Coordinate>) attributesManager.getSessionAttributes().get("Stations");
                 ArrayList<String> keys = new ArrayList<>(stations.keySet());
+                GuideStates stateToSet = GuideStates.Q_NEXT_ADDR;
                 if (attributesManager.getPersistentAttributes().get("DEST1") == null) {
 
+                    // so sollte es funktionieren
+                    BasicUtils.setPersistentAttributes(attributesManager,destName,stations.get(keys.get(0)));
 
 
-                    attributesManager.getPersistentAttributes().put("DEST1", stations.get(keys.get(DestChoiceIntentHandler.getDestChoice())));
-                    speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName
+//                    speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: "+stations.get(keys.get(0))+ keys.get(0)+destName
+//                            + " gespeichert. Noch eine Adresse eingeben?";
+                    speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: "+ destName
                             + " gespeichert. Noch eine Adresse eingeben?";
 
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.Q_NEXT_ADDR));
+                    // default state q_next
 
                 } else if (attributesManager.getPersistentAttributes().get("DEST2") == null) {
 
-                    attributesManager.getPersistentAttributes().put("DEST2", "asdf2");
+                    BasicUtils.setPersistentAttributes(attributesManager,"DEST2", "asdf2");
                     speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName
                             + " gespeichert. Noch eine Adresse eingeben?";
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.Q_NEXT_ADDR));
+                    // default state q_next
 
                 } else if (attributesManager.getPersistentAttributes().get("DEST3") == null) {
-                    attributesManager.getPersistentAttributes().put("DEST3", "asdf3");
+                    BasicUtils.setPersistentAttributes(attributesManager,"DEST3", "asdf3");
                     speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName + " gespeichert." +
                             " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
                             "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen";
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+                    stateToSet = GuideStates.TRANSIT;
                 } else {
                     speechText = "Error";
                     // Todo: all dest Addresses are set.
@@ -72,9 +77,8 @@ public class DestNameIntentHandler implements RequestHandler {
                     //      - Error?
                     //      - Do nothing?
                 }
-                attributesManager.savePersistentAttributes();
 
-
+                BasicUtils.setSessionAttributes(attributesManager,"State", stateToSet);
             } else {
                 speechText = "Leider hab ich den Namen nicht verstanden";
                 repromt = "Bitte sag den Namen erneut";

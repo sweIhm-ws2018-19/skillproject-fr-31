@@ -27,7 +27,7 @@ public enum GuideStates {
             case SAY_DEST_ADDR_AGAIN:
             {
                 if(isYes){
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_ADDR));
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_ADDR);
                     String speechText = "Alles klar. Bitte sag mir nochmal die Strasse, Hausnummer und Stadt";
                     FallbackIntentHandler.setFallbackMessage(speechText);
                     respBuilder
@@ -38,7 +38,7 @@ public enum GuideStates {
                 }else{
                     Map<String, Coordinate> stations = (Map<String, Coordinate>) attributesManager.getSessionAttributes().get("Stations");
                     String stationsToSelect = StringUtils.prepStringForChoiceIntent(new ArrayList<>(stations.keySet()));
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.SELECT_NEARBY_STATION);
                     String speechText = "Alles klar. Ich sage dir jetzt die Stationen die du zur Auswahl hast. Merke dir" +
                             " bitte die zugehörige Nummer der Station die du benutzen möchtest. " +
                             "Station: " + stationsToSelect +
@@ -55,12 +55,12 @@ public enum GuideStates {
             }
             case Q_NEXT_ADDR:{
                 if(isYes){
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_ADDR));
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_ADDR);
                     respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES+" "+SpeechStrings.SAY_ADDRESS);
                 }else{
                     String speech = " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
                             "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen";
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.TRANSIT);
                     respBuilder = BasicUtils.putTogether("Route", speech);
                 }
                 break;

@@ -6,6 +6,15 @@ import java.util.Objects;
 public class Coordinate {
     private double latitude;
     private double longitude;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Coordinate(double latitude, double longitude) {
         this.latitude = latitude;
@@ -43,12 +52,6 @@ public class Coordinate {
     }
 
     public String toJsonString(String name){
-        try{
-            String x = String.format(Locale.ROOT,"{\n\t\"NAME\":%s,\n\t\"lat\":%f,\n\t\"long\":%f\n}", name,latitude,longitude);
-            return x;
-        }
-        catch (Exception e){
-            return e.getMessage();
-        }
+            return String.format(Locale.US,"{\n\t\"NAME\":%1s,\n\t\"lat\":%2f,\n\t\"long\":%3f\n}", name,getLatitude(),getLongitude());
     }
 }

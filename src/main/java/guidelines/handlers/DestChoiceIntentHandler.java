@@ -6,6 +6,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import guidelines.models.Coordinate;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.BasicUtils;
 
 import java.util.Collections;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class DestChoiceIntentHandler implements RequestHandler {
             String choiceValue = choiceSlot.getValue();
             int choice = Integer.parseInt(choiceValue);
             destChoice = choice;
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_NAME));
+            BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_NAME);
             Map<String, Coordinate> stations = (Map<String, Coordinate>)attributesManager.getSessionAttributes().get("Stations");
 
             speechText = "Deine Wahl faellt auf " + stations.keySet() +

@@ -26,7 +26,7 @@ public class Setup {
         // If no Name ask Name
         if (persistentAttributes.get("NAME") == null) {
             // store in database
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
+            BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.INSERT_NAME);
 
             return BasicUtils.putTogether("Namen", SpeechStrings.WELCOME_NO_CONFIG).build();
         } else {
@@ -46,16 +46,15 @@ public class Setup {
                 String apiEndpoint = systemState.getApiEndpoint();
                 if (permissions == null) {
                     // Return that we want to get the homeAdress
-                    attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_HOME_ADDR));
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_HOME_ADDR);
                     return BasicUtils.putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
                 } else {
                     String deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
                     if(deviceAddressJson != null && !deviceAddressJson.isEmpty()){
                         // Todo: get geocoordinates and save them and not this shit!!!!!!!!!!
-                        persistentAttributes.put("HOME", deviceAddressJson);
-                        attributesManager.savePersistentAttributes();
+                        BasicUtils.setPersistentAttributes(attributesManager,"HOME", deviceAddressJson);
                     }else{
-                        attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_HOME_ADDR));
+                        BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_HOME_ADDR);
                         return BasicUtils.putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
                     }
                 }
@@ -63,11 +62,11 @@ public class Setup {
             }
 
             if (persistentAttributes.get("DEST1") == null) {
-                attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.GET_DEST_ADDR));
+                BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_ADDR);
                 return BasicUtils.putTogether("Ziel Adresse", SpeechStrings.START_CONFIG_DEST_ADDRESS).build();
             }
 
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+            BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.TRANSIT);
             String outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
             return BasicUtils.putTogether("Route", outputMessage).build();
 

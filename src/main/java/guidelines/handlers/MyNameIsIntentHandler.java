@@ -7,6 +7,7 @@ import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.BasicUtils;
 
 import java.util.Collections;
 import java.util.Map;
@@ -41,8 +42,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
             setName(nameSlot.getValue());
             AttributesManager attributesManager = input.getAttributesManager();
 
-            attributesManager.getPersistentAttributes().put("NAME", nameSlot.getValue());
-            attributesManager.savePersistentAttributes();
+            BasicUtils.setPersistentAttributes(attributesManager, "NAME", nameSlot.getValue());
             return Setup.SetupState(input);
 
 //            speechText = SpeechStrings.WELCOME_USER + getName() + SpeechStrings.START_CONFIG_DEST_ADDRESS;

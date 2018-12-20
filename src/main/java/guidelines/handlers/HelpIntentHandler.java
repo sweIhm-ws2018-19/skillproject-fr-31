@@ -21,6 +21,8 @@ import com.amazon.ask.response.ResponseBuilder;
 
 import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.BasicUtils;
+
 import java.util.Collections;
 import java.util.Optional;
 
@@ -38,7 +40,7 @@ public class HelpIntentHandler implements RequestHandler {
         ResponseBuilder respBuilder = input.getResponseBuilder();
 
         AttributesManager attributesManager = input.getAttributesManager();
-        attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP.toString()));
+        BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.HELP.toString());
 
         String speechText = SpeechStrings.HELP;
         FallbackIntentHandler.setFallbackMessage(speechText);
