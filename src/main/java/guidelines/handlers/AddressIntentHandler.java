@@ -16,9 +16,6 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class AddressIntentHandler implements RequestHandler {
 
-    private static List<String> stationNames;
-    private static Map<String, Coordinate> nearbyStations;
-
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AddressIntent")
@@ -67,8 +64,9 @@ public class AddressIntentHandler implements RequestHandler {
             //if(currentState == GuideStates.GET_DEST_ADDR) maybe?
             else
             {
-                nearbyStations = HereApi.getNearbyStations(coordinates);
-                stationNames = new ArrayList<>(nearbyStations.keySet());
+                Map<String, Coordinate> nearbyStations = HereApi.getNearbyStations(coordinates);
+                attributesManager.setSessionAttributes(Collections.singletonMap("Stations", nearbyStations));
+
 
                 attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SAY_DEST_ADDR_AGAIN));
                 speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
@@ -88,13 +86,5 @@ public class AddressIntentHandler implements RequestHandler {
                     .withSpeech(speechText)
                     .withReprompt("Bitte mache die Eingabe der Slots erneut").build();
         }
-    }
-
-    public static List<String> getStationNames() {
-        return stationNames;
-    }
-
-    static Map<String, Coordinate> getNearbyStations() {
-        return nearbyStations;
     }
 }

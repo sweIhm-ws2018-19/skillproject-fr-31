@@ -6,10 +6,13 @@ import com.amazon.ask.response.ResponseBuilder;
 import guidelines.SpeechStrings;
 import guidelines.handlers.AddressIntentHandler;
 import guidelines.handlers.FallbackIntentHandler;
+import guidelines.models.Coordinate;
 import guidelines.utilities.BasicUtils;
 import guidelines.utilities.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 public enum GuideStates {
@@ -33,7 +36,8 @@ public enum GuideStates {
                             .withShouldEndSession(false)
                             .build();
                 }else{
-                    String stationsToSelect = StringUtils.prepStringForChoiceIntent(AddressIntentHandler.getStationNames());
+                    Map<String, Coordinate> stations = (Map<String, Coordinate>) attributesManager.getSessionAttributes().get("Stations");
+                    String stationsToSelect = StringUtils.prepStringForChoiceIntent(new ArrayList<>(stations.keySet()));
                     attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.SELECT_NEARBY_STATION));
                     String speechText = "Alles klar. Ich sage dir jetzt die Stationen die du zur Auswahl hast. Merke dir" +
                             " bitte die zugehörige Nummer der Station die du benutzen möchtest. " +
