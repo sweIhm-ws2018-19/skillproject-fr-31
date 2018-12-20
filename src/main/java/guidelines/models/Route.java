@@ -5,10 +5,16 @@ import java.util.Objects;
 public class Route {
     private final int minutesLeft;
     private final int delay;
+    private final String firstStation;
 
-    public Route(int minutesLeft, int delay) {
+    public String getFirstStation() {
+        return firstStation;
+    }
+
+    public Route(int minutesLeft, int delay, String firstStation) {
         this.minutesLeft = minutesLeft;
         this.delay = delay;
+        this.firstStation = firstStation;
     }
 
     public int getMinutesLeft() {

@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,14 +36,18 @@ public class HereApi {
     }
 
     public static Route getRoute(Coordinate home, Coordinate dest, String time){
-        long currentTime = System.currentTimeMillis() + 60*60;
+        long currentTime = System.currentTimeMillis();
         String requestUrl = ROUTEBASE + "&routing=all&dep=" + home.getLatitude() + "," + home.getLongitude() + "&arr=" + dest.getLatitude() + "," + dest.getLongitude() +
                 "&time=" + time + "&routingMode=realtime&arrival=1&walk=2000,200";
         JsonNode jsNode = sendRequest(requestUrl);
-        String depTimeSt = jsNode.findPath("Connection").get(0).findValue("Dep").findValue("time").asText();
-        long depTime = Instant.parse( depTimeSt + ".000Z" ).toEpochMilli() - 60 * 60 * 1000;
-        int minutesLeft =(int)(depTime - currentTime) /1000 /60;
-        return new Route(minutesLeft, 0);
+
+        JsonNode connection = jsNode.findPath("Connection").get(0);
+        String depTimeSt = connection.findValue("Dep").findValue("time").asText();
+        String firstStation = connection.findValue("Sections").findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
+
+        long depTime = Instant.parse( depTimeSt + ".000Z" ).toEpochMilli();
+        int minutesLeft =(int)(depTime - currentTime) /(60*1000);
+        return new Route(minutesLeft, 0, firstStation);
     }
 
     public static Map<String, Coordinate> getNearbyStations(Coordinate co){
