@@ -41,7 +41,7 @@ public class RouteTimeIntentHandler implements RequestHandler {
 
         if (timeSlot != null) {
             AttributesManager attributesManager = input.getAttributesManager();
-            final Map<String, Object> home = (Map<String, Object>) attributesManager.getPersistentAttributes().get("arbeit");
+            final Map<String, Object> home = (Map<String, Object>) attributesManager.getPersistentAttributes().get("DEST");
             final BigDecimal homeLatitudeBD = (BigDecimal) home.get("latitude");
             final double homeLatitude = homeLatitudeBD.doubleValue();
             final BigDecimal homeLongitudeBD = (BigDecimal) home.get("longitude");

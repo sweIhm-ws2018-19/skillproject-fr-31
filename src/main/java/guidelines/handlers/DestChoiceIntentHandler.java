@@ -7,8 +7,11 @@ import com.amazon.ask.model.*;
 import guidelines.models.Coordinate;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
+import guidelines.utilities.StringUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
@@ -38,14 +41,19 @@ public class DestChoiceIntentHandler implements RequestHandler {
         if (choiceSlot != null) {
             String choiceValue = choiceSlot.getValue();
             int choice = Integer.parseInt(choiceValue);
-            destChoice = choice;
+            destChoice = choice -1;
             BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_NAME);
             Map<String, Coordinate> stations = (Map<String, Coordinate>)attributesManager.getSessionAttributes().get("Stations");
-            List<String> stationNames = new ArrayList<>(stations.keySet());
 
-            speechText = "Deine Wahl faellt auf " + stationNames.get(choice - 1) +
-                    ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
-                    "heisst: plus den Namen";
+            if (destChoice > stations.size()){
+                String stationsToSelect = StringUtils.prepStringForChoiceIntent(new ArrayList<>(stations.keySet()));
+                speechText = "Du hast ein Ziel ausgewählt das nicht exsistiert. Bitte Wähle erneut. Hier sind nocheinmal die möglichkeiten. "+stationsToSelect;
+            }
+            else{
+                speechText = "Deine Wahl faellt auf " + stations.keySet() +
+                        ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
+                        "heisst: plus den Namen";
+            }
             FallbackIntentHandler.setFallbackMessage(speechText);
 
             return input.getResponseBuilder()
