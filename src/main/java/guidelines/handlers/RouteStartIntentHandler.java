@@ -13,6 +13,9 @@ import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class RouteStartIntentHandler implements RequestHandler {
+
+    private static String destinationName;
+
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
         return handlerInput.matches(intentName("RouteStartIntent").and(sessionAttribute("State", GuideStates.TRANSIT.toString())));
@@ -30,7 +33,7 @@ public class RouteStartIntentHandler implements RequestHandler {
         if(destinationSlot != null){
             String speechText = "Um wie viel Uhr moechtest du am Ziel " + destinationSlot.getValue() + " sein?";
             handlerInput.getAttributesManager().setSessionAttributes(Collections.singletonMap("State", GuideStates.ROUTE_TIME));
-
+            destinationName = destinationSlot.getValue();
             FallbackIntentHandler.setFallbackMessage(speechText);
             return handlerInput.getResponseBuilder()
                     .withSpeech(speechText)
@@ -39,5 +42,9 @@ public class RouteStartIntentHandler implements RequestHandler {
         }
 
         return Optional.empty();
+    }
+
+    public static String getDestinationName() {
+        return destinationName;
     }
 }

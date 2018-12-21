@@ -41,15 +41,17 @@ public class RouteTimeIntentHandler implements RequestHandler {
 
         if (timeSlot != null) {
             AttributesManager attributesManager = input.getAttributesManager();
-            final Map<String, Object> home = (Map<String, Object>) attributesManager.getPersistentAttributes().get("DEST");
-            final BigDecimal homeLatitudeBD = (BigDecimal) home.get("latitude");
+            final Map<String, Object> home = (Map<String, Object>) attributesManager.getPersistentAttributes().get("HOME");
+
+            final BigDecimal homeLatitudeBD = (BigDecimal) home.get("Latitude");
             final double homeLatitude = homeLatitudeBD.doubleValue();
-            final BigDecimal homeLongitudeBD = (BigDecimal) home.get("longitude");
+            final BigDecimal homeLongitudeBD = (BigDecimal) home.get("Longitude");
             final double homeLongitude = homeLongitudeBD.doubleValue();
-            final Map<String, Object> dest = (Map<String, Object>) attributesManager.getPersistentAttributes().get("uni");
-            final BigDecimal destLatitudeBD = (BigDecimal) dest.get("latitude");
+            final Map<String, Object> dest = (Map<String, Object>) attributesManager.getPersistentAttributes().get("DEST");
+            final Map<String, Object> decision = (Map<String, Object>) dest.get(RouteStartIntentHandler.getDestinationName());
+            final BigDecimal destLatitudeBD = (BigDecimal) decision.get("latitude");
             final double destLatitude = destLatitudeBD.doubleValue();
-            final BigDecimal destLongitudeBD = (BigDecimal) dest.get("longitude");
+            final BigDecimal destLongitudeBD = (BigDecimal) decision.get("longitude");
             final double destLongitude = destLongitudeBD.doubleValue();
 
             final Coordinate homeCoordinate = new Coordinate(homeLatitude, homeLongitude);
