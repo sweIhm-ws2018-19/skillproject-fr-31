@@ -31,7 +31,8 @@ public class Route {
         if (o == null || getClass() != o.getClass()) return false;
         Route route = (Route) o;
         return minutesLeft == route.minutesLeft &&
-                delay == route.delay;
+                delay == route.delay &&
+                Objects.equals(firstStation, route.firstStation);
     }
 
     @Override
