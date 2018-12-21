@@ -23,7 +23,7 @@ public class BackToStartIntentHandler implements RequestHandler {
         String speechText = "Du kannst nun wieder die Hilfefunktion aufrufen oder eine Route erfragen";
 
         AttributesManager attributesManager = handlerInput.getAttributesManager();
-        BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.TRANSIT.toString());
+        BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE.getKey(), GuideStates.TRANSIT.toString());
 
 
         FallbackIntentHandler.setFallbackMessage(speechText);

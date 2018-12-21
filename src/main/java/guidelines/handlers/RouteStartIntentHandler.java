@@ -18,7 +18,7 @@ public class RouteStartIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(intentName("RouteStartIntent").and(sessionAttribute(GuideStates.STATE, GuideStates.TRANSIT.toString())));
+        return handlerInput.matches(intentName("RouteStartIntent").and(sessionAttribute(GuideStates.STATE.getKey(), GuideStates.TRANSIT.toString())));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class RouteStartIntentHandler implements RequestHandler {
 
         if(destinationSlot != null){
             String speechText = "Um wie viel Uhr moechtest du am Ziel: " + destinationSlot.getValue() + ", sein?";
-            handlerInput.getAttributesManager().setSessionAttributes(Collections.singletonMap(GuideStates.STATE, GuideStates.ROUTE_TIME));
+            handlerInput.getAttributesManager().setSessionAttributes(Collections.singletonMap(GuideStates.STATE.getKey(), GuideStates.ROUTE_TIME));
             setDestinationName(destinationSlot.getValue());
             FallbackIntentHandler.setFallbackMessage(speechText);
             return handlerInput.getResponseBuilder()

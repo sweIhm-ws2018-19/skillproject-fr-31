@@ -18,7 +18,7 @@ public class ConfigurationHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ConfigurationIntent")
-                .and(sessionAttribute(GuideStates.STATE, GuideStates.TRANSIT.toString())));
+                .and(sessionAttribute(GuideStates.STATE.getKey(), GuideStates.TRANSIT.toString())));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ConfigurationHandler implements RequestHandler {
             .withReprompt(SpeechStrings.NEW_STREET)
             .withShouldEndSession(false);
 
-        BasicUtils.setSessionAttributes(input.getAttributesManager(), GuideStates.STATE, GuideStates.CONFIG);
+        BasicUtils.setSessionAttributes(input.getAttributesManager(), GuideStates.STATE.getKey(), GuideStates.CONFIG);
 
         return respBuilder.build();
     }
