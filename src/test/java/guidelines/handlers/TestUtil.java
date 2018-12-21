@@ -9,7 +9,6 @@ import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 import org.mockito.Mockito;
 
-import java.util.Collections;
 import java.util.Map;
 
 import static org.mockito.Mockito.when;
@@ -42,9 +41,5 @@ public class TestUtil {
         when(input.getRequestEnvelope()).thenReturn(requestEnvelopeMock);
 
         return input;
-    }
-
-    public static HandlerInput mockHandlerInput(String playerName, Map<String, Object> sessionAttributes, Map<String, Object> persistentAttributes, Map<String, Object> requestAttributes) {
-        return mockHandlerInput(Collections.singletonMap("PlayerName", playerName), sessionAttributes, persistentAttributes, requestAttributes);
     }
 }
