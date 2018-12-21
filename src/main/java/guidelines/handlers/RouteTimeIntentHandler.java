@@ -43,9 +43,9 @@ public class RouteTimeIntentHandler implements RequestHandler {
             AttributesManager attributesManager = input.getAttributesManager();
             final Map<String, Object> home = (Map<String, Object>) attributesManager.getPersistentAttributes().get("HOME");
 
-            final BigDecimal homeLatitudeBD = (BigDecimal) home.get("Latitude");
+            final BigDecimal homeLatitudeBD = (BigDecimal) home.get("latitude");
             final double homeLatitude = homeLatitudeBD.doubleValue();
-            final BigDecimal homeLongitudeBD = (BigDecimal) home.get("Longitude");
+            final BigDecimal homeLongitudeBD = (BigDecimal) home.get("longitude");
             final double homeLongitude = homeLongitudeBD.doubleValue();
             final Map<String, Object> dest = (Map<String, Object>) attributesManager.getPersistentAttributes().get("DEST");
             final Map<String, Object> decision = (Map<String, Object>) dest.get(RouteStartIntentHandler.getDestinationName());

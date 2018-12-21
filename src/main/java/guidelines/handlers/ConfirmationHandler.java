@@ -14,7 +14,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class ConfirmationHandler implements RequestHandler {
 
-    ArrayList<GuideStates> confirmationStates=new ArrayList<>(Arrays.asList(GuideStates.SAY_DEST_ADDR_AGAIN,GuideStates.Q_NEXT_ADDR, GuideStates.CONFIG));
+    ArrayList<GuideStates> confirmationStates=new ArrayList<>(Arrays.asList(GuideStates.SAY_DEST_ADDR_AGAIN,GuideStates.Q_NEXT_ADDR, GuideStates.CONFIG, GuideStates.NEW_CONFIG));
     private boolean inConfirmationStates(HandlerInput input){
         return confirmationStates.contains(
                 GuideStates.valueOf(input.getAttributesManager().getSessionAttributes().get("State").toString()));
