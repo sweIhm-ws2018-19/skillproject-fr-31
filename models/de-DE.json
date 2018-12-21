@@ -141,7 +141,20 @@
             }
           ],
           "samples": [
+            "Ich möchte zum {destination}",
             "Ich möchte zur {destination}"
+          ]
+        },
+        {
+          "name": "RouteTimeIntent",
+          "slots": [
+            {
+              "name": "time",
+              "type": "AMAZON.TIME"
+            }
+          ],
+          "samples": [
+            "Ankunftszeit {time}"
           ]
         }
       ],
