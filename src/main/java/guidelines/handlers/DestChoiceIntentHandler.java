@@ -9,7 +9,6 @@ import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 import guidelines.utilities.StringUtils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
@@ -42,7 +41,7 @@ public class DestChoiceIntentHandler implements RequestHandler {
         if (choiceSlot != null) {
             String choiceValue = choiceSlot.getValue();
             int choice = Integer.parseInt(choiceValue);
-            destChoice = choice -1;
+            setDestChoice(choice -1);
             BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_NAME);
             Map<String, Coordinate> stations = (Map<String, Coordinate>)attributesManager.getSessionAttributes().get("Stations");
             ArrayList<String> stationNames = new ArrayList<>(stations.keySet());
@@ -72,7 +71,11 @@ public class DestChoiceIntentHandler implements RequestHandler {
         }
     }
 
-    public static int getDestChoice() {
+    static int getDestChoice() {
         return destChoice;
+    }
+
+    private static void setDestChoice(int destChoice) {
+        DestChoiceIntentHandler.destChoice = destChoice;
     }
 }

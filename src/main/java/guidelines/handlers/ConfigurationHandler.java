@@ -9,7 +9,6 @@ import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -19,9 +18,7 @@ public class ConfigurationHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ConfigurationIntent")
-                .and(sessionAttribute("State", GuideStates.TRANSIT.toString())));
-        // maybe
-//                        .or(sessionAttribute("State", GuideStates.CONFIG.toString()))));
+                .and(sessionAttribute(GuideStates.getStateString(), GuideStates.TRANSIT.toString())));
     }
 
     @Override
@@ -32,7 +29,7 @@ public class ConfigurationHandler implements RequestHandler {
             .withReprompt(SpeechStrings.NEW_STREET)
             .withShouldEndSession(false);
 
-        BasicUtils.setSessionAttributes(input.getAttributesManager(), "State", GuideStates.CONFIG);
+        BasicUtils.setSessionAttributes(input.getAttributesManager(), GuideStates.getStateString(), GuideStates.CONFIG);
 
         return respBuilder.build();
     }

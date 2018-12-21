@@ -9,7 +9,6 @@ import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 

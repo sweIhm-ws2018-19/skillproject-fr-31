@@ -13,30 +13,18 @@
 
 package guidelines.handlers;
 
-import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
-import com.amazon.ask.model.Permissions;
 import com.amazon.ask.model.Response;
-import com.amazon.ask.model.Session;
-import com.amazon.ask.model.interfaces.system.SystemState;
-import com.amazon.ask.response.ResponseBuilder;
-import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.requestType;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
-import static guidelines.utilities.DeviceAddressClient.getDeviceAddress;
 
 public class LaunchRequestHandler implements RequestHandler {
-
-
-    private static final Logger log = LoggerFactory.getLogger(LaunchRequestHandler.class);
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -45,6 +33,6 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        return Setup.SetupState(input);
+        return Setup.setupState(input);
     }
 }

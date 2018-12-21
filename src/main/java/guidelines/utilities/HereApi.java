@@ -3,6 +3,7 @@ package guidelines.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guidelines.exceptions.HereApiRequestFailedException;
 import guidelines.models.Coordinate;
 import guidelines.models.Route;
 import org.slf4j.Logger;
@@ -68,7 +69,7 @@ public class HereApi {
         return stations;
     }
 
-    private static JsonNode sendRequest(String url){
+    private static JsonNode sendRequest(String url) throws HereApiRequestFailedException {
         RestTemplate rs = new RestTemplate();
         String result = "";
         result = rs.getForObject(url, String.class);
@@ -80,7 +81,7 @@ public class HereApi {
             log.info("could not read js node");
         }
         if(jsNode == null)
-            throw new RuntimeException("Could not send HereApi Request: " + url);
+            throw new HereApiRequestFailedException("Could not send HereApi Request: " + url);
         return jsNode;
     }
 }

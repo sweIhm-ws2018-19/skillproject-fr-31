@@ -18,12 +18,10 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
-
 import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;

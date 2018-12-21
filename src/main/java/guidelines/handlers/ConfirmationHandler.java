@@ -35,8 +35,6 @@ public class ConfirmationHandler implements RequestHandler {
 
         AttributesManager attributesManager = input.getAttributesManager();
 
-        String speechText;
-
         if (yesOrNoSlot != null) {
             String yesOrNo = yesOrNoSlot.getValue();
             GuideStates currentState = GuideStates.valueOf(attributesManager.getSessionAttributes().get("State").toString());

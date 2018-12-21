@@ -8,7 +8,10 @@ import guidelines.models.Coordinate;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
@@ -28,7 +31,7 @@ public class DestNameIntentHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
         Slot destNameSlot = slots.get("destCustomName");
 
-        String speechText = "";
+        String speechText;
         String repromt = "Bitte sage uns nochmal den Namen des Ziels";
 
         AttributesManager attributesManager = input.getAttributesManager();
@@ -44,16 +47,9 @@ public class DestNameIntentHandler implements RequestHandler {
 
                 int choice = DestChoiceIntentHandler.getDestChoice();
                 if (attributesManager.getPersistentAttributes().get("DEST") == null) {
-
-                    // so sollte es funktionieren
                     Map<String, Object> newMap = new HashMap<>();
                     newMap.put(destName, stations.get(keys.get(choice)));
                     BasicUtils.setPersistentAttributes(attributesManager, "DEST", newMap);
-
-//                    speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: "+stations.get(keys.get(0))+ keys.get(0)+destName
-//                            + " gespeichert. Noch eine Adresse eingeben?";
-
-                    // default state q_next
 
                 } else {
                     Map<String, Object> attributeMap = (Map<String, Object>) attributesManager.getPersistentAttributes().get("DEST");

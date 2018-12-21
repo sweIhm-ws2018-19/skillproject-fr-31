@@ -20,9 +20,7 @@ public final class BasicUtils {
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
-
-        Map<String, Slot> slots = intent.getSlots();
-        return slots;
+        return intent.getSlots();
     }
     public  static ResponseBuilder putTogether(String title, String text){
         return new ResponseBuilder().withSimpleCard(title,text)

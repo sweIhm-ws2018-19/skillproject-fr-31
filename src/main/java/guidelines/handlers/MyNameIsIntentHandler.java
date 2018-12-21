@@ -9,7 +9,6 @@ import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,17 +35,14 @@ public class MyNameIsIntentHandler implements RequestHandler {
 
         String speechText;
         String repromptText;
-        boolean askResponse = false;
+        boolean askResponse;
 
         if (nameSlot != null) {
             setName(nameSlot.getValue());
             AttributesManager attributesManager = input.getAttributesManager();
 
             BasicUtils.setPersistentAttributes(attributesManager, "NAME", nameSlot.getValue());
-            return Setup.SetupState(input);
-
-//            speechText = SpeechStrings.WELCOME_USER + getName() + SpeechStrings.START_CONFIG_DEST_ADDRESS;
-//            repromptText = getName() + SpeechStrings.PLS + SpeechStrings.STREET;
+            return Setup.setupState(input);
         } else {
             speechText = SpeechStrings.INAUDIBLE + " Versuche bitte erneut deinen Name zu sagen";
             repromptText = SpeechStrings.NAMEUNKNOWN;

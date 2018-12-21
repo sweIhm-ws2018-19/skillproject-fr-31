@@ -8,7 +8,6 @@ import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -24,7 +23,7 @@ public class BackToStartIntentHandler implements RequestHandler {
         String speechText = "Du kannst nun wieder die Hilfefunktion aufrufen oder eine Route erfragen";
 
         AttributesManager attributesManager = handlerInput.getAttributesManager();
-        BasicUtils.setSessionAttributes(attributesManager, "State", GuideStates.TRANSIT.toString());
+        BasicUtils.setSessionAttributes(attributesManager, GuideStates.getStateString(), GuideStates.TRANSIT.toString());
 
 
         FallbackIntentHandler.setFallbackMessage(speechText);

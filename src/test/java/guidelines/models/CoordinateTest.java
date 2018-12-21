@@ -20,15 +20,4 @@ public class CoordinateTest {
         final Coordinate want = new Coordinate(1.0 , 95.0);
         Assert.assertEquals(want, have);
     }
-
-    @Test
-    public void getJsonString(){
-        final Coordinate have = new Coordinate(48.154721, 11.561071);
-        String want = "{\n" +
-                "\t\"NAME\":test,\n" +
-                "\t\"lat\":48.154721,\n" +
-                "\t\"long\":11.561071\n" +
-                "}";
-        Assert.assertEquals(want,have.toJsonString("test"));
-    }
 }

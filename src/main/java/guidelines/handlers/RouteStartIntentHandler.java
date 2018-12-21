@@ -33,7 +33,7 @@ public class RouteStartIntentHandler implements RequestHandler {
         if(destinationSlot != null){
             String speechText = "Um wie viel Uhr moechtest du am Ziel: " + destinationSlot.getValue() + ", sein?";
             handlerInput.getAttributesManager().setSessionAttributes(Collections.singletonMap("State", GuideStates.ROUTE_TIME));
-            destinationName = destinationSlot.getValue();
+            setDestinationName(destinationSlot.getValue());
             FallbackIntentHandler.setFallbackMessage(speechText);
             return handlerInput.getResponseBuilder()
                     .withSpeech(speechText)
@@ -46,5 +46,9 @@ public class RouteStartIntentHandler implements RequestHandler {
 
     public static String getDestinationName() {
         return destinationName;
+    }
+
+    private static void setDestinationName(String destinationName) {
+        RouteStartIntentHandler.destinationName = destinationName;
     }
 }
