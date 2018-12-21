@@ -104,7 +104,8 @@
           "samples": [
             "Bitte nehme die {choice}",
             "Ich nehme die {choice}",
-            "Ich wähle die {choice}"
+            "Ich wähle die {choice}",
+            "{choice}"
           ]
         },
         {
@@ -160,6 +161,10 @@
               "name": "time",
               "type": "AMAZON.TIME"
             }
+          ],
+          "samples": [
+            "{time} Uhr",
+            "Um {time}"
           ]
         }
       ],
