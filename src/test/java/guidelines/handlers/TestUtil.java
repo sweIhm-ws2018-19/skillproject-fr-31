@@ -10,6 +10,7 @@ import com.amazon.ask.response.ResponseBuilder;
 import org.mockito.Mockito;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static org.mockito.Mockito.when;
 
@@ -23,7 +24,7 @@ public class TestUtil {
 
         final Intent.Builder intentBuilder = Intent.builder();
         slots.forEach((key, value) ->
-                intentBuilder.putSlotsItem(key, Slot.builder().withName(key).withValue(value).build())
+                intentBuilder.putSlotsItem(key, Objects.isNull(value) ? null : Slot.builder().withName(key).withValue(value).build())
         );
 
         // Mock Slots

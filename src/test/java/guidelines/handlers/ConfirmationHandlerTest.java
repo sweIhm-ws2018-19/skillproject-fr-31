@@ -90,5 +90,20 @@ public class ConfirmationHandlerTest {
         assertTrue(response.getOutputSpeech().toString().contains(stationsToSelect));
     }
 
-    // missing handleTestSLotNull
+    @Test
+    public void slotNullTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("decision", null);
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotNull(response.getOutputSpeech());
+        assertTrue(response.getOutputSpeech().toString().contains("DIE BEFUELLUNG HAT NICHT GEKLAPPT"));
+    }
 }

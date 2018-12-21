@@ -66,7 +66,47 @@ public class DestChoiceIntentHandlerTest {
 
         assertFalse(response.getShouldEndSession());
         assertNotNull(response.getOutputSpeech());
-        assertNotEquals("test", response.getOutputSpeech());
+        assertNotEquals("test", response.getReprompt());
         assertTrue(response.getOutputSpeech().toString().contains(stationNames.get(0)));
+    }
+
+    @Test
+    public void destChoiceGreaterThanStationListSize(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        final Map<String, Coordinate> stations = new HashMap<>();
+        stations.put("bahnhof", new Coordinate(41.222, 11.111));
+        stations.put("arbeit", new Coordinate(41.212, 11.171));
+        ArrayList<String> stationNames = new ArrayList<>(stations.keySet());
+        sessionAttributes.put("Stations", stations);
+        sessionAttributes.put(GuideStates.STATE.getKey(), GuideStates.SELECT_NEARBY_STATION);
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("choice", "3");
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertTrue(response.getOutputSpeech().toString().contains(StringUtils.prepStringForChoiceIntent(stationNames)));
+    }
+
+    @Test
+    public void slotNullTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("choice", null);
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotNull(response.getOutputSpeech());
+        assertNotEquals("test", response.getReprompt());
+        assertTrue(response.getOutputSpeech().toString().contains("Leider hat das Befüllen der Slots nicht richtig funktioniert"));
     }
 }
