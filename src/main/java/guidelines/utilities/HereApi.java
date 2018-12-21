@@ -39,7 +39,8 @@ public class HereApi {
 
     public static Route getRoute(Coordinate home, Coordinate dest, String time){
         final Instant currentTime = Instant.ofEpochMilli(System.currentTimeMillis());
-        OffsetDateTime currentTimeMez = currentTime.plusSeconds(60*60).atOffset(ZoneOffset.ofHours(1));
+        long oneHour = 60*60;
+        OffsetDateTime currentTimeMez = currentTime.plusSeconds(oneHour).atOffset(ZoneOffset.ofHours(1));
 
         String requestUrl = ROUTEBASE + "&routing=all&dep=" + home.getLatitude() + "," + home.getLongitude() + "&arr=" + dest.getLatitude() + "," + dest.getLongitude() +
                 "&time=" + time + "&routingMode=realtime&arrival=1&walk=2000,200";
