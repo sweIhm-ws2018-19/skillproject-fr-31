@@ -70,8 +70,6 @@ public class DestChoiceIntentHandler implements RequestHandler {
                     .withSpeech("Leider hat das Befüllen der Slots nicht richtig funktioniert")
                     .withReprompt("Bitte mache die Eingabe der Slots erneut").build();
         }
-
-
     }
 
     public static int getDestChoice() {

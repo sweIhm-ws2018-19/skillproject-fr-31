@@ -63,7 +63,7 @@ public class RouteTimeIntentHandler implements RequestHandler {
 
             final String speechText = "In " + route.getMinutesLeft() + " Minuten gibt es die letzte Moeglichkeit " +
                     "von deiner Startstation: " + route.getFirstStation() + " rechtzeitig zum Ziel zu gelangen."
-                    + " Es gibt momentan Verspaetungen von " + route.getDelay() + " Minuten" + time;
+                    + " Es gibt momentan Verspaetungen von " + route.getDelay() + " Minuten";
 
             FallbackIntentHandler.setFallbackMessage(speechText);
             return input.getResponseBuilder()
