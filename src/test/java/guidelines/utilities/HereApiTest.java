@@ -9,7 +9,9 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class HereApiTest {
 
@@ -31,9 +33,10 @@ public class HereApiTest {
     public void getRouteTest(){
         final Instant oneHourAgo = Instant.ofEpochMilli(System.currentTimeMillis());
         OffsetDateTime time = oneHourAgo.plusSeconds(2*60*60).atOffset(ZoneOffset.ofHours(1));
-
-        final Route have = HereApi.getRoute(new Coordinate(48.474536,11.9278286),
-                new Coordinate(48.1549484,11.5537992),time.toString());
+        System.out.println(time);
+        final Route have = HereApi.getRoute(new Coordinate(48.14989,11.54617),
+                new Coordinate(48.15427,11.55383),time.toString());
+        System.out.println(have.getMinutesLeft());
         Assert.assertTrue(have.getMinutesLeft() >= 0);
     }
 

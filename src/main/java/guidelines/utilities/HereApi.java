@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +38,9 @@ public class HereApi {
     }
 
     public static Route getRoute(Coordinate home, Coordinate dest, String time){
-        long currentTime = System.currentTimeMillis();
+        final Instant currentTime = Instant.ofEpochMilli(System.currentTimeMillis());
+        OffsetDateTime currentTimeMez = currentTime.plusSeconds(60*60).atOffset(ZoneOffset.ofHours(1));
+
         String requestUrl = ROUTEBASE + "&routing=all&dep=" + home.getLatitude() + "," + home.getLongitude() + "&arr=" + dest.getLatitude() + "," + dest.getLongitude() +
                 "&time=" + time + "&routingMode=realtime&arrival=1&walk=2000,200";
         JsonNode jsNode = sendRequest(requestUrl);
@@ -45,8 +49,8 @@ public class HereApi {
         String depTimeSt = connection.findValue("Dep").findValue("time").asText();
         String firstStation = connection.findValue("Sections").findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
 
-        long depTime = Instant.parse( depTimeSt + ".000Z" ).toEpochMilli();
-        int minutesLeft =(int)(depTime - currentTime) /(60*1000);
+        OffsetDateTime depTime = Instant.parse( depTimeSt + ".000Z" ).atOffset(ZoneOffset.ofHours(1));
+        int minutesLeft =(int)currentTimeMez.until(depTime, ChronoUnit.MINUTES);
         return new Route(minutesLeft, 0, firstStation);
     }
 
