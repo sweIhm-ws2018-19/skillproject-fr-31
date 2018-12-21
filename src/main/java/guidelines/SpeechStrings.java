@@ -46,8 +46,13 @@ public class SpeechStrings {
             "Du hast nun die Moeglichkeit bis zu drei Zieladressen einzurichten. " +
             "Bitte nenne uns deine erste Zieladresse. Sage uns die Strasse, Hausnummer und die Stadt";
 
+    public static final String NEW_STREET = "Du bist jetzt in der Konfiguration. Willst du eine neu Straße hinzufügen?";
+    public static final String NEW_CONFIG = "Willst du eine komplett neue Konfiguration";
+
     // format Strings
     public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";
+    public static final String TRANSIT = "%s wo willst du hin?";
+
 
     // Short answers to combine
     public static final String THANKS = "Vielen Dank ";

@@ -1,11 +1,13 @@
 package guidelines.statemachine;
 
 import com.amazon.ask.attributes.AttributesManager;
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 import guidelines.SpeechStrings;
 import guidelines.handlers.AddressIntentHandler;
 import guidelines.handlers.FallbackIntentHandler;
+import guidelines.handlers.Setup;
 import guidelines.models.Coordinate;
 import guidelines.utilities.BasicUtils;
 import guidelines.utilities.StringUtils;
@@ -16,12 +18,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public enum GuideStates {
-    CONFIG, CONFIG_AVAILABLE, INSERT_NAME, LAUNCH_STATE, HOME_ADDR, GET_DEST_NAME,
+    CONFIG, NEW_CONFIG, INSERT_NAME, LAUNCH_STATE, HOME_ADDR, GET_DEST_NAME,
     GET_HOME_ADDR, Q_NEXT_ADDR,
     GET_DEST_ADDR, HELP, HELP_DEST, HELP_HOME, TRANSIT, USE_GPS_OR_NOT, YES, HOME_ADDR_NAME, NO, SELECT_NEARBY_STATION,
     SAY_DEST_ADDR_AGAIN, ROUTE_TIME, ROUTE_FINAL;
 
-    public static Optional<Response> decisionBuilder(GuideStates state, boolean isYes, AttributesManager attributesManager){
+    public static Optional<Response> decisionBuilder(GuideStates state, boolean isYes, HandlerInput input){
+        AttributesManager attributesManager = input.getAttributesManager();
         ResponseBuilder respBuilder = new ResponseBuilder();
         switch (state){
             case SAY_DEST_ADDR_AGAIN:
@@ -64,6 +67,29 @@ public enum GuideStates {
                     respBuilder = BasicUtils.putTogether("Route", speech);
                 }
                 break;
+            }
+            case CONFIG:{
+                if(isYes){
+                    respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES+" "+SpeechStrings.SAY_ADDRESS);
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_ADDR);
+                }else{
+                    respBuilder = BasicUtils.putTogether("Neue Konfiguration" ,SpeechStrings.NEW_CONFIG);
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.NEW_CONFIG);
+                }
+                break;
+            }
+            case NEW_CONFIG:{
+                if(isYes){
+                    attributesManager.getPersistentAttributes().clear();
+                    attributesManager.savePersistentAttributes();
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_ADDR);
+                    return Setup.SetupState(input);
+                }else{
+                    respBuilder = BasicUtils.putTogether("RoutenOption", String.format(SpeechStrings.WELCOME_TRANSIT, attributesManager.getPersistentAttributes().get("NAME")));
+                    BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.TRANSIT);
+                }
+                break;
+
             }
 
         }

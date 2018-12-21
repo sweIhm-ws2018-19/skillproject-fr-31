@@ -14,7 +14,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class ConfirmationHandler implements RequestHandler {
 
-    ArrayList<GuideStates> confirmationStates=new ArrayList<>(Arrays.asList(GuideStates.SAY_DEST_ADDR_AGAIN,GuideStates.Q_NEXT_ADDR));
+    ArrayList<GuideStates> confirmationStates=new ArrayList<>(Arrays.asList(GuideStates.SAY_DEST_ADDR_AGAIN,GuideStates.Q_NEXT_ADDR, GuideStates.CONFIG));
     private boolean inConfirmationStates(HandlerInput input){
         return confirmationStates.contains(
                 GuideStates.valueOf(input.getAttributesManager().getSessionAttributes().get("State").toString()));
@@ -41,9 +41,9 @@ public class ConfirmationHandler implements RequestHandler {
             String yesOrNo = yesOrNoSlot.getValue();
             GuideStates currentState = GuideStates.valueOf(attributesManager.getSessionAttributes().get("State").toString());
             if (yesOrNo.equals("nein")) {
-                return GuideStates.decisionBuilder(currentState,false,attributesManager);
+                return GuideStates.decisionBuilder(currentState,false, input);
             } else {
-                return GuideStates.decisionBuilder(currentState,true,attributesManager);
+                return GuideStates.decisionBuilder(currentState,true, input);
             }
         }
 

@@ -121,6 +121,15 @@
           ]
         },
         {
+          "name": "ConfigurationIntent",
+          "samples": [
+            "Einrichtung",
+            "Configuration",
+            "Konfiguration",
+            "Ich möchte zur Konfiguration"
+          ]
+        },
+        {
           "name": "DestNameIntent",
           "slots": [
             {

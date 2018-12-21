@@ -36,6 +36,7 @@ public class GuidelinesStreamHandler extends SkillStreamHandler {
                         new ConfirmationHandler(),
                         new RouteStartIntentHandler(),
                         new RouteTimeIntentHandler(),
+                        new ConfigurationHandler(),
                         new FallbackIntentHandler())
                 .withTableName("configuration")
                 .withAutoCreateTable(true)
