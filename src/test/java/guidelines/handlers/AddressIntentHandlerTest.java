@@ -11,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-public class ChoiceIntentHandlerTest {
-    private ChoiceIntentHandler handler;
+public class AddressIntentHandlerTest {
+    private AddressIntentHandler handler;
 
     @Before
     public void setup() {
-        handler = new ChoiceIntentHandler();
+        handler = new AddressIntentHandler();
     }
 
     @Test
     public void test_Ctor() {
-        assertEquals(handler.getClass(), ChoiceIntentHandler.class);
+        assertEquals(handler.getClass(), AddressIntentHandler.class);
     }
 
 

@@ -1,5 +1,6 @@
 package guidelines.models;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class Coordinate {
@@ -39,5 +40,9 @@ public class Coordinate {
     @Override
     public int hashCode() {
         return Objects.hash(latitude, longitude);
+    }
+
+    public String toJsonString(String name){
+            return String.format(Locale.US,"{\n\t\"NAME\":%1s,\n\t\"lat\":%2f,\n\t\"long\":%3f\n}", name,getLatitude(),getLongitude());
     }
 }

@@ -26,13 +26,12 @@ import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
 import static com.amazon.ask.request.Predicates.requestType;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
+import static guidelines.utilities.DeviceAddressClient.getDeviceAddress;
 
 public class LaunchRequestHandler implements RequestHandler {
 
@@ -46,56 +45,6 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        ResponseBuilder responseBuilder = input.getResponseBuilder();
-
-        String permission = "read::alexa:device:all:address";
-        List<String> permissionList = new ArrayList<>();
-        permissionList.add(permission);
-
-        Session session = input.getRequestEnvelope().getSession();
-        Permissions permissions = session.getUser().getPermissions();
-
-        if (permissions == null) {
-            log.info("Der Nutzer hat keine Freigabe für den Skill gegeben.");
-            return responseBuilder.withAskForPermissionsConsentCard(permissionList)
-                    .withSpeech(SpeechStrings.NO_PERMISSION_DEVICE_ADDRESS)
-                    .build();
-        }
-
-        SystemState systemState = input.getRequestEnvelope().getContext().getSystem();
-        String apiAccessToken = systemState.getApiAccessToken();
-        String deviceId = systemState.getDevice().getDeviceId();
-        String apiEndpoint = systemState.getApiEndpoint();
-
-        AttributesManager attributesManager = input.getAttributesManager();
-        Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-
-        String outputMessage;
-        if (persistentAttributes.get("NAME") == null) {
-            RestTemplate restTemplate = new RestTemplate();
-            String requestUrl = apiEndpoint + "/v1/devices/" + deviceId + "/settings/address";
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-            httpHeaders.add("Authorization", "Bearer " + apiAccessToken);
-            HttpEntity<String> request = new HttpEntity<>(httpHeaders);
-            ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, request, String.class);
-            // store in database
-            persistentAttributes.put("Zuhause", response.getBody());
-
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.INSERT_NAME));
-
-            attributesManager.setPersistentAttributes(persistentAttributes);
-            attributesManager.savePersistentAttributes();
-
-            outputMessage = SpeechStrings.WELCOME_NO_CONFIG;
-        } else {
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
-            outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
-        }
-
-        return responseBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Start")
-                .withSpeech(outputMessage)
-                .withReprompt(outputMessage)
-                .build();
+        return Setup.SetupState(input);
     }
 }

@@ -31,14 +31,28 @@ public class SpeechStrings {
             "Möchtest du mit den Infos zur Heimadresse weiterfahren oder die Hilfefunktion beenden?";
     public static final String SPEECH_ERROR_DESTINATION_ADDRESS = "Leider hat etwas nicht geklappt, " +
             "bitte sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
+
     public static final String NO_PERMISSION_DEVICE_ADDRESS = "Du hast dem Alexa Skill keine Berechtigung erteilt auf deine" +
             " Adresse zuzugreifen. Bitte gebe dem Skill die notwendigen Berechtigungen";
-    public static final String START_CONFIG_DEST_ADDRESS = ". Nun beginnen wir mit der Einrichtung der Zieladressen. " +
+
+    public static final String SAY_ADDRESS = "Bitte sage uns die Strasse, Hausnummer und die Stadt\"";
+
+    public static final String FOLLOWING_ADDRESSES = "Okay du kannst jetzt die nächste Adresse einrichten.";
+
+    public static final String NO_PERMISSION_DEVICE_GET_HOME = "Du hast dem Alexa Skill keine Berechtigung erteilt auf deine" +
+            "            Adresse zuzugreifen. "+ SAY_ADDRESS;
+
+    public static final String START_CONFIG_DEST_ADDRESS = "Nun beginnen wir mit der Einrichtung der Zieladressen. " +
             "Du hast nun die Moeglichkeit bis zu drei Zieladressen einzurichten. " +
             "Bitte nenne uns deine erste Zieladresse. Sage uns die Strasse, Hausnummer und die Stadt";
 
+    public static final String NEW_STREET = "Du bist jetzt in der Konfiguration. Willst du eine neu Straße hinzufügen?";
+    public static final String NEW_CONFIG = "Willst du eine komplett neue Konfiguration";
+
     // format Strings
     public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines, %s wo willst du hin?";
+    public static final String TRANSIT = "%s wo willst du hin?";
+
 
     // Short answers to combine
     public static final String THANKS = "Vielen Dank ";
@@ -49,5 +63,5 @@ public class SpeechStrings {
     public static final String STATE = "State";
 
     // Info
-    public static final String SKILL_NAME = "Guidelines";
+    public static final String SKILL_NAME = "Utilities";
 }

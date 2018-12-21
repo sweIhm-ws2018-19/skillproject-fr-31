@@ -11,19 +11,27 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class FallbackIntentHandler implements RequestHandler {
 
+    private static String fallbackMessage = "Default Fallback Message";
+
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.FallbackIntent"));
+        return true;
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Tut mir leid, das weiss ich nicht. Sage einfach Hilfe.";
         return input.getResponseBuilder()
-                .withSpeech(speechText)
-                .withSimpleCard(SpeechStrings.SKILL_NAME, speechText)
-                .withReprompt(speechText)
+                .withSpeech(getFallbackMessage())
+                .withSimpleCard(SpeechStrings.SKILL_NAME, getFallbackMessage())
+                .withReprompt(getFallbackMessage())
                 .build();
     }
 
+    public static String getFallbackMessage() {
+        return fallbackMessage;
+    }
+
+    public static void setFallbackMessage(String fallbackMessage) {
+        FallbackIntentHandler.fallbackMessage = fallbackMessage;
+    }
 }

@@ -8,6 +8,8 @@ import com.amazon.ask.response.ResponseBuilder;
 
 import guidelines.SpeechStrings;
 import guidelines.statemachine.GuideStates;
+import guidelines.utilities.BasicUtils;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -40,7 +42,7 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
 
         if (exitOrDestSlot != null) {
             AttributesManager attributesManager = handlerInput.getAttributesManager();
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.HELP));
+            BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.HELP);
             speechText = SpeechStrings.HELP_HOME_ADDRESS;
             repromptText = "Vielen dank";
         } else {
@@ -49,8 +51,11 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
             askResponse = true;
         }
 
+
+        FallbackIntentHandler.setFallbackMessage(speechText);
         respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Hilfe Heimadresse")
                 .withSpeech(speechText)
+                .withReprompt("Moechtest du Infos zur Zieladresse oder zurueck zum Start?")
                 .withShouldEndSession(false)
                 .build();
 
