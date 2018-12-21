@@ -151,7 +151,12 @@
           ],
           "samples": [
             "Ich möchte zum {destination}",
-            "Ich möchte zur {destination}"
+            "Ich möchte zur {destination}",
+            "Ich will zur {destination}",
+            "Ich will zum {destination}",
+            "Ich möchte nach {destination}",
+            "zur {destination}",
+            "zum {destination}"
           ]
         },
         {
@@ -180,6 +185,27 @@
             {
               "name": {
                 "value": "nein"
+              }
+            }
+          ,
+            {
+              "name": {
+                "value": "ne"
+              }
+            },
+            {
+              "name": {
+                "value": "nö"
+              }
+            },
+            {
+              "name": {
+                "value": "no"
+              }
+            },
+            {
+              "name": {
+                "value": "yes"
               }
             }
           ]

@@ -4,6 +4,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import guidelines.SpeechStrings;
 import guidelines.models.Coordinate;
 import guidelines.models.Route;
 import guidelines.statemachine.GuideStates;
@@ -11,9 +12,9 @@ import guidelines.utilities.HereApi;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -57,14 +58,15 @@ public class RouteTimeIntentHandler implements RequestHandler {
             final Coordinate homeCoordinate = new Coordinate(homeLatitude, homeLongitude);
             final Coordinate destCoordinate = new Coordinate(destLatitude, destLongitude);
 
-            final String time = todayDate + timeSlot.getValue() + "+01:00";
+            final String time = todayDate + timeSlot.getValue() + ":00+01:00";
 
             final Route route = HereApi.getRoute(homeCoordinate, destCoordinate, time);
 
             final String speechText = "In " + route.getMinutesLeft() + " Minuten gibt es die letzte Moeglichkeit " +
                     "von deiner Startstation: " + route.getFirstStation() + " rechtzeitig zum Ziel zu gelangen."
-                    + " Es gibt momentan Verspaetungen von " + route.getDelay() + " Minuten";
-
+                    + " Es gibt momentan eine Verspaetung von " + route.getDelay() + " Minuten." + String
+                    .format(SpeechStrings.WELCOME_TRANSIT_SECOND, attributesManager.getPersistentAttributes().get("NAME"));
+            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
             FallbackIntentHandler.setFallbackMessage(speechText);
             return input.getResponseBuilder()
                     .withSpeech(speechText)

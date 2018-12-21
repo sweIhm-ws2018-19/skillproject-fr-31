@@ -62,7 +62,7 @@ public enum GuideStates {
                     respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES+" "+SpeechStrings.SAY_ADDRESS);
                 }else{
                     String speech = " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
-                            "Du kannst nun die Hilfefunktion aufrufen oder eine Route erfragen";
+                            "Du kannst nun die Hilfefunktion aufrufen, eine Route erfragen oder die Konfiguration starten";
                     BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.TRANSIT);
                     respBuilder = BasicUtils.putTogether("Route", speech);
                 }
