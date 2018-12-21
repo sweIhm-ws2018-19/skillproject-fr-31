@@ -8,9 +8,7 @@ import guidelines.models.Coordinate;
 import guidelines.statemachine.GuideStates;
 import guidelines.utilities.BasicUtils;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
@@ -43,8 +41,9 @@ public class DestChoiceIntentHandler implements RequestHandler {
             destChoice = choice;
             BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_NAME);
             Map<String, Coordinate> stations = (Map<String, Coordinate>)attributesManager.getSessionAttributes().get("Stations");
+            List<String> stationNames = new ArrayList<>(stations.keySet());
 
-            speechText = "Deine Wahl faellt auf " + stations.keySet() +
+            speechText = "Deine Wahl faellt auf " + stationNames.get(choice - 1) +
                     ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
                     "heisst: plus den Namen";
             FallbackIntentHandler.setFallbackMessage(speechText);

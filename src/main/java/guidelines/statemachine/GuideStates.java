@@ -19,7 +19,7 @@ public enum GuideStates {
     CONFIG, CONFIG_AVAILABLE, INSERT_NAME, LAUNCH_STATE, HOME_ADDR, GET_DEST_NAME,
     GET_HOME_ADDR, Q_NEXT_ADDR,
     GET_DEST_ADDR, HELP, HELP_DEST, HELP_HOME, TRANSIT, USE_GPS_OR_NOT, YES, HOME_ADDR_NAME, NO, SELECT_NEARBY_STATION,
-    SAY_DEST_ADDR_AGAIN;
+    SAY_DEST_ADDR_AGAIN, ROUTE_TIME, ROUTE_FINAL;
 
     public static Optional<Response> decisionBuilder(GuideStates state, boolean isYes, AttributesManager attributesManager){
         ResponseBuilder respBuilder = new ResponseBuilder();

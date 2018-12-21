@@ -131,6 +131,18 @@
           "samples": [
             "Mein Ziel heißt {destCustomName}"
           ]
+        },
+        {
+          "name": "RouteStartIntent",
+          "slots": [
+            {
+              "name": "destination",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Ich möchte zur {destination}"
+          ]
         }
       ],
       "types": [

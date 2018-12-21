@@ -47,7 +47,7 @@ public class DestNameIntentHandler implements RequestHandler {
                 if (attributesManager.getPersistentAttributes().get("DEST1") == null) {
 
                     // so sollte es funktionieren
-                    BasicUtils.setPersistentAttributes(attributesManager,destName,stations.get(keys.get(0)));
+                    BasicUtils.setPersistentAttributes(attributesManager,destName,stations.get(keys.get(DestChoiceIntentHandler.getDestChoice() - 1)));
 
 
 //                    speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: "+stations.get(keys.get(0))+ keys.get(0)+destName
