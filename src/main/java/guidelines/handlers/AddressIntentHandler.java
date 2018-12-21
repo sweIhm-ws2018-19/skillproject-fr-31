@@ -57,7 +57,11 @@ public class AddressIntentHandler implements RequestHandler {
             }
 
             if(currentState == GuideStates.GET_HOME_ADDR){
-                BasicUtils.setPersistentAttributes(attributesManager,"HOME", coordinates.toJsonString("HOME"));
+
+                Map<String, Double> myMap = new HashMap<>();
+                myMap.put("latitude", coordinates.getLatitude());
+                myMap.put("longitude", coordinates.getLongitude());
+                BasicUtils.setPersistentAttributes(attributesManager,"HOME", myMap);
                 return Setup.SetupState(input);
             }
             //if(currentState == GuideStates.GET_DEST_ADDR) maybe?
