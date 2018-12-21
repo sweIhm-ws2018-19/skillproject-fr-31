@@ -3,7 +3,6 @@ package guidelines.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import guidelines.exceptions.HereApiRequestFailedException;
 import guidelines.models.Coordinate;
 import guidelines.models.Route;
 import org.slf4j.Logger;
@@ -29,7 +28,7 @@ public class HereApi {
 
     private HereApi(){}
 
-    public static Coordinate getCoordinate(String street, int number, String city) throws HereApiRequestFailedException {
+    public static Coordinate getCoordinate(String street, int number, String city){
         String requestUrl = GEOCODEBASE +"&searchtext="+ street + "&city=" + city + "&housenumber=" + number;
         JsonNode jsNode = sendRequest(requestUrl);
         jsNode = jsNode.findPath("DisplayPosition");
@@ -38,7 +37,7 @@ public class HereApi {
         return new Coordinate(jsNode.findValue("Latitude").asDouble(),jsNode.findValue("Longitude").asDouble());
     }
 
-    public static Route getRoute(Coordinate home, Coordinate dest, String time) throws HereApiRequestFailedException {
+    public static Route getRoute(Coordinate home, Coordinate dest, String time){
         final Instant currentTime = Instant.ofEpochMilli(System.currentTimeMillis());
         OffsetDateTime currentTimeMez = currentTime.plusSeconds((long)60*60).atOffset(ZoneOffset.ofHours(1));
 
@@ -55,7 +54,7 @@ public class HereApi {
         return new Route(minutesLeft, 0, firstStation);
     }
 
-    public static Map<String, Coordinate> getNearbyStations(Coordinate co) throws HereApiRequestFailedException {
+    public static Map<String, Coordinate> getNearbyStations(Coordinate co){
         String stationReq = STATIONSBASE + "&center=" + co.getLatitude() + "," + co.getLongitude();
         JsonNode jsNode = sendRequest(stationReq);
         jsNode = jsNode.findPath("Stn");
@@ -69,7 +68,7 @@ public class HereApi {
         return stations;
     }
 
-    private static JsonNode sendRequest(String url) throws HereApiRequestFailedException {
+    private static JsonNode sendRequest(String url){
         RestTemplate rs = new RestTemplate();
         String result = rs.getForObject(url, String.class);
         ObjectMapper jsonMapper = new ObjectMapper();
@@ -80,7 +79,7 @@ public class HereApi {
             log.info("could not read js node");
         }
         if(jsNode == null)
-            throw new HereApiRequestFailedException("Could not send HereApi Request: " + url);
+            throw new RuntimeException("Could not send HereApi Request: " + url);
         return jsNode;
     }
 }
