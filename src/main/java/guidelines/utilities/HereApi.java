@@ -29,7 +29,7 @@ public class HereApi {
 
     private HereApi(){}
 
-    public static Coordinate getCoordinate(String street, int number, String city){
+    public static Coordinate getCoordinate(String street, int number, String city) throws HereApiRequestFailedException {
         String requestUrl = GEOCODEBASE +"&searchtext="+ street + "&city=" + city + "&housenumber=" + number;
         JsonNode jsNode = sendRequest(requestUrl);
         jsNode = jsNode.findPath("DisplayPosition");
@@ -38,7 +38,7 @@ public class HereApi {
         return new Coordinate(jsNode.findValue("Latitude").asDouble(),jsNode.findValue("Longitude").asDouble());
     }
 
-    public static Route getRoute(Coordinate home, Coordinate dest, String time){
+    public static Route getRoute(Coordinate home, Coordinate dest, String time) throws HereApiRequestFailedException {
         final Instant currentTime = Instant.ofEpochMilli(System.currentTimeMillis());
         OffsetDateTime currentTimeMez = currentTime.plusSeconds((long)60*60).atOffset(ZoneOffset.ofHours(1));
 
@@ -55,7 +55,7 @@ public class HereApi {
         return new Route(minutesLeft, 0, firstStation);
     }
 
-    public static Map<String, Coordinate> getNearbyStations(Coordinate co){
+    public static Map<String, Coordinate> getNearbyStations(Coordinate co) throws HereApiRequestFailedException {
         String stationReq = STATIONSBASE + "&center=" + co.getLatitude() + "," + co.getLongitude();
         JsonNode jsNode = sendRequest(stationReq);
         jsNode = jsNode.findPath("Stn");
@@ -71,8 +71,7 @@ public class HereApi {
 
     private static JsonNode sendRequest(String url) throws HereApiRequestFailedException {
         RestTemplate rs = new RestTemplate();
-        String result = "";
-        result = rs.getForObject(url, String.class);
+        String result = rs.getForObject(url, String.class);
         ObjectMapper jsonMapper = new ObjectMapper();
         JsonNode jsNode = null;
         try {
