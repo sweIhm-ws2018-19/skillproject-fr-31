@@ -18,7 +18,8 @@ import java.util.Optional;
 import static guidelines.utilities.DeviceAddressClient.getDeviceAddress;
 
 public class Setup {
-    private Setup(){}
+    private Setup() {
+    }
 
     public static Optional<Response> setupState(HandlerInput input) {
 
@@ -28,7 +29,7 @@ public class Setup {
         // If no Name ask Name
         if (persistentAttributes.get("NAME") == null) {
             // store in database
-            BasicUtils.setSessionAttributes(attributesManager,GuideStates.getStateString(), GuideStates.INSERT_NAME);
+            BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.INSERT_NAME);
 
             return BasicUtils.putTogether("Namen", SpeechStrings.WELCOME_NO_CONFIG).build();
         } else {
@@ -48,14 +49,14 @@ public class Setup {
                 String apiEndpoint = systemState.getApiEndpoint();
                 if (permissions == null) {
                     // Return that we want to get the homeAdress
-                    BasicUtils.setSessionAttributes(attributesManager,GuideStates.getStateString(), GuideStates.GET_HOME_ADDR);
+                    BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.GET_HOME_ADDR);
                     return BasicUtils.putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
                 } else {
                     String deviceAddressJson = getDeviceAddress(apiEndpoint, deviceId, apiAccessToken);
-                    if(deviceAddressJson != null && !deviceAddressJson.isEmpty()){
-                        BasicUtils.setPersistentAttributes(attributesManager,"HOME", deviceAddressJson);
-                    }else{
-                        BasicUtils.setSessionAttributes(attributesManager,GuideStates.getStateString(), GuideStates.GET_HOME_ADDR);
+                    if (deviceAddressJson != null && !deviceAddressJson.isEmpty()) {
+                        BasicUtils.setPersistentAttributes(attributesManager, "HOME", deviceAddressJson);
+                    } else {
+                        BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.GET_HOME_ADDR);
                         return BasicUtils.putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
                     }
                 }
@@ -63,11 +64,11 @@ public class Setup {
             }
 
             if (persistentAttributes.get("DEST") == null) {
-                BasicUtils.setSessionAttributes(attributesManager,GuideStates.getStateString(), GuideStates.GET_DEST_ADDR);
+                BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.GET_DEST_ADDR);
                 return BasicUtils.putTogether("Ziel Adresse", SpeechStrings.START_CONFIG_DEST_ADDRESS).build();
             }
 
-            BasicUtils.setSessionAttributes(attributesManager,GuideStates.getStateString(), GuideStates.TRANSIT);
+            BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.TRANSIT);
             String outputMessage = String.format(SpeechStrings.WELCOME_TRANSIT, persistentAttributes.get("NAME"));
             return BasicUtils.putTogether("Route", outputMessage).build();
 

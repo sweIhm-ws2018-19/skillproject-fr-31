@@ -22,7 +22,7 @@ public class DestChoiceIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("DestChoiceIntent").and(sessionAttribute("State", GuideStates.SELECT_NEARBY_STATION.toString())));
+        return input.matches(intentName("DestChoiceIntent").and(sessionAttribute(GuideStates.STATE, GuideStates.SELECT_NEARBY_STATION.toString())));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DestChoiceIntentHandler implements RequestHandler {
             String choiceValue = choiceSlot.getValue();
             int choice = Integer.parseInt(choiceValue);
             setDestChoice(choice -1);
-            BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_NAME);
+            BasicUtils.setSessionAttributes(attributesManager,GuideStates.STATE, GuideStates.GET_DEST_NAME);
             Map<String, Coordinate> stations = (Map<String, Coordinate>)attributesManager.getSessionAttributes().get("Stations");
             ArrayList<String> stationNames = new ArrayList<>(stations.keySet());
             if (destChoice > stations.size()){

@@ -19,7 +19,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class DestNameIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("DestNameIntent").and(sessionAttribute("State", GuideStates.GET_DEST_NAME.toString())));
+        return input.matches(intentName("DestNameIntent").and(sessionAttribute(GuideStates.STATE, GuideStates.GET_DEST_NAME.toString())));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class DestNameIntentHandler implements RequestHandler {
                 speechText = "Deine gewuenschte Zielstation ist nun unter den Namen: " + destName
                         + " gespeichert. Noch eine Adresse eingeben?";
 
-                BasicUtils.setSessionAttributes(attributesManager, "State", GuideStates.Q_NEXT_ADDR);
+                BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.Q_NEXT_ADDR);
 
             } else {
                 speechText = "Leider hab ich den Namen nicht verstanden";

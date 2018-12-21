@@ -21,14 +21,16 @@ public enum GuideStates {
     GET_DEST_ADDR, HELP, TRANSIT, SELECT_NEARBY_STATION,
     SAY_DEST_ADDR_AGAIN, ROUTE_TIME;
 
-    public static Optional<Response> decisionBuilder(GuideStates state, boolean isYes, HandlerInput input){
+
+    public static final String STATE = "State";
+
+    public static Optional<Response> decisionBuilder(GuideStates state, boolean isYes, HandlerInput input) {
         AttributesManager attributesManager = input.getAttributesManager();
         ResponseBuilder respBuilder = new ResponseBuilder();
-        switch (state){
-            case SAY_DEST_ADDR_AGAIN:
-            {
-                if(isYes){
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.GET_DEST_ADDR);
+        switch (state) {
+            case SAY_DEST_ADDR_AGAIN: {
+                if (isYes) {
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.GET_DEST_ADDR);
                     String speechText = "Alles klar. Bitte sag mir nochmal die Strasse, Hausnummer und Stadt";
                     FallbackIntentHandler.setFallbackMessage(speechText);
                     respBuilder
@@ -36,10 +38,10 @@ public enum GuideStates {
                             .withReprompt("Bitte sag mir nochmal die Strasse, Hausnummer und Stadt")
                             .withShouldEndSession(false)
                             .build();
-                }else{
+                } else {
                     Map<String, Coordinate> stations = (Map<String, Coordinate>) attributesManager.getSessionAttributes().get("Stations");
                     String stationsToSelect = StringUtils.prepStringForChoiceIntent(new ArrayList<>(stations.keySet()));
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.SELECT_NEARBY_STATION);
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.SELECT_NEARBY_STATION);
                     String speechText = "Alles klar. Ich sage dir jetzt die Stationen die du zur Auswahl hast. Merke dir" +
                             " bitte die zugehörige Nummer der Station die du benutzen möchtest. " +
                             "Station: " + stationsToSelect +
@@ -54,37 +56,37 @@ public enum GuideStates {
                 break;
 
             }
-            case Q_NEXT_ADDR:{
-                if(isYes){
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.GET_DEST_ADDR);
-                    respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES+" "+SpeechStrings.SAY_ADDRESS);
-                }else{
+            case Q_NEXT_ADDR: {
+                if (isYes) {
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.GET_DEST_ADDR);
+                    respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES + " " + SpeechStrings.SAY_ADDRESS);
+                } else {
                     String speech = " Die Einrichtung waere hiermit vorerst abgeschlossen. " +
                             "Du kannst nun die Hilfefunktion aufrufen, eine Route erfragen oder die Konfiguration starten";
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.TRANSIT);
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.TRANSIT);
                     respBuilder = BasicUtils.putTogether("Route", speech);
                 }
                 break;
             }
-            case CONFIG:{
-                if(isYes){
-                    respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES+" "+SpeechStrings.SAY_ADDRESS);
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.GET_DEST_ADDR);
-                }else{
-                    respBuilder = BasicUtils.putTogether("Neue Konfiguration" ,SpeechStrings.NEW_CONFIG);
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.NEW_CONFIG);
+            case CONFIG: {
+                if (isYes) {
+                    respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES + " " + SpeechStrings.SAY_ADDRESS);
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.GET_DEST_ADDR);
+                } else {
+                    respBuilder = BasicUtils.putTogether("Neue Konfiguration", SpeechStrings.NEW_CONFIG);
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.NEW_CONFIG);
                 }
                 break;
             }
-            case NEW_CONFIG:{
-                if(isYes){
+            case NEW_CONFIG: {
+                if (isYes) {
                     attributesManager.getPersistentAttributes().clear();
                     attributesManager.savePersistentAttributes();
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.GET_DEST_ADDR);
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.GET_DEST_ADDR);
                     return Setup.setupState(input);
-                }else{
+                } else {
                     respBuilder = BasicUtils.putTogether("RoutenOption", String.format(SpeechStrings.WELCOME_TRANSIT, attributesManager.getPersistentAttributes().get("NAME")));
-                    BasicUtils.setSessionAttributes(attributesManager,getStateString(), GuideStates.TRANSIT);
+                    BasicUtils.setSessionAttributes(attributesManager, STATE, GuideStates.TRANSIT);
                 }
                 break;
 
@@ -92,9 +94,5 @@ public enum GuideStates {
 
         }
         return respBuilder.build();
-    }
-
-    public static String getStateString(){
-        return "State";
     }
 }

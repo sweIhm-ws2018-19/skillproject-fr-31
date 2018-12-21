@@ -63,7 +63,6 @@ public class SpeechStrings {
     public static final String PLS = "Bitte ";
     public static final String STREET = "jetzt die Straße angeben.";
     public static final String INAUDIBLE = "Das habe ich nicht verstande.";
-    public static final String STATE = "State";
 
     // Info
     public static final String SKILL_NAME = "Utilities";

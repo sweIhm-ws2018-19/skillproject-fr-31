@@ -18,7 +18,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class DestinationAddressHelpIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(intentName("DestinationAddressHelpIntent").and(sessionAttribute("State",
+        return handlerInput.matches(intentName("DestinationAddressHelpIntent").and(sessionAttribute(GuideStates.STATE,
                 GuideStates.HELP.toString())));
     }
 
@@ -40,7 +40,7 @@ public class DestinationAddressHelpIntentHandler implements RequestHandler {
 
         if (exitOrHomeSlot != null) {
             AttributesManager attributesManager = handlerInput.getAttributesManager();
-            BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.HELP);
+            BasicUtils.setSessionAttributes(attributesManager,GuideStates.STATE, GuideStates.HELP);
             speechText = SpeechStrings.HELP_DESTINATION_ADDRESS;
             repromptText = SpeechStrings.THANKS;
         } else {

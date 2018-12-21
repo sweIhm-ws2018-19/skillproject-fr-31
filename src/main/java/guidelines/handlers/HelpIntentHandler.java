@@ -30,7 +30,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class HelpIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.HelpIntent").and(sessionAttribute("State", GuideStates.TRANSIT.toString())));
+        return input.matches(intentName("AMAZON.HelpIntent").and(sessionAttribute(GuideStates.STATE, GuideStates.TRANSIT.toString())));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class HelpIntentHandler implements RequestHandler {
         ResponseBuilder respBuilder = input.getResponseBuilder();
 
         AttributesManager attributesManager = input.getAttributesManager();
-        BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.HELP.toString());
+        BasicUtils.setSessionAttributes(attributesManager,GuideStates.STATE, GuideStates.HELP.toString());
 
         String speechText = SpeechStrings.HELP;
         FallbackIntentHandler.setFallbackMessage(speechText);

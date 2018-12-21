@@ -40,7 +40,7 @@ public class HomeAddressHelpIntentHandler implements RequestHandler {
 
         if (exitOrDestSlot != null) {
             AttributesManager attributesManager = handlerInput.getAttributesManager();
-            BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.HELP);
+            BasicUtils.setSessionAttributes(attributesManager,GuideStates.STATE, GuideStates.HELP);
             speechText = SpeechStrings.HELP_HOME_ADDRESS;
             repromptText = "Vielen dank";
         } else {

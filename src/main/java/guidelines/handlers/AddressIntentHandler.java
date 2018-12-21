@@ -19,15 +19,15 @@ public class AddressIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AddressIntent")
-                .and(sessionAttribute(GuideStates.getStateString(), GuideStates.GET_DEST_ADDR.toString())
-                        .or(sessionAttribute(GuideStates.getStateString(), GuideStates.GET_HOME_ADDR.toString()))
+                .and(sessionAttribute(GuideStates.STATE, GuideStates.GET_DEST_ADDR.toString())
+                        .or(sessionAttribute(GuideStates.STATE, GuideStates.GET_HOME_ADDR.toString()))
                 ));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
         AttributesManager attributesManager = input.getAttributesManager();
-        GuideStates currentState = GuideStates.valueOf(input.getAttributesManager().getSessionAttributes().get(GuideStates.getStateString()).toString());
+        GuideStates currentState = GuideStates.valueOf(input.getAttributesManager().getSessionAttributes().get(GuideStates.STATE).toString());
 
         Map<String, Slot> slots = BasicUtils.getSlots(input);
         Slot citySlot = slots.get("city");
@@ -46,7 +46,7 @@ public class AddressIntentHandler implements RequestHandler {
             final Coordinate coordinates = HereApi.getCoordinate(streetValue, Integer.valueOf(streetNumberValue),
                     cityValue);
             if (coordinates == null) {
-                BasicUtils.setSessionAttributes(attributesManager, GuideStates.getStateString(), currentState);
+                BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, currentState);
                 return input.getResponseBuilder()
                         .withSpeech("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
                         .withReprompt("Ich habe dich leider nicht verstanden. Bitte geben die Adresse nochmal ein")
@@ -66,7 +66,7 @@ public class AddressIntentHandler implements RequestHandler {
                 BasicUtils.setSessionAttributes(attributesManager, "Stations", nearbyStations);
 
 
-                BasicUtils.setSessionAttributes(attributesManager, GuideStates.getStateString(), GuideStates.SAY_DEST_ADDR_AGAIN);
+                BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE, GuideStates.SAY_DEST_ADDR_AGAIN);
                 speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
                         cityValue + ". Moechtest du deine Eingabe wiederholen?";
                 FallbackIntentHandler.setFallbackMessage(speechText);

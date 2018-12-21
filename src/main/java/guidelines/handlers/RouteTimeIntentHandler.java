@@ -24,7 +24,7 @@ import static com.amazon.ask.request.Predicates.sessionAttribute;
 public class RouteTimeIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("RouteTimeIntent").and(sessionAttribute("State", GuideStates.ROUTE_TIME.toString())));
+        return input.matches(intentName("RouteTimeIntent").and(sessionAttribute(GuideStates.STATE, GuideStates.ROUTE_TIME.toString())));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class RouteTimeIntentHandler implements RequestHandler {
                     "von deiner Startstation: " + route.getFirstStation() + " rechtzeitig zum Ziel zu gelangen."
                     + " Es gibt momentan eine Verspaetung von " + route.getDelay() + " Minuten." + String
                     .format(SpeechStrings.WELCOME_TRANSIT_SECOND, attributesManager.getPersistentAttributes().get("NAME"));
-            attributesManager.setSessionAttributes(Collections.singletonMap("State", GuideStates.TRANSIT));
+            attributesManager.setSessionAttributes(Collections.singletonMap(GuideStates.STATE, GuideStates.TRANSIT));
             FallbackIntentHandler.setFallbackMessage(speechText);
             return input.getResponseBuilder()
                     .withSpeech(speechText)

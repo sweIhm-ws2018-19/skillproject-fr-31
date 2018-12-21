@@ -21,7 +21,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(intentName("MyNameIsIntent").and(sessionAttribute("State", GuideStates.INSERT_NAME.toString())));
+        return handlerInput.matches(intentName("MyNameIsIntent").and(sessionAttribute(GuideStates.STATE, GuideStates.INSERT_NAME.toString())));
     }
 
     @Override
