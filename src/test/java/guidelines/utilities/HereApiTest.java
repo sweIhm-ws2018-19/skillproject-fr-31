@@ -31,10 +31,8 @@ public class HereApiTest {
     public void getRouteTest(){
         final Instant oneHourAgo = Instant.ofEpochMilli(System.currentTimeMillis());
         OffsetDateTime time = oneHourAgo.plusSeconds(2*60*60).atOffset(ZoneOffset.ofHours(1));
-        System.out.println(time);
         final Route have = HereApi.getRoute(new Coordinate(48.14989,11.54617),
                 new Coordinate(48.15427,11.55383),time.toString());
-        System.out.println(have.getMinutesLeft());
         Assert.assertTrue(have.getMinutesLeft() >= 0);
     }
 
