@@ -6,7 +6,7 @@ Der User soll sobald er ein Profil angelegt hat, nur noch sagen müssen, wann er
 Dann soll ihm eine Zeitangabe in Minuten ausgegeben werden, wann er losgehen muss, um noch pünktlich anzukommen.
 
 ## Github Pages zum Projekt
-hier Link einfügen
+https://sweihm-ws2018-19.github.io/skillproject-fr-31/
 
 ## Badges
 ### travis-ci
