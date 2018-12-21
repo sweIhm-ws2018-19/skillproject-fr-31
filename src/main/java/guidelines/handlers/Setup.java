@@ -61,7 +61,7 @@ public class Setup {
 
             }
 
-            if (persistentAttributes.get("DEST1") == null) {
+            if (persistentAttributes.get("DEST") == null) {
                 BasicUtils.setSessionAttributes(attributesManager,"State", GuideStates.GET_DEST_ADDR);
                 return BasicUtils.putTogether("Ziel Adresse", SpeechStrings.START_CONFIG_DEST_ADDRESS).build();
             }
