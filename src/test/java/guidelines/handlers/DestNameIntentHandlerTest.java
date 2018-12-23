@@ -69,6 +69,8 @@ public class DestNameIntentHandlerTest {
         final Map<String, Coordinate> stations = new HashMap<>();
         stations.put("bahnhof", new Coordinate(41.222, 11.111));
         stations.put("arbeit", new Coordinate(41.212, 11.171));
+        stations.put("Sport", new Coordinate(45.222, 11.411));
+        stations.put("Theater", new Coordinate(43.212, 11.876));
         sessionAttributes.put("Stations", stations);
         final Map<String, String> slots = new HashMap<>();
         slots.put("destCustomName", "arbeit");
@@ -91,6 +93,8 @@ public class DestNameIntentHandlerTest {
         final Map<String, Coordinate> stations = new HashMap<>();
         stations.put("bahnhof", new Coordinate(41.222, 11.111));
         stations.put("arbeit", new Coordinate(41.212, 11.171));
+        stations.put("Sport", new Coordinate(45.222, 11.411));
+        stations.put("Theater", new Coordinate(43.212, 11.876));
         sessionAttributes.put("Stations", stations);
         final Map<String, String> slots = new HashMap<>();
         slots.put("destCustomName", "arbeit");
