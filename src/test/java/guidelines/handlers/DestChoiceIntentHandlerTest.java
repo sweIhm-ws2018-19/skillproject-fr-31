@@ -107,6 +107,6 @@ public class DestChoiceIntentHandlerTest {
 
         assertNotNull(response.getOutputSpeech());
         assertNotEquals("test", response.getReprompt());
-        assertTrue(response.getOutputSpeech().toString().contains("Leider hat das Befüllen der Slots nicht richtig funktioniert"));
+        assertTrue(response.getOutputSpeech().toString().contains("der Slots nicht richtig funktioniert"));
     }
 }

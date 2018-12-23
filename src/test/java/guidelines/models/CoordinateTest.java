@@ -23,6 +23,6 @@ public class CoordinateTest {
 
     @Test
     public void equalsTest(){
-        Assert.assertEquals(new Coordinate(1.0, 2.0), new Coordinate(1.0, 2.0));
+        Assert.assertTrue(new Coordinate(1.0, 2.0).equals(new Coordinate(1.0, 2.0)));
     }
 }

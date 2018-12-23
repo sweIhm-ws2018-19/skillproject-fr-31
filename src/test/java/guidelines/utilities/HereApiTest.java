@@ -6,11 +6,14 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.Assert.assertNull;
 
 public class HereApiTest {
 
@@ -35,6 +38,11 @@ public class HereApiTest {
         final Route have = HereApi.getRoute(new Coordinate(48.14989,11.54617),
                 new Coordinate(48.15427,11.55383),time.toString());
         Assert.assertTrue(have.getMinutesLeft() >= 0);
+    }
+
+    @Test()
+    public void sendRequestNodeIsNullTest(){
+        assertNull(HereApi.getCoordinate("NOT VALID STREET", 123123123, "thiscitydoesntexist"));
     }
 
     @Ignore

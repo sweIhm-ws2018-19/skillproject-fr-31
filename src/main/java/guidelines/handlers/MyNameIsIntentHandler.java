@@ -35,7 +35,6 @@ public class MyNameIsIntentHandler implements RequestHandler {
 
         String speechText;
         String repromptText;
-        boolean askResponse;
 
         if (nameSlot != null) {
             setName(nameSlot.getValue());
@@ -46,23 +45,14 @@ public class MyNameIsIntentHandler implements RequestHandler {
         } else {
             speechText = SpeechStrings.INAUDIBLE + " Versuche bitte erneut deinen Name zu sagen";
             repromptText = SpeechStrings.NAMEUNKNOWN;
-            askResponse = true;
+            FallbackIntentHandler.setFallbackMessage(speechText);
+            ResponseBuilder respBuilder = input.getResponseBuilder();
+            return  respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Namenseingabe")
+                    .withSpeech(speechText)
+                    .withReprompt(repromptText)
+                    .withShouldEndSession(false)
+                    .build();
         }
-
-
-        FallbackIntentHandler.setFallbackMessage(speechText);
-        ResponseBuilder respBuilder = input.getResponseBuilder();
-        respBuilder.withSimpleCard(SpeechStrings.SKILL_NAME, "Namenseingabe")
-                .withSpeech(speechText)
-                .withReprompt("Bitte sage mir nochmal die Straße, Hausnummer und Stadt")
-                .withShouldEndSession(false);
-
-        if (askResponse) {
-            respBuilder.withShouldEndSession(false)
-                    .withReprompt(repromptText);
-        }
-
-        return respBuilder.build();
     }
 
     public static String getName() {
