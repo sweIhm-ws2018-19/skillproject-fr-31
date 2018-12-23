@@ -108,7 +108,7 @@ public class AddressIntentHandlerTest {
     }
 
     @Test
-    public void slotNullTest(){
+    public void slotStreetIsNullTest(){
         final Map<String, Object> sessionAttributes = new HashMap<>();
         sessionAttributes.put(GuideStates.STATE.getKey(), GuideStates.GET_HOME_ADDR);
         final Map<String, Object> persistentAttributes = new HashMap<>();
@@ -116,6 +116,46 @@ public class AddressIntentHandlerTest {
         slots.put("street", null);
         slots.put("streetNumber", null);
         slots.put("city", null);
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotEquals("TEST", response.getReprompt());
+        assertNotNull(response.getOutputSpeech());
+    }
+
+    @Test
+    public void slotCityIsNullTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        sessionAttributes.put(GuideStates.STATE.getKey(), GuideStates.GET_HOME_ADDR);
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("street", "Hirschgartenalle");
+        slots.put("streetNumber", "148");
+        slots.put("city", null);
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotEquals("TEST", response.getReprompt());
+        assertNotNull(response.getOutputSpeech());
+    }
+
+    @Test
+    public void slotStreetNumberIsNullTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        sessionAttributes.put(GuideStates.STATE.getKey(), GuideStates.GET_HOME_ADDR);
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("street", "Budapester Straße");
+        slots.put("streetNumber", null);
+        slots.put("city", "München");
 
         final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
         final Optional<Response> res = handler.handle(inputMock);

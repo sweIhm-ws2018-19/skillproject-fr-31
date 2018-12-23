@@ -20,4 +20,9 @@ public class CoordinateTest {
         final Coordinate want = new Coordinate(1.0 , 95.0);
         Assert.assertEquals(want, have);
     }
+
+    @Test
+    public void equalsTest(){
+        Assert.assertEquals(new Coordinate(1.0, 2.0), new Coordinate(1.0, 2.0));
+    }
 }
