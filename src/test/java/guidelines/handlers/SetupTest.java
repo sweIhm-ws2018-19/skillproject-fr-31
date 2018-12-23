@@ -64,7 +64,7 @@ public class SetupTest {
 
         assertNotNull(response.getOutputSpeech());
         assertNotEquals("test", response.getReprompt());
-        assertTrue(response.getOutputSpeech().toString().contains(SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME));
+        assertTrue(response.getOutputSpeech().toString().contains(SpeechStrings.SAY_HOME_ADDRESS));
     }
 
     @Test

@@ -30,7 +30,7 @@ public class Setup {
             if (persistentAttributes.get("HOME") == null) {
                 // Return that we want to get the homeAdress
                 BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE.getKey(), GuideStates.GET_HOME_ADDR);
-                return BasicUtils.putTogether("Home Adresse", SpeechStrings.NO_PERMISSION_DEVICE_GET_HOME).build();
+                return BasicUtils.putTogether("Home Adresse", SpeechStrings.SAY_HOME_ADDRESS).build();
             }
 
             if (persistentAttributes.get("DEST") == null) {

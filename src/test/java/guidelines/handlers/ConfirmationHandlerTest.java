@@ -109,7 +109,6 @@ public class ConfirmationHandlerTest {
         assertFalse(response.getShouldEndSession());
         assertNotNull(response.getOutputSpeech());
         assertNotEquals("test", response.getReprompt());
-        assertTrue(response.getOutputSpeech().toString().contains(SpeechStrings.FOLLOWING_ADDRESSES));
     }
 
     @Test
@@ -180,7 +179,6 @@ public class ConfirmationHandlerTest {
         assertFalse(response.getShouldEndSession());
         assertNotNull(response.getOutputSpeech());
         assertNotEquals("test", response.getReprompt());
-        assertTrue(response.getOutputSpeech().toString().contains(SpeechStrings.FOLLOWING_ADDRESSES));
     }
 
     @Test
