@@ -43,11 +43,11 @@ public class HomeAddressHelpIntentHandlerTest {
     }
 
     @Test
-    public void exitOrHomeSlotNotNullTest(){
+    public void exitOrDestSlotNotNullTest(){
         final Map<String, Object> sessionAttributes = new HashMap<>();
         final Map<String, Object> persistentAttributes = new HashMap<>();
         final Map<String, String> slots = new HashMap<>();
-        slots.put("exitOrHome", "Zieladresse");
+        slots.put("exitOrDest", "Zieladresse");
         final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
         final Optional<Response> res = handler.handle(inputMock);
 
@@ -64,7 +64,7 @@ public class HomeAddressHelpIntentHandlerTest {
         final Map<String, Object> sessionAttributes = new HashMap<>();
         final Map<String, Object> persistentAttributes = new HashMap<>();
         final Map<String, String> slots = new HashMap<>();
-        slots.put("exitOrHome", null);
+        slots.put("exitOrDest", null);
         final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
         final Optional<Response> res = handler.handle(inputMock);
 
