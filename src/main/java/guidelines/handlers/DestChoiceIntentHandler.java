@@ -45,12 +45,12 @@ public class DestChoiceIntentHandler implements RequestHandler {
             BasicUtils.setSessionAttributes(attributesManager,GuideStates.STATE.getKey(), GuideStates.GET_DEST_NAME);
             Map<String, Coordinate> stations = (Map<String, Coordinate>)attributesManager.getSessionAttributes().get("Stations");
             ArrayList<String> stationNames = new ArrayList<>(stations.keySet());
-            if (destChoice >= stations.size()){
+            if (getDestChoice() >= stations.size()){
                 String stationsToSelect = StringUtils.prepStringForChoiceIntent(stationNames);
                 speechText = "Du hast ein Ziel ausgewählt das nicht exsistiert. Bitte Wähle erneut. Hier sind nocheinmal die möglichkeiten. "+stationsToSelect;
             }
             else{
-                speechText = "Deine Wahl faellt auf " + stationNames.get(destChoice) +
+                speechText = "Deine Wahl faellt auf " + stationNames.get(getDestChoice()) +
                         ". Welchen benutzerdefinierten Namen moechtest du der Station geben? Sage hierzu: Mein Ziel " +
                         "heisst: plus den Namen";
             }
