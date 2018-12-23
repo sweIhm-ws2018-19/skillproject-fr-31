@@ -23,7 +23,7 @@ public enum GuideStates {
 
     private final String key;
 
-    GuideStates(String key){
+    GuideStates(String key) {
         this.key = key;
     }
 
@@ -35,7 +35,7 @@ public enum GuideStates {
         AttributesManager attributesManager = input.getAttributesManager();
         ResponseBuilder respBuilder = new ResponseBuilder();
         switch (state) {
-            case SAY_DEST_ADDR_AGAIN: {
+            case SAY_DEST_ADDR_AGAIN:
                 if (isYes) {
                     BasicUtils.setSessionAttributes(attributesManager, STATE.key, GuideStates.GET_DEST_ADDR);
                     String speechText = "Alles klar. Bitte sag mir nochmal die Strasse, Hausnummer und Stadt";
@@ -62,8 +62,8 @@ public enum GuideStates {
                 }
                 break;
 
-            }
-            case Q_NEXT_ADDR: {
+
+            case Q_NEXT_ADDR:
                 if (isYes) {
                     BasicUtils.setSessionAttributes(attributesManager, STATE.key, GuideStates.GET_DEST_ADDR);
                     respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES + " " + SpeechStrings.SAY_ADDRESS);
@@ -74,8 +74,8 @@ public enum GuideStates {
                     respBuilder = BasicUtils.putTogether("Route", speech);
                 }
                 break;
-            }
-            case CONFIG: {
+
+            case CONFIG:
                 if (isYes) {
                     respBuilder = BasicUtils.putTogether("Neue Adresse", SpeechStrings.FOLLOWING_ADDRESSES + " " + SpeechStrings.SAY_ADDRESS);
                     BasicUtils.setSessionAttributes(attributesManager, STATE.key, GuideStates.GET_DEST_ADDR);
@@ -84,8 +84,8 @@ public enum GuideStates {
                     BasicUtils.setSessionAttributes(attributesManager, STATE.key, GuideStates.NEW_CONFIG);
                 }
                 break;
-            }
-            case NEW_CONFIG: {
+
+            case NEW_CONFIG:
                 if (isYes) {
                     attributesManager.getPersistentAttributes().clear();
                     attributesManager.savePersistentAttributes();
@@ -97,8 +97,7 @@ public enum GuideStates {
                 }
                 break;
 
-            }
-
+            
         }
         return respBuilder.build();
     }

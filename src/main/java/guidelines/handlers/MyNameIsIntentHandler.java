@@ -59,7 +59,7 @@ public class MyNameIsIntentHandler implements RequestHandler {
         return name;
     }
 
-    private void setName(String name) {
+    private static void setName(String name) {
         MyNameIsIntentHandler.name = name;
     }
 }

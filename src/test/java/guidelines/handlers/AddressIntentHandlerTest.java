@@ -166,4 +166,24 @@ public class AddressIntentHandlerTest {
         assertNotEquals("TEST", response.getReprompt());
         assertNotNull(response.getOutputSpeech());
     }
+
+    @Test
+    public void slotOnlyStreetIsNullTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        sessionAttributes.put(GuideStates.STATE.getKey(), GuideStates.GET_HOME_ADDR);
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("street", null);
+        slots.put("streetNumber", "156");
+        slots.put("city", "München");
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotEquals("TEST", response.getReprompt());
+        assertNotNull(response.getOutputSpeech());
+    }
 }

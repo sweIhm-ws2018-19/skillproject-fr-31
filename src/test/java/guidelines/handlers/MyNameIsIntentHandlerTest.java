@@ -52,6 +52,7 @@ public class MyNameIsIntentHandlerTest {
         final Optional<Response> res = handler.handle(inputMock);
 
         assertTrue(res.isPresent());
+        assertEquals("denis", MyNameIsIntentHandler.getName());
         final Response response = res.get();
 
         assertNotEquals("TEST", response.getReprompt());

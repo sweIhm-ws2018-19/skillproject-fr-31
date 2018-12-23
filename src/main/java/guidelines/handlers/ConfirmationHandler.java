@@ -38,11 +38,8 @@ public class ConfirmationHandler implements RequestHandler {
         if (yesOrNoSlot != null) {
             String yesOrNo = yesOrNoSlot.getValue();
             GuideStates currentState = GuideStates.valueOf(attributesManager.getSessionAttributes().get("State").toString());
-            if (yesOrNo.equals("nein")) {
-                return GuideStates.decisionBuilder(currentState,false, input);
-            } else {
-                return GuideStates.decisionBuilder(currentState,true, input);
-            }
+            return yesOrNo.equals("nein") ?
+                    GuideStates.decisionBuilder(currentState, false, input) : GuideStates.decisionBuilder(currentState, true, input);
         }
 
         return responseBuilder.withSpeech("DIE BEFUELLUNG HAT NICHT GEKLAPPT").build();

@@ -11,10 +11,6 @@ import com.amazon.ask.response.ResponseBuilder;
 import java.util.Map;
 
 public final class BasicUtils {
-    private final AttributesManager attributesManager;
-    public BasicUtils(AttributesManager attributesManager){
-        this.attributesManager = attributesManager;
-    }
 
     public static Map<String,Slot> getSlots(HandlerInput input){
         Request request = input.getRequestEnvelope().getRequest();

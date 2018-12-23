@@ -52,6 +52,7 @@ public class RouteStartIntentHandlerTest {
         final Optional<Response> res = handler.handle(inputMock);
 
         assertTrue(res.isPresent());
+        assertEquals("uni", RouteStartIntentHandler.getDestinationName());
         final Response response = res.get();
 
         assertFalse(response.getShouldEndSession());
