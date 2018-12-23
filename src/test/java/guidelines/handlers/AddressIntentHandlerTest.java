@@ -114,7 +114,7 @@ public class AddressIntentHandlerTest {
         final Map<String, Object> persistentAttributes = new HashMap<>();
         final Map<String, String> slots = new HashMap<>();
         slots.put("street", null);
-        slots.put("streetNumber", "148");
+        slots.put("streetNumber", null);
         slots.put("city", null);
 
         final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);

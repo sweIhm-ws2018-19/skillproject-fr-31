@@ -1,12 +1,19 @@
 package guidelines.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import com.amazon.ask.model.Response;
+import guidelines.models.Coordinate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -35,5 +42,66 @@ public class DestNameIntentHandlerTest {
     @Test
     public void nullHandleTest(){
         assertThrows(NullPointerException.class, () -> handler.handle(null));
+    }
+
+    @Test
+    public void destNameSlotIsNullTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("destCustomName", null);
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotEquals("TEST", response.getReprompt());
+        assertNotNull(response.getOutputSpeech());
+        assertTrue(response.getOutputSpeech().toString().contains("Leider hab ich den Namen nicht verstanden"));
+    }
+
+    @Test
+    public void destNameSlotAndDestNameNotNullTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        final Map<String, Coordinate> stations = new HashMap<>();
+        stations.put("bahnhof", new Coordinate(41.222, 11.111));
+        stations.put("arbeit", new Coordinate(41.212, 11.171));
+        sessionAttributes.put("Stations", stations);
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("destCustomName", "arbeit");
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotEquals("TEST", response.getReprompt());
+        assertNotNull(response.getOutputSpeech());
+    }
+
+    @Test
+    public void destAlreadyExistInDbTest(){
+        final Map<String, Object> sessionAttributes = new HashMap<>();
+        final Map<String, Object> persistentAttributes = new HashMap<>();
+        persistentAttributes.put("DEST", new HashMap<>());
+        final Map<String, Coordinate> stations = new HashMap<>();
+        stations.put("bahnhof", new Coordinate(41.222, 11.111));
+        stations.put("arbeit", new Coordinate(41.212, 11.171));
+        sessionAttributes.put("Stations", stations);
+        final Map<String, String> slots = new HashMap<>();
+        slots.put("destCustomName", "arbeit");
+
+        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
+        final Optional<Response> res = handler.handle(inputMock);
+
+        assertTrue(res.isPresent());
+        final Response response = res.get();
+
+        assertNotEquals("TEST", response.getReprompt());
+        assertNotNull(response.getOutputSpeech());
     }
 }
