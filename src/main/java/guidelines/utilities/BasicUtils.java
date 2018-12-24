@@ -12,6 +12,10 @@ import java.util.Map;
 
 public final class BasicUtils {
 
+    private BasicUtils(){
+
+    }
+
     public static Map<String,Slot> getSlots(HandlerInput input){
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;

@@ -96,8 +96,9 @@ public enum GuideStates {
                     BasicUtils.setSessionAttributes(attributesManager, STATE.key, GuideStates.TRANSIT);
                 }
                 break;
+            default:
+                respBuilder = BasicUtils.putTogether("GuideStates", "You are currently in state " + state.getKey());
 
-            
         }
         return respBuilder.build();
     }
