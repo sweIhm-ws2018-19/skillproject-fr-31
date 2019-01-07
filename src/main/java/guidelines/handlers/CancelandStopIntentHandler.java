@@ -18,8 +18,8 @@ public class CancelandStopIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         return input.getResponseBuilder()
-                .withSpeech("Auf Wiedersehen")
-                .withSimpleCard(SpeechStrings.SKILL_NAME, "Auf Wiedersehen")
+                .withSpeech("Gute Fahrt")
+                .withSimpleCard(SpeechStrings.SKILL_NAME, "Gute Fahrt")
                 .build();
     }
 }

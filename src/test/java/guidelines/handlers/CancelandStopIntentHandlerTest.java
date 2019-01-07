@@ -55,6 +55,6 @@ public class CancelandStopIntentHandlerTest {
         final Response response = res.get();
 
         assertNotNull(response.getOutputSpeech());
-        assertTrue(response.getOutputSpeech().toString().contains("Auf Wiedersehen"));
+        assertTrue(response.getOutputSpeech().toString().contains("Gute Fahrt"));
     }
 }
