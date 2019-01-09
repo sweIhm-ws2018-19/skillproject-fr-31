@@ -5,7 +5,7 @@ public class SpeechStrings {
     }
 
     // complete Strings
-    public static final String WELCOME_NO_CONFIG = "Herzlich willkommen bei guidelines, der Skill wird jetzt eingerichtet. Bitte sag mir deinen Namen";
+    public static final String WELCOME_NO_CONFIG = "Willkommen beim GuideLines Einrichtungsassistenten! Die Einrichtung dauert circa fünf Minuten. Bitte sage mir deinen Namen";
     public static final String REPROMPT = "Auf gehts!";
     public static final String HELP = "Der Einrichtungsassistent besteht aus drei grundlegenden Schritten. " +
             "Du startest mit der Einrichtung deiner Heimadresse. Anschliessend kannst du bis zu 3 Ziele definieren und " +
@@ -32,7 +32,7 @@ public class SpeechStrings {
 
     public static final String SAY_ADDRESS = "Bitte sage uns die Strasse, Hausnummer und die Stadt\"";
 
-    public static final String SAY_HOME_ADDRESS = "Bitte sage uns die Strasse, Hausnummer und die Stadt deiner Heimadresse";
+    public static final String SAY_HOME_ADDRESS = " .Bitte sage uns die Strasse, Hausnummer und die Stadt deiner Heimadresse";
 
     public static final String FOLLOWING_ADDRESSES = "Okay du kannst jetzt die nächste Adresse einrichten.";
 
