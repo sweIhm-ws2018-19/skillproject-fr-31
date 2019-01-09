@@ -13,5 +13,5 @@ Dann soll ihm eine Zeitangabe in Minuten ausgegeben werden, wann er losgehen mus
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=sweIhm_ws2018_19:lieblingsfarbe&metric=alert_status)](https://sonarcloud.io/dashboard?id=alexa-skills-kit-samples%3Aguidelines)
 
 ## Fachklassenmodell:
-![../images/Klassendiagramm.png](../images/Klassendiagramm.png)
+![images/Klassendiagramm.png](images/Klassendiagramm.png)
 
