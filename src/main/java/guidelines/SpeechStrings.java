@@ -32,7 +32,7 @@ public class SpeechStrings {
 
     public static final String SAY_ADDRESS = "Bitte sage mir die Strasse, Hausnummer und die Stadt\"";
 
-    public static final String SAY_HOME_ADDRESS = " .Bitte sage mir die Strasse, Hausnummer und die Stadt deiner Heimadresse";
+    public static final String SAY_HOME_ADDRESS = ". Bitte sage mir die Strasse, Hausnummer und die Stadt deiner Heimadresse";
 
     public static final String FOLLOWING_ADDRESSES = "Okay du kannst jetzt die nächste Adresse einrichten.";
 

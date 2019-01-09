@@ -4,7 +4,6 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import guidelines.SpeechStrings;
 import guidelines.models.Coordinate;
 import guidelines.models.Route;
 import guidelines.statemachine.GuideStates;
@@ -76,7 +75,7 @@ public class RouteTimeIntentHandler implements RequestHandler {
                     speechText = String.format(speechText, (hours + " Stunden und " + minutes + " Minuten"));
             }
             else{
-                speechText = String.format(speechText, minutes + "Minuten");
+                speechText = String.format(speechText, minutes + " Minuten");
             }
 
 

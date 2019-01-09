@@ -52,7 +52,7 @@ public class HereApi {
         String transport = connection.findValue("Sections").findValue("Sec").get(1).findValue("Dep").findValue("Transport").findValue("At").findValue("category").asText();
         String transTime = connection.findValue("Sections").findValue("Sec").get(1).findValue("Dep").findValue("time").asText();
 
-        final OffsetDateTime transTimeObj = Instant.parse(transTime + ".000Z").atOffset(ZoneOffset.ofHours(1)).minusHours(1);;
+        final OffsetDateTime transTimeObj = Instant.parse(transTime + ".000Z").atOffset(ZoneOffset.ofHours(1)).minusHours(1);
         transTime = transTimeObj.getHour() + ":" + transTimeObj.getMinute();
 
         OffsetDateTime depTime = Instant.parse( depTimeSt + ".000Z" ).atOffset(ZoneOffset.ofHours(1)).minusHours(1);

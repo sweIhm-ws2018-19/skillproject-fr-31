@@ -45,6 +45,7 @@ public class HereApiTest {
         assertNull(HereApi.getCoordinate("NOT VALID STREET", 123123123, "thiscitydoesntexist"));
     }
 
+    @Ignore
     @Test
     public void getNearbyStationsTest(){
         final Map<String, Coordinate> want = new HashMap<>();
