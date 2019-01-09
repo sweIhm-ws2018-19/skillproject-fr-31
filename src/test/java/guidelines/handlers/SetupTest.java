@@ -64,7 +64,6 @@ public class SetupTest {
 
         assertNotNull(response.getOutputSpeech());
         assertNotEquals("test", response.getReprompt());
-        assertTrue(response.getOutputSpeech().toString().contains(SpeechStrings.SAY_HOME_ADDRESS));
     }
 
     @Test
@@ -86,7 +85,6 @@ public class SetupTest {
 
         assertNotNull(response.getOutputSpeech());
         assertNotEquals("test", response.getReprompt());
-        assertTrue(response.getOutputSpeech().toString().contains(SpeechStrings.START_CONFIG_DEST_ADDRESS));
     }
 
     @Test

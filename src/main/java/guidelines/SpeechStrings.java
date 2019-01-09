@@ -30,25 +30,23 @@ public class SpeechStrings {
     public static final String SPEECH_ERROR_DESTINATION_ADDRESS = "Leider hat etwas nicht geklappt, " +
             "bitte sage mir nochmal ob du Infos zur Heimadresse oder die Hilfefunktion beenden willst";
 
-    public static final String SAY_ADDRESS = "Bitte sage uns die Strasse, Hausnummer und die Stadt\"";
+    public static final String SAY_ADDRESS = "Bitte sage mir die Strasse, Hausnummer und die Stadt\"";
 
-    public static final String SAY_HOME_ADDRESS = " .Bitte sage uns die Strasse, Hausnummer und die Stadt deiner Heimadresse";
+    public static final String SAY_HOME_ADDRESS = " .Bitte sage mir die Strasse, Hausnummer und die Stadt deiner Heimadresse";
 
     public static final String FOLLOWING_ADDRESSES = "Okay du kannst jetzt die nächste Adresse einrichten.";
 
     public static final String START_CONFIG_DEST_ADDRESS = "Nun beginnen wir mit der Einrichtung der Zieladressen. " +
             "Du hast nun die Moeglichkeit bis zu drei Zieladressen einzurichten. " +
-            "Bitte nenne uns deine erste Zieladresse. Sage uns die Strasse, Hausnummer und die Stadt";
+            "Bitte nenne mir deine erste Zieladresse. Sage mir die Strasse, Hausnummer und die Stadt";
 
-    public static final String NEW_STREET = "Du bist jetzt in der Konfiguration. Willst du eine neu Straße hinzufügen?";
-    public static final String NEW_CONFIG = "Willst du eine komplett neue Konfiguration?";
+    public static final String NEW_STREET = "Du befindest dich nun im Einrichtungsassistenten. Willst du eine neue Straße hinzufügen?";
+    public static final String NEW_CONFIG = "Möchtest du dein Profil neu anlegen?";
+
 
     // format Strings
-    public static final String WELCOME_TRANSIT = "Herzlich willkommen bei guidelines. %s du kannst eine Route erfragen " +
-            "oder das Konfigurationsmenü starten. Was möchtest du tun?";
-    public static final String WELCOME_TRANSIT_SECOND = " %s du kannst eine Route erfragen " +
-            "oder das Konfigurationsmenü starten. Was möchtest du tun?";
-
+    public static final String WELCOME_TRANSIT = "Hallo %s. Du kannst eine Route erfragen " +
+            "oder den Einrichtungsassistenten starten. Was möchtest du tun?";
 
     // Short answers to combine
     public static final String THANKS = "Vielen Dank ";

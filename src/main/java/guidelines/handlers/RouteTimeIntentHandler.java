@@ -65,7 +65,7 @@ public class RouteTimeIntentHandler implements RequestHandler {
             final String speechText = "In " + route.getMinutesLeft() + " Minuten gibt es die letzte Moeglichkeit " +
                     "von deiner Startstation: " + route.getFirstStation() + " rechtzeitig zum Ziel zu gelangen."
                     + " Es gibt momentan eine Verspaetung von " + route.getDelay() + " Minuten." + String
-                    .format(SpeechStrings.WELCOME_TRANSIT_SECOND, attributesManager.getPersistentAttributes().get("NAME"));
+                    .format(SpeechStrings.WELCOME_TRANSIT, attributesManager.getPersistentAttributes().get("NAME"));
             attributesManager.setSessionAttributes(Collections.singletonMap(GuideStates.STATE.getKey(), GuideStates.TRANSIT));
             FallbackIntentHandler.setFallbackMessage(speechText);
             return input.getResponseBuilder()

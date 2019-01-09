@@ -104,8 +104,7 @@
           "samples": [
             "Bitte nehme die {choice}",
             "Ich nehme die {choice}",
-            "Ich wähle die {choice}",
-            "{choice}"
+            "Ich wähle die {choice}"
           ]
         },
         {
@@ -122,6 +121,7 @@
         },
         {
           "name": "ConfigurationIntent",
+          "slots": [],
           "samples": [
             "Einrichtung",
             "Configuration",
@@ -168,8 +168,7 @@
             }
           ],
           "samples": [
-            "{time} Uhr",
-            "Um {time}"
+            "{time}"
           ]
         }
       ],
@@ -186,8 +185,7 @@
               "name": {
                 "value": "nein"
               }
-            }
-          ,
+            },
             {
               "name": {
                 "value": "ne"

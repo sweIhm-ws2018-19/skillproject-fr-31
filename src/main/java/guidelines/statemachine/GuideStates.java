@@ -52,7 +52,7 @@ public enum GuideStates {
                     String speechText = "Alles klar. Ich sage dir jetzt die Stationen die du zur Auswahl hast. Merke dir" +
                             " bitte die zugehörige Nummer der Station die du benutzen möchtest. " +
                             "Station: " + stationsToSelect +
-                            " Zur Auswahl sage jetzt bitte die Nummer der Gewünschten Haltestelle.";
+                            " Zur Auswahl sage jetzt bitte: Ich nehme die, plus die zahl";
                     FallbackIntentHandler.setFallbackMessage(speechText);
                     respBuilder
                             .withSpeech(speechText)
