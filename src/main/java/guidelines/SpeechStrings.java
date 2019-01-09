@@ -45,7 +45,7 @@ public class SpeechStrings {
 
 
     // format Strings
-    public static final String WELCOME_TRANSIT = "Hallo %s. Du kannst eine Route erfragen " +
+    public static final String WELCOME_TRANSIT = " Hallo %s. Du kannst eine Route erfragen " +
             "oder den Einrichtungsassistenten starten. Was möchtest du tun?";
 
     // Short answers to combine
