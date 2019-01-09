@@ -43,8 +43,7 @@ public enum GuideStates {
                     respBuilder
                             .withSpeech(speechText)
                             .withReprompt("Bitte sag mir nochmal die Strasse, Hausnummer und Stadt")
-                            .withShouldEndSession(false)
-                            .build();
+                            .withShouldEndSession(false);
                 } else {
                     Map<String, Coordinate> stations = (Map<String, Coordinate>) attributesManager.getSessionAttributes().get("Stations");
                     String stationsToSelect = StringUtils.prepStringForChoiceIntent(new ArrayList<>(stations.keySet()));
@@ -57,8 +56,7 @@ public enum GuideStates {
                     respBuilder
                             .withSpeech(speechText)
                             .withReprompt(stationsToSelect)
-                            .withShouldEndSession(false)
-                            .build();
+                            .withShouldEndSession(false);
                 }
                 break;
 

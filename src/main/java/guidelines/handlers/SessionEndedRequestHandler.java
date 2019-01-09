@@ -30,6 +30,7 @@ public class SessionEndedRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
+        input.getAttributesManager().getSessionAttributes().clear();
         return input.getResponseBuilder().build();
     }
 }

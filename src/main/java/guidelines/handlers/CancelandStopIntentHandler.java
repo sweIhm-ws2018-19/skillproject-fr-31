@@ -17,6 +17,7 @@ public class CancelandStopIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
+        input.getAttributesManager().getSessionAttributes().clear();
         return input.getResponseBuilder()
                 .withSpeech("Gute Fahrt")
                 .withSimpleCard(SpeechStrings.SKILL_NAME, "Gute Fahrt")
