@@ -123,10 +123,12 @@
           "name": "ConfigurationIntent",
           "slots": [],
           "samples": [
+            "Einrichtungsassistenten",
             "Einrichtung",
             "Configuration",
             "Konfiguration",
-            "Ich möchte zur Konfiguration"
+            "Ich möchte zur Konfiguration",
+            "Starte Konfiguration"
           ]
         },
         {
@@ -157,7 +159,8 @@
             "Ich möchte nach {destination}",
             "Ich möchte in die {destination}",
             "zur {destination}",
-            "zum {destination}"
+            "zum {destination}",
+            "in die {destination}"
           ]
         },
         {
