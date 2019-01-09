@@ -64,13 +64,13 @@ public class RouteTimeIntentHandler implements RequestHandler {
 
             String speechText = "Du solltest in " + route.getMinutesLeft() + " Minuten losgehen um das Verkehrsmittel "
                     + route.getTransport() + " an der Station " + route.getFirstStation() + " zu erreichen." +
-                    " Dein Verkehrsmittel fährt in " + route.getTransTime() + " los. Ich wünsche dir eine gute Fahrt";
+                    " Dein Verkehrsmittel fährt um " + route.getTransTime() + " los. Ich wünsche dir eine gute Fahrt";
             if(route.getMinutesLeft() == 0){
                 speechText = "Du solltest jetzt los gehen um das Verkehrsmittel " + route.getTransport() + " an der Station " + route.getFirstStation()
-                        + " zu erreichen. Dein Verkehrsmittel fährt in " + route.getTransTime() + " los. Ich wünsche dir eine gute Fahrt";
+                        + " zu erreichen. Dein Verkehrsmittel fährt um " + route.getTransTime() + " los. Ich wünsche dir eine gute Fahrt";
             }
             if(route.getMinutesLeft() < 0){
-                speechText = "Mit den öffentlichen Verkehrsmittel erreichst du dein Ziel nicht mehr rechtzeitig. Was möchtest du tun?";
+                speechText = "Mit den öffentlichen Verkehrsmittel erreichst du dein Ziel nicht mehr rechtzeitig. Auf Wiedersehen";
             }
 
             attributesManager.setSessionAttributes(Collections.singletonMap(GuideStates.STATE.getKey(), GuideStates.TRANSIT));
