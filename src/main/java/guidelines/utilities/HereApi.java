@@ -50,10 +50,14 @@ public class HereApi {
         String depTimeSt = connection.findValue("Dep").findValue("time").asText();
         String firstStation = connection.findValue("Sections").findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
         String transport = connection.findValue("Sections").findValue("Sec").get(1).findValue("Dep").findValue("Transport").findValue("At").findValue("category").asText();
+        String transTime = connection.findValue("Sections").findValue("Sec").get(1).findValue("Dep").findValue("time").asText();
+
+        final OffsetDateTime transTimeObj = Instant.parse(transTime + ".000Z").atOffset(ZoneOffset.ofHours(1)).minusHours(1);;
+        transTime = transTimeObj.getHour() + ":" + transTimeObj.getMinute();
 
         OffsetDateTime depTime = Instant.parse( depTimeSt + ".000Z" ).atOffset(ZoneOffset.ofHours(1)).minusHours(1);
         int minutesLeft =(int)currentTimeMez.until(depTime, ChronoUnit.MINUTES);
-        return new Route(minutesLeft, 0, firstStation, transport);
+        return new Route(minutesLeft, 0, firstStation, transport, transTime);
     }
 
     public static Map<String, Coordinate> getNearbyStations(Coordinate co){

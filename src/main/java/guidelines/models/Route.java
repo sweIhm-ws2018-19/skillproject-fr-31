@@ -7,16 +7,18 @@ public class Route {
     private final int delay;
     private final String firstStation;
     private final String transport;
+    private final String transTime;
 
     public String getFirstStation() {
         return firstStation;
     }
 
-    public Route(int minutesLeft, int delay, String firstStation, String transport) {
+    public Route(int minutesLeft, int delay, String firstStation, String transport, String transTime) {
         this.minutesLeft = minutesLeft;
         this.delay = delay;
         this.firstStation = firstStation;
         this.transport = transport;
+        this.transTime = transTime;
     }
 
     public int getMinutesLeft() {
@@ -29,6 +31,10 @@ public class Route {
 
     public String getTransport() {
         return transport;
+    }
+
+    public String getTransTime() {
+        return transTime;
     }
 
     @Override
