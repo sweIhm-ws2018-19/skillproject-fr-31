@@ -40,7 +40,7 @@ public class HereApi {
 
     public static Route getRoute(Coordinate home, Coordinate dest, String time){
         final Instant currentTime = Instant.ofEpochMilli(System.currentTimeMillis());
-        OffsetDateTime currentTimeMez = currentTime.plusSeconds((long)60*60).atOffset(ZoneOffset.ofHours(1));
+        OffsetDateTime currentTimeMez = currentTime.atOffset(ZoneOffset.ofHours(1));
 
         String requestUrl = ROUTEBASE + "&routing=all&dep=" + home.getLatitude() + "," + home.getLongitude() + "&arr=" + dest.getLatitude() + "," + dest.getLongitude() +
                 "&time=" + time + "&routingMode=realtime&arrival=1&walk=2000,200";
@@ -50,7 +50,7 @@ public class HereApi {
         String depTimeSt = connection.findValue("Dep").findValue("time").asText();
         String firstStation = connection.findValue("Sections").findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
 
-        OffsetDateTime depTime = Instant.parse( depTimeSt + ".000Z" ).atOffset(ZoneOffset.ofHours(1));
+        OffsetDateTime depTime = Instant.parse( depTimeSt + ".000Z" ).atOffset(ZoneOffset.ofHours(1)).minusHours(1);
         int minutesLeft =(int)currentTimeMez.until(depTime, ChronoUnit.MINUTES);
         return new Route(minutesLeft, 0, firstStation);
     }
