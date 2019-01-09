@@ -49,10 +49,11 @@ public class HereApi {
         JsonNode connection = jsNode.findPath("Connection").get(0);
         String depTimeSt = connection.findValue("Dep").findValue("time").asText();
         String firstStation = connection.findValue("Sections").findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
+        String transport = connection.findValue("Sections").findValue("Sec").get(1).findValue("Dep").findValue("Transport").findValue("At").findValue("category").asText();
 
         OffsetDateTime depTime = Instant.parse( depTimeSt + ".000Z" ).atOffset(ZoneOffset.ofHours(1)).minusHours(1);
         int minutesLeft =(int)currentTimeMez.until(depTime, ChronoUnit.MINUTES);
-        return new Route(minutesLeft, 0, firstStation);
+        return new Route(minutesLeft, 0, firstStation, transport);
     }
 
     public static Map<String, Coordinate> getNearbyStations(Coordinate co){
