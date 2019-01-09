@@ -63,8 +63,8 @@ public class RouteTimeIntentHandler implements RequestHandler {
             final Route route = HereApi.getRoute(homeCoordinate, destCoordinate, time);
 
 
-            int minutes = route.getMinutesLeft();
-            int hours = minutes%60;
+            int minutes = route.getMinutesLeft() % 60;
+            int hours = route.getMinutesLeft() / 60;
             String speechText = "Du solltest in %s losgehen um das Verkehrsmittel "
                     + route.getTransport() + " an der Station " + route.getFirstStation() + " zu erreichen." +
                     " Dein Verkehrsmittel fährt um " + route.getTransTime() + " los. Ich wünsche dir eine gute Fahrt";
