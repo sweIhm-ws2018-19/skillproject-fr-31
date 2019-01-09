@@ -73,7 +73,7 @@ public class RouteTimeIntentHandler implements RequestHandler {
                 if(hours == 1)
                     speechText = String.format(speechText, ("einer Stunde und " + minutes + " Minuten"));
                 else
-                    speechText = String.format(speechText, (hours + " Stunde und " + minutes + " Minuten"));
+                    speechText = String.format(speechText, (hours + " Stunden und " + minutes + " Minuten"));
             }
             else{
                 speechText = String.format(speechText, minutes + "Minuten");
