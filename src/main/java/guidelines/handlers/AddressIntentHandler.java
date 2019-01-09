@@ -68,7 +68,7 @@ public class AddressIntentHandler implements RequestHandler {
 
                 BasicUtils.setSessionAttributes(attributesManager, GuideStates.STATE.getKey(), GuideStates.SAY_DEST_ADDR_AGAIN);
                 speechText = "Du hast mir folgende Adresse mitgeteilt: " + streetValue + ", " + streetNumberValue + ", " +
-                        cityValue + ". Moechtest du deine Eingabe wiederholen?";
+                        cityValue + ". Möchtest du die Adresse ändern?";
                 FallbackIntentHandler.setFallbackMessage(speechText);
             }
 
