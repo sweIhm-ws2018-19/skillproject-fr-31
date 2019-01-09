@@ -62,17 +62,15 @@ public class RouteTimeIntentHandler implements RequestHandler {
 
             final Route route = HereApi.getRoute(homeCoordinate, destCoordinate, time);
 
-            // Du solltest in --- Minuten losgehen um das Verkehrsmittel --- an der Station --- zu erreichen
-            final String speechText = "In " + route.getMinutesLeft() + " Minuten gibt es die letzte Moeglichkeit " +
-                    "von deiner Startstation: " + route.getFirstStation() + " rechtzeitig zum Ziel zu gelangen."
-                    + " Es gibt momentan eine Verspaetung von " + route.getDelay() + " Minuten." + String
-                    .format(SpeechStrings.WELCOME_TRANSIT, attributesManager.getPersistentAttributes().get("NAME"));
+            final String speechText = "Du soltest in " + route.getMinutesLeft() + " Minuten losgehen um das Verkehrsmittel "
+                    + route.getTransport() + " an der Station " + route.getFirstStation() + " zu erreichen. Ich wünsche dir eine gute Fahrt";
+
             attributesManager.setSessionAttributes(Collections.singletonMap(GuideStates.STATE.getKey(), GuideStates.TRANSIT));
             FallbackIntentHandler.setFallbackMessage(speechText);
             return input.getResponseBuilder()
                     .withSpeech(speechText)
                     .withReprompt("Bitte nenne mir nochmals die Uhrzeit")
-                    .withShouldEndSession(false)
+                    .withShouldEndSession(true)
                     .build();
         }
         return input.getResponseBuilder()
