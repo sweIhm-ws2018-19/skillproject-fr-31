@@ -16,4 +16,5 @@ https://sweihm-ws2018-19.github.io/skillproject-fr-31/
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=sweIhm_ws2018_19:lieblingsfarbe&metric=alert_status)](https://sonarcloud.io/dashboard?id=alexa-skills-kit-samples%3Aguidelines)
 
 ## Fachklassenmodell:
-[!](images/Klassendiagramm.jpg)
+![images/Klassendiagramm.png](images/Klassendiagrammm.png)
+
