@@ -19,7 +19,7 @@ https://sweihm-ws2018-19.github.io/skillproject-fr-31/
 ![images/Klassendiagramm.png](images/Klassendiagramm.png)
 
 ## Aktivitätsdiagramm:
-![images/Guidelines_aktivitätsdia.svg](images/Guidelines_aktivitätsdia.svg)
+![images/Guidelines_activitätsdia.svg](images/Guidelines_activitätsdia.svg)
 
 
 
