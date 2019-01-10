@@ -50,7 +50,12 @@ public class HereApi {
         JsonNode connection = jsNode.findPath("Connection").get(0);
         String depTimeSt = connection.findValue("Dep").findValue("time").asText();
         String firstStation = connection.findValue(SECTIONS_STRING).findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
-        String transport = connection.findValue(SECTIONS_STRING).findValue("Sec").get(1).findValue("Dep").findValue("Transport").findValue("At").findValue("category").asText();
+        String transport;
+        try{
+            transport = connection.findValue(SECTIONS_STRING).findValue("Sec").get(1).findValue("Dep").findValue("Transport").findValue("At").findValue("category").asText();
+        }catch(NullPointerException e){
+            transport = "";
+        }
         String transTime = connection.findValue(SECTIONS_STRING).findValue("Sec").get(1).findValue("Dep").findValue("time").asText();
 
         final OffsetDateTime transTimeObj = Instant.parse(transTime + ".000Z").atOffset(ZoneOffset.ofHours(1)).minusHours(1);
