@@ -7,6 +7,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
+import guidelines.handlers.FallbackIntentHandler;
 
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public final class BasicUtils {
         return intent.getSlots();
     }
     public  static ResponseBuilder putTogether(String title, String text){
+        FallbackIntentHandler.setFallbackMessage(text);
         return new ResponseBuilder().withSimpleCard(title,text)
                 .withSpeech(text)
                 .withReprompt(text);

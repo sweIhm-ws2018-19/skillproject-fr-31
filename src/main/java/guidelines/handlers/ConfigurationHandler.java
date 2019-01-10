@@ -29,6 +29,7 @@ public class ConfigurationHandler implements RequestHandler {
             .withReprompt(SpeechStrings.NEW_STREET)
             .withShouldEndSession(false);
 
+        FallbackIntentHandler.setFallbackMessage(SpeechStrings.NEW_STREET);
         BasicUtils.setSessionAttributes(input.getAttributesManager(), GuideStates.STATE.getKey(), GuideStates.CONFIG);
 
         return respBuilder.build();
