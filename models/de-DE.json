@@ -152,6 +152,10 @@
             }
           ],
           "samples": [
+            "Ich muss an die {destination}",
+            "Ich muss zum {destination}",
+            "Ich muss zur {destination}",
+            "Ich muss in die {destination}",
             "Ich möchte zum {destination}",
             "Ich möchte zur {destination}",
             "Ich will zur {destination}",
