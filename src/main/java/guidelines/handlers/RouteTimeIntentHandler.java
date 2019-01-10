@@ -21,6 +21,9 @@ import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 public class RouteTimeIntentHandler implements RequestHandler {
+
+    private static final String MINUTE = " Minuten";
+
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("RouteTimeIntent").and(sessionAttribute(GuideStates.STATE.getKey(), GuideStates.ROUTE_TIME.toString())));
@@ -70,12 +73,12 @@ public class RouteTimeIntentHandler implements RequestHandler {
 
             if(hours > 0){
                 if(hours == 1)
-                    speechText = String.format(speechText, ("einer Stunde und " + minutes + " Minuten"));
+                    speechText = String.format(speechText, ("einer Stunde und " + minutes + MINUTE));
                 else
-                    speechText = String.format(speechText, (hours + " Stunden und " + minutes + " Minuten"));
+                    speechText = String.format(speechText, (hours + " Stunden und " + minutes + MINUTE));
             }
             else{
-                speechText = String.format(speechText, minutes + " Minuten");
+                speechText = String.format(speechText, minutes + MINUTE);
             }
 
 

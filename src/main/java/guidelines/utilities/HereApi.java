@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HereApi {
+    private static final String SECTIONS_STRING = "Sections";
     private static final String APPID_APPCODE = "?app_id=7nxl2JeeP1KRwPVAwQpP&app_code=lwWNVNoVphoUo3V5XhGZng";
 
     private static final String GEOCODEBASE = "https://geocoder.api.here.com/6.2/geocode.json"+ APPID_APPCODE;
@@ -48,9 +49,9 @@ public class HereApi {
 
         JsonNode connection = jsNode.findPath("Connection").get(0);
         String depTimeSt = connection.findValue("Dep").findValue("time").asText();
-        String firstStation = connection.findValue("Sections").findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
-        String transport = connection.findValue("Sections").findValue("Sec").get(1).findValue("Dep").findValue("Transport").findValue("At").findValue("category").asText();
-        String transTime = connection.findValue("Sections").findValue("Sec").get(1).findValue("Dep").findValue("time").asText();
+        String firstStation = connection.findValue(SECTIONS_STRING).findValue("Sec").get(0).findValue("Arr").findValue("Stn").findValue("name").asText();
+        String transport = connection.findValue(SECTIONS_STRING).findValue("Sec").get(1).findValue("Dep").findValue("Transport").findValue("At").findValue("category").asText();
+        String transTime = connection.findValue(SECTIONS_STRING).findValue("Sec").get(1).findValue("Dep").findValue("time").asText();
 
         final OffsetDateTime transTimeObj = Instant.parse(transTime + ".000Z").atOffset(ZoneOffset.ofHours(1)).minusHours(1);
         transTime = transTimeObj.getHour() + ":" + transTimeObj.getMinute();

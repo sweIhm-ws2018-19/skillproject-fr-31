@@ -59,34 +59,4 @@ public class RouteTimeIntentHandlerTest {
         assertNotNull(response.getOutputSpeech());
         assertTrue(response.getOutputSpeech().toString().contains("Bei der Eingabe der Uhrzeit hat etwas nicht geklappt"));
     }
-
-    @Test
-    @Ignore
-    public void timeSlotNotNullTest(){
-        final Map<String, Object> sessionAttributes = new HashMap<>();
-        final Map<String, Object> persistentAttributes = new HashMap<>();
-        final Map<String, BigDecimal> homeAddress = new HashMap<>();
-        homeAddress.put("latitude", BigDecimal.valueOf(42.121312));
-        homeAddress.put("longitude", BigDecimal.valueOf(12.222222));
-        final Map<String, Object> destAddresses = new HashMap<>();
-        final Map<String, BigDecimal> uniMap = new HashMap<>();
-        uniMap.put("latitude", BigDecimal.valueOf(42.23232));
-        uniMap.put("longitude", BigDecimal.valueOf(12.93123));
-        final Map<String, BigDecimal> arbeitMap = new HashMap<>();
-        uniMap.put("latitude", BigDecimal.valueOf(42.23232));
-        uniMap.put("longitude", BigDecimal.valueOf(12.93123));
-        destAddresses.put("arbeit", arbeitMap);
-        destAddresses.put("uni", uniMap);
-        persistentAttributes.put("HOME", homeAddress);
-        persistentAttributes.put("DEST", destAddresses);
-
-        final Map<String, String> slots = new HashMap<>();
-        slots.put("time", "13:45");
-
-        final HandlerInput inputMock = TestUtil.mockHandlerInput(slots, sessionAttributes, persistentAttributes, null);
-        final Optional<Response> res = handler.handle(inputMock);
-
-        assertTrue(res.isPresent());
-        final Response response = res.get();
-    }
 }
