@@ -15,3 +15,6 @@ Dann soll ihm eine Zeitangabe in Minuten ausgegeben werden, wann er losgehen mus
 ## Fachklassenmodell:
 ![images/Klassendiagramm.svg](images/Klassendiagramm.svg)
 
+## Aktivitätsdiagramm:
+![images/Guidelines_activitätsdia.svg](images/Guidelines_activitätsdia.svg)
+
